@@ -1,0 +1,545 @@
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		#geom_bar(stat='summary', fun.y='mean') +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+x=read_tsv('~/Downloads/temp.txt')
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		#geom_bar(stat='summary', fun='mean') +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		geom_bar(stat='summary', fun='mean') +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		geom_bar(stat='summary', fun=mean) +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		geom_bar(stat='summary', fun=median) +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		geom_bar(stat='summary', fun.y='mean') +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		#geom_bar(stat='summary', fun.y='mean') +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		geom_bar(stat='summary', fun='mean') +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+my.plot('SDC1')
+my.plot = function(gene) {#
+	filter(x, target==gene) %>%#
+	ggplot(aes(x=sample, y=expr)) +#
+		stat_summary(fun='mean', geom='bar') +#
+		geom_point(position=position_jitter(0.2))#
+}#
+my.plot('TEAD4')
+group_by(x, target, sample) %>% summarise(av=mean(expr))
+x
+filter(x,target=='TEAD4') %>% group_by(sample) %>% summarise(av=mean(expr))
+?install.packages
+filter(x,target=='TEAD4')
+filter(x,target=='TEAD4') %>% group_by(sample) %>% summarise(av=mean(expr))
+18*2*6
+182.4/152
+60/50
+60*1.2
+(4+23*3+24*4+19*5+12)/70
+nchar('CAAGCAGAAGACGGCATACGAGATGACGGAGTGACTGGAGTTCAGACGTGTGCTCTTCCGATC')
+BiocManager::install('flowCore')
+library(flowCore)
+x = read.FCS('A and B_E11 Pos_004.fcs')
+x = read.FCS('A and B_E11 Pos_004.fcs', transformation=FALSE)
+?read.FCS
+x = read.FCS('A and B_EV Pos_006.fcs', transformation=FALSE)
+17/24
+4/6
+library(pzfx)#
+library(tidyverse)#
+##growth curve#
+#
+df = read_pzfx('ENG.pzfx','ENG growth curves')#
+grow = tibble(sample = rep(gsub('_[[:digit:]]+$', '', colnames(df)[-1]), each=nrow(df)),#
+		day = rep(df$Var.1, ncol(df)-1),#
+		count = as.numeric(as.matrix(df[,-1]))) %>%#
+		filter(!is.na(count))#
+#
+quartz(w=4.5,h=3)#
+ggplot(grow, aes(x=day, y=count, colour=sample)) +#
+	geom_line(stat='summary', fun='mean') +#
+	geom_point() +#
+	theme_classic() +#
+	xlab('Days in culture') +#
+	ylab('Cell count')
+789/2900
+789/2.9
+1148/2.7
+149/0.139
+349/1.4
+1072/272
+2900/139
+425/272
+13/37
+40*300
+40 * 271 + 1440
+9148254108/945
+444035776/4
+7653687293/111
+12280 * 70
+2560/5
+1920/4
+1920/5
+1920/4
+512*5
+512*4
+12/11
+x=read.delim('~/Downloads/Raw_data.txt')
+head(x)
+counts=x[,4:9]
+head(counts)
+total=colSums(counts)
+total
+hist(log2(counts[,1]+1))
+log2(250)
+log2(30)
+head(x)
+sample(1:65,1)
+8746/9629
+16589/19542
+819.40-372
+143.5/7*4
+library(tidyverse)
+library(svglite)
+sample=rep(c('A','B','C'), each=3)
+val=rep(c(0.95,1,1.05),3)
+x=tibble(sample, val)
+x
+gene=rep('POU5F1',9)
+x=tibble(sample, val, gene)
+x
+ggplot(x,aes(x=gene,y=val,fill=sample))+geom_bar(stat='summary',fun.y=mean)
+ggplot(x,aes(x=gene,y=val,fill=sample))+geom_bar(stat='summary',fun=mean)
+ggplot(x,aes(x=gene,y=val,fill=sample))+geom_bar(stat='summary',fun=mean, position=position_dodge())
+ggplot(x,aes(x=gene,y=val,fill=sample))+geom_bar(stat='summary',fun=mean, position=position_dodge(), colour='black') + theme_classic()
+ggplot(x,aes(x=gene,y=val,fill=sample))+geom_bar(stat='summary',fun=mean, position=position_dodge(), colour='black') + theme_classic() + geom_errorbar()
+group_by(x, sample) %>% summarise(m=mean(val),sd=sd(val))
+y=group_by(x, sample) %>% summarise(m=mean(val),sd=sd(val)) %>% add_column(gene='NANOG')
+ggplot(x,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black') + theme_classic() + geom_errorbar(ymax=m+sd)
+ggplot(y,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black') + theme_classic() + geom_errorbar(ymax=m+sd)
+y
+ggplot(y,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black')
+ggplot(y,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black') + theme_classic() + geom_errorbar(aes(ymax=m+sd))
+ggplot(y,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black') + theme_classic() + geom_errorbar(aes(ymin=m,ymax=m+sd))
+ggplot(y,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black') + theme_classic() + geom_errorbar(aes(ymin=m,ymax=m+sd), position=position_dodge())
+ggplot(y,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black') + theme_classic() + geom_errorbar(aes(ymin=m,ymax=m+sd), position=position_dodge(), width=0.2)
+ggplot(y,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black') + theme_classic() + geom_errorbar(aes(ymin=m,ymax=m+sd), position=position_dodge(0.8), width=0.2)
+ggplot(y,aes(x=gene,y=m,fill=sample))+geom_bar(stat='identity', position=position_dodge(), colour='black') + theme_classic() + geom_errorbar(aes(ymin=m,ymax=m+sd), position=position_dodge(0.9), width=0.2)
+ggsave('Downloads/temp.svg')
+rev('vog.hin.liam@tfeleya')
+rev(strsplit('vog.hin.liam@tfeleya'))
+library(msa)#
+#
+clean.cons = function(consensus) {#
+	nodash = gsub('-','',consensus)#
+	return(gsub('\\.','N',nodash))#
+}
+17/2.54*300
+7/2.54*300
+10.1/12.6
+11.6/13.8
+10986/11301
+library(msa)#
+#
+clean.cons = function(consensus) {#
+	nodash = gsub('-','',consensus)#
+	return(gsub('\\.','N',nodash))#
+}#
+##LTR10#
+#
+ltr10 = readDNAStringSet('fasta/LTR10_dfam.fa')#
+ltr10.mus = msa(ltr10, method='Muscle', type='dna')#
+#
+ltr10a = readDNAStringSet('fasta/TSC_LTR10A.fa')#
+ltr10a.mus = msa(ltr10a, method='Muscle', type='dna')#
+ltr10a.cons = clean.cons(msaConsensusSequence(ltr10a.mus, type='upperlower', thresh=c(50,25)))#
+#
+ltr10f = readDNAStringSet('fasta/TSC_LTR10F.fa')#
+ltr10f.mus = msa(ltr10f, method='Muscle', type='dna')#
+ltr10f.cons = clean.cons(msaConsensusSequence(ltr10f.mus, type='upperlower', thresh=c(50,25)))#
+#
+ltr10.merge = c(ltr10[c(1,2,8,9)], ltr10a.cons,ltr10f.cons)#
+names(ltr10.merge)[5:6] = c('ts_ltr10a','ts_ltr10f')#
+#
+print(msa(ltr10.merge,method='Muscle',type='dna'), show='complete')
+nchar('tgagggaagagagagaccctctcatattgttttatattgttttatactcagtacctgttt')
+23*800
+23*800+6.6
+23*800+6600
+800*3
+876.10-248
+nchar('ATGGGAGGTGTTTGGTGCTCTGTTTT')
+nchar('GATTCTTAGACATCCTTTGCCAACCTTT')
+nchar('GTGGGTAGTGACTAAACAACATTTGGCC')
+x=read.delim('Downloads/lncipedia_5_2_hg38.bed.txt')
+head(x)
+x=read.delim('Downloads/lncipedia_5_2_hg38.bed.txt',header=F)
+head(x)
+x[x$V1=='chr6' & x$V2>111255843 & x$V3<111312465,]
+nchar('ATGCTAACTCCTTTAAAACAGACAATCCAGTCAGCCATCCTGAACAACTTGTCTCCAGCGATCCAGGAATGGCTCAACCTCTGCCTCCTCCTGATGACACTGATCCTTCTACCCTCTGTCACTCCACAGACTGTTAAAAACTATACATATTGGGCCTATATTCCTTTTCCTCCTCTTATTCGAGCCATGACATGGATGGATGCTCCTATTAAGGTCTATGTTAATGATAGTATTTGGATGCCTGGTTCTGTAGATGATCGTTGTCCTGCCCAACCTTCAGAAGGAATCCCTTTCAATATCACTTTAGGTTTTAGGTATCCACCTTTGTGCCTGGGACCCACTAATGGATGTCTCTCATTAGATATTCAAACTTGGGCAGTCACACTACCATCTGGTCACTCTGTCCCTCCTTTAGGACACTTGGTATCAGGGCTCTCATTAAAACCTCTAAGGCAGATAAAATAG')
+nchar('ATGTGGAAGGATTGTGTTAGTCCAGAAGGAACTGTGTTATTTAATTCTTCTCACTACACCATTGTTGACTGGGCTCCTAAAGGTCATATTACTAATGATTGCTCTCAAGGTCACAGAGATTATCAACATTTTCTCTATGATATTACTTATCAAAAAAGTAGTGACAGCCCTCCCCTATTATATCGTAGATTTAACTCCTTTTTTCCTTTTAAGTGGAAAGGGGCAGGGGTTGCCCCTCCAAAGCCAAGGCTCGTTGTTCCCCACTTAGGACCTGAACATTCAGAATTATGGAGATTAACCATAGCTATGACTGGTTTGAGAGTTTGGGCTGGAGAAAGTGTTATAAGTAAATCCACCTTGTCACCTCAAAAACTAAGACAACAGATTAATTTACACTACTATTTCCACACAGCCAAAAATATCACTATGGCAATCATCAAAATGTCAATTCAAAGATGGGACAGTAAAGACTATGAGGACTTGTACCCCCCCATTACTAATGACCCCCACCACCTCTCATACAACCTATTCCCCCCACCCCACATTTCACAAAAACGAATACCATCCCAAAATATATACACTATCTATACGGAGTCCAATAAAACTATACCACTTAAAAGTTGTGTTAAACCACCATATATGTTATTAGTAGGAAAGATGCATATTAGTTCAAAAATCAACATAATTACATGTGTTGTTACTTGTATACTTGCATTGACTCATCTTTTAATCAATATCATGGTATTTTAA')
+nchar('ATGACATGGATGGACGCTCCTATCGAGGTCTATGTTAATGATAGTATTCGGATGCCTGGTTCTGTAGATGATCGTTTTTCTGCCCAACCTGCAGAAGAAGGAACCCCTTTCAATATCACTTTAGGTTTTAGGTATCCACCTTTGTGCCTGGGACCCACTAACGGATGTCTCTCATTAGATATTCAAACTTGGGCAGTCACACTACCATCTGGTCACTCTGTCCCTCCTTTGGGACACTTGGTATCAGGGCTCTCATTAAAACCTCTAAGGCAGATCAAAATAGGAATCGCTGATTATATTCATACATCCCAACATAAGCCTTTATGTTGGCTCAACTTGTCTTCAAATGCTGAAGAATTAATATGGAAGGATTGTGTTAGTTCAGAAGGAACTGTGTTATTTAATTCTTCTCACTACAGCATTGTTGATTGGGCCCCTAAAGGTCATATTACTAATGATTGCTCTCAAGGTCACAGAGATTGTCAACATTTTCTCTATGATATTACTTATCAAAACAATAGTGACAACCCTCCCCTATTATATCGTAGATTTAACTCCTTTTTTCCTTTTAAGTAG')
+nchar('CTGAAAATGCATACAACAACGAGACAGAGAAATTTGCTGAAAAAGCACCACAGCAAGAAACAACTAACACATCCAATCGTCAAAAAGAAGAAAATGACCACGCTAACTCCTTTACAACAGACAATCCAGTCAGCCTTCCTGAACAACTTGTCTCCAGAGATCCAGGTCTGGCTCAACCTCTGCCTCCTCCTGATGACACTGATCCTTCTACCCTCTGTTGCCCCACAGACTGTTAAAAACTATACACATTGGGCCTATATTCCTTTTCCTCCTCTTATTCGAGCCATGACATAGATGGACGCTCCTATCGAGGTCTATGTTAATGATAGTATTTGGATGCCTGGTTCTGTAGATGATCGTTGTCCTGCCCAACCTTCAGAAGAAGGAATCCCTTTCAATATCACTTTAGGTTTTAGGTGTCCACCTTTGTGCCTGGGACCCACTAATGGATGTCTCTCATTAGATATTCAAACTTGGGCGGTCACACTACCATCTGGTCACTCTGTCCCTCCTTTGGGACACTTGGTATCAGGGCTCTCATTAAAACCTCTAAGGCAGATCAAAACAGAAATCACTGAATATATTCACACAACCCAATATAAGCCTTTAGGACCTGCATGA')
+x=read.delim('~/Desktop/endometrium/EPL_RNAseq/B26-H_S13.fastq.gz_subFcounts.txt')
+headx
+head(x)
+te = x$Subfamily.Family.Class
+te[grep('IAP',te)]
+head(te)
+raw = scan('all_LTRs.txt', character(), comment='S', sep='\n')
+setwd('Dropbox/Cheng_2022_vitC/RNAseq/Genes/')
+x=scan('ribo_genes.txt',character())
+x
+y=unique(x)
+y
+write(y,'ribo_genes.txt')
+rna = read.delim('gene_expression_vsd.txt')
+head(rna)
+library('DESeq2')
+reads = read.table('gene_rawCounts.txt', header = T, row.names = 1)#
+colData = DataFrame(sample=factor(rep(c('Ctrl','VitC'),each=4)),replicate=factor(rep(c('10','11','35B','35C'),2)))#
+##Expression values (VST)#
+#
+##dds = DESeqDataSetFromMatrix(reads,colData,design=~sample+replicate)#
+##vsd = varianceStabilizingTransformation(dds)#
+##expr = assay(vsd)#
+expr = read.table('gene_expression_vsd.txt',as.is=T,row.names=1)#
+##Get DE genes#
+#
+dds = DESeqDataSetFromMatrix(reads,colData,design=~sample+replicate)#
+dds = DESeq(dds)#
+res = results(dds,contrast=c('sample','VitC','Ctrl'))#
+sig = as.data.frame(subset(res,padj<0.05 & abs(log2FoldChange)>log2(1.5)))#
+sig = sig[order(sig$log2FoldChange,decreasing=T),]
+twoc = scan('2C_genes.txt', character(), comment='#')
+twoc
+isg = scan('ISGs.txt', character(), comment='#')
+ribo = scan('ribo_genes.txt', character(), comment='#')
+res
+gene = rownames(res)
+boxplot(fc[res %in% twoc],#
+		fc[res %in% ribo],#
+		fc[res %in% ribo])
+fc = res$log2FoldChange#
+boxplot(fc[res %in% twoc],#
+		fc[res %in% ribo],#
+		fc[res %in% ribo])
+gene = rownames(res)#
+fc = res$log2FoldChange#
+boxplot(fc[gene %in% twoc],#
+		fc[gene %in% ribo],#
+		fc[gene %in% ribo])
+boxplot(fc[gene %in% twoc],#
+		fc[gene %in% ribo],#
+		fc[gene %in% ribo],#
+		outline=F)
+hist(res$baseMean)
+quantile(res$baseMean)
+log2(4)
+log2(157)
+log2(31039)
+gene = rownames(res)#
+fc = res$log2FoldChange#
+min.exp = res$baseMean>4#
+boxplot(fc[gene %in% twoc & min.expr],#
+		fc[gene %in% ribo & min.expr],#
+		fc[gene %in% ribo & min.expr],#
+		outline=F)
+gene = rownames(res)#
+fc = res$log2FoldChange#
+min.exp = res$baseMean>4#
+boxplot(fc[gene %in% twoc & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		outline=F)
+boxplot(fc[min.exp],#
+		fc[gene %in% twoc & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		outline=F)
+boxplot(fc[min.exp],#
+		fc[gene %in% twoc & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		outline=F, lty=1)#
+abline(h=0, lty=2)
+boxplot(fc[min.exp],#
+		fc[gene %in% twoc & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		fc[gene %in% isg & min.exp],#
+		outline=F, lty=1)#
+abline(h=0, lty=2)
+boxplot(fc[min.exp],#
+		fc[gene %in% twoc & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		fc[gene %in% isg & min.exp],#
+		outline=T, lty=1)#
+abline(h=0, lty=2)
+boxplot(fc[min.exp],#
+		fc[gene %in% twoc & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		fc[gene %in% isg & min.exp],#
+		outline=F, lty=1)#
+abline(h=0, lty=2)
+t.test(fc[gene %in% ribo & min.exp],fc[min.exp])
+wilcox.test(fc[gene %in% ribo & min.exp],fc[min.exp])
+1746/6*7
+l1 = read.delim('L1near_genes.txt', comment='#')
+head(l1)
+dfac = cut(l1$Distance, c(0,10000,50000,100000,500000))
+levels(dfac)
+?cut
+dfac = cut(l1$Distance, c(0,10000,50000,100000,500000), include.lowest=T)
+?cut
+levels(dfac)
+head(dfac)
+res
+res.l1 = l1$L1[match(l1$TSS, gene)]
+head(res.l1)
+length(res.l1)
+res.l1 = l1$L1[match(gene, l1$TSS)]
+length(res.l1)
+head(res.l1)
+res.d = dfac[match(gene, l1$TSS)]
+head(res.d)
+boxplot(fc ~ res.l1 + res.d)
+boxplot(fc ~ res.l1 + res.d, outline=F)
+dfac = cut(l1$Distance, c(0,50000,100000,500000), include.lowest=T)#
+#
+res.l1 = l1$L1[match(gene, l1$TSS)]#
+res.d = dfac[match(gene, l1$TSS)]#
+#
+boxplot(fc ~ res.l1 + res.d, outline=F)
+boxplot(fc ~ res.d + res.l1, outline=F)
+tapply(res.d, paste(res.l1,res.d), length)
+abline(h=0)
+head(l1)
+close = l1$Distance < 100000
+close = l1$Distance < 100000#
+#
+res.l1 = l1$L1[match(gene, l1$TSS)]#
+res.d = close[match(gene, l1$TSS)]#
+#
+boxplot(fc ~ res.d + res.l1, outline=F)
+boxplot(fc[res.l1=='L1Md_A' & res.d & min.exp], outline=F)
+boxplot(fc[res.l1=='L1Md_A' & res.d & min.exp],#
+		fc[res.l1=='L1Md_T' & res.d & min.exp],#
+		fc[res.l1=='L1Md_Gf' & res.d & min.exp],#
+		fc[!res.d & min.exp],#
+		outline=F)
+boxplot(fc ~ res.l1 + res.d)
+boxplot(fc ~ res.l1 + res.d, outline=F)
+boxplot(fc[res.l1=='L1Md_A' & res.d & min.exp],#
+		fc[res.l1=='L1Md_T' & res.d & min.exp],#
+		fc[res.l1=='L1Md_Gf' & res.d & min.exp],#
+		fc[!res.d & min.exp],#
+		outline=F)
+boxplot(fc[res.l1=='L1Md_A' & res.d],#
+		fc[res.l1=='L1Md_T' & res.d],#
+		fc[res.l1=='L1Md_Gf' & res.d],#
+		fc[!res.d & min.exp],#
+		outline=F)
+wilcox.test(fc[res.l1=='L1Md_T' & res.d],fc[!res.d])
+rna = read.delim('gene_expression_vsd.txt')
+head(rna)
+ctrl = rowMeans(rna[grepl('Ctrl_',colnames(rna))],)
+vc = rowMeans(rna[grepl('VC_',colnames(rna))],)
+head(ctrl)
+head(vc)
+plot(ctrl,vc)
+hist(ctrl)
+min.exp = ctrl>7 | vc>7
+twoc = scan('2C_genes.txt', character(), comment='#')#
+isg = scan('ISGs.txt', character(), comment='#')#
+ribo = scan('ribo_genes.txt', character(), comment='#')#
+boxplot(fc[min.exp],#
+		fc[gene %in% twoc & min.exp],#
+		fc[gene %in% ribo & min.exp],#
+		fc[gene %in% isg & min.exp],#
+		outline=F, lty=1)#
+abline(h=0, lty=2)
+wilcox.test(fc[min.exp],fc[gene %in% twoc & min.exp])
+wilcox.test(fc[min.exp],fc[gene %in% ribo & min.exp])
+wilcox.test(fc[min.exp],fc[gene %in% isg & min.exp])
+head(l1)
+l1a = l1$TSS[l1$Distance<100000]
+head(l1a)
+length(l1a)
+l1a = l1$TSS[l1&L1=='L1Md_A' & l1$Distance<100000]#
+l1t = l1$TSS[l1&L1=='L1Md_T' & l1$Distance<100000]#
+l1gf = l1$TSS[l1&L1=='L1Md_Gf' & l1$Distance<100000]
+l1a = l1$TSS[l1$L1=='L1Md_A' & l1$Distance<100000]#
+l1t = l1$TSS[l1$L1=='L1Md_T' & l1$Distance<100000]#
+l1gf = l1$TSS[l1$L1=='L1Md_Gf' & l1$Distance<100000]
+length(l1a)
+length(l1t)
+length(l1gf)
+fc.list = list(all=fc[min.exp],#
+			twoc=fc[gene %in% twoc & min.exp],#
+			ribo=fc[gene %in% ribo & min.exp],#
+			isg=fc[gene %in% isg & min.exp],#
+			l1a=fc[gene %in% l1a & min.exp],#
+			l1tf=fc[gene %in% l1t & min.exp],#
+			l1gf=fc[gene %in% l1gf & min.exp],)
+fc.list = list(all=fc[min.exp],#
+			twoc=fc[gene %in% twoc & min.exp],#
+			ribo=fc[gene %in% ribo & min.exp],#
+			isg=fc[gene %in% isg & min.exp],#
+			l1a=fc[gene %in% l1a & min.exp],#
+			l1tf=fc[gene %in% l1t & min.exp],#
+			l1gf=fc[gene %in% l1gf & min.exp])
+names(fc.list)
+boxplot(fc.list, outline=F, lty=1)#
+abline(h=0, lty=2)
+lapply(fc.list,length)
+lapply(fc.list,wilcox.test)
+head(rna)
+plot(rna[,2],[rna,3])
+plot(rna[,2],rna[,3])
+plot(rna[,2],rna[,4])
+plot(rna[,2],rna[,5])
+plot(rna[,4],rna[,8])
+fc = rowMeans(rna[grepl('VC_',colnames(rna))] - rna[grepl('Ctrl_',colnames(rna))])
+head(fc)
+head(rna[grepl('VC_',colnames(rna))] - rna[grepl('Ctrl_',colnames(rna))])
+min.exp = ctrl>7 | vc>7
+twoc = scan('2C_genes.txt', character(), comment='#')#
+isg = scan('ISGs.txt', character(), comment='#')#
+ribo = scan('ribo_genes.txt', character(), comment='#')#
+l1 = read.delim('L1near_genes.txt', comment='#')#
+l1a = l1$TSS[l1$L1=='L1Md_A' & l1$Distance<100000]#
+l1t = l1$TSS[l1$L1=='L1Md_T' & l1$Distance<100000]#
+l1gf = l1$TSS[l1$L1=='L1Md_Gf' & l1$Distance<100000]#
+#
+fc.list = list(all=fc[min.exp],#
+			twoc=fc[gene %in% twoc & min.exp],#
+			ribo=fc[gene %in% ribo & min.exp],#
+			isg=fc[gene %in% isg & min.exp],#
+			l1a=fc[gene %in% l1a & min.exp],#
+			l1tf=fc[gene %in% l1t & min.exp],#
+			l1gf=fc[gene %in% l1gf & min.exp])#
+#
+##Plot#
+#
+boxplot(fc.list, outline=F, lty=1)#
+abline(h=0, lty=2)
+min.exp = ctrl>8 | vc>8#
+##Define gene sets#
+#
+twoc = scan('2C_genes.txt', character(), comment='#')#
+isg = scan('ISGs.txt', character(), comment='#')#
+ribo = scan('ribo_genes.txt', character(), comment='#')#
+l1 = read.delim('L1near_genes.txt', comment='#')#
+l1a = l1$TSS[l1$L1=='L1Md_A' & l1$Distance<100000]#
+l1t = l1$TSS[l1$L1=='L1Md_T' & l1$Distance<100000]#
+l1gf = l1$TSS[l1$L1=='L1Md_Gf' & l1$Distance<100000]#
+#
+fc.list = list(all=fc[min.exp],#
+			twoc=fc[gene %in% twoc & min.exp],#
+			ribo=fc[gene %in% ribo & min.exp],#
+			isg=fc[gene %in% isg & min.exp],#
+			l1a=fc[gene %in% l1a & min.exp],#
+			l1tf=fc[gene %in% l1t & min.exp],#
+			l1gf=fc[gene %in% l1gf & min.exp])#
+#
+##Plot#
+#
+boxplot(fc.list, outline=F, lty=1)#
+abline(h=0, lty=2)
+min.exp = ctrl>6.5 | vc>6.5#
+##Define gene sets#
+#
+twoc = scan('2C_genes.txt', character(), comment='#')#
+isg = scan('ISGs.txt', character(), comment='#')#
+ribo = scan('ribo_genes.txt', character(), comment='#')#
+l1 = read.delim('L1near_genes.txt', comment='#')#
+l1a = l1$TSS[l1$L1=='L1Md_A' & l1$Distance<100000]#
+l1t = l1$TSS[l1$L1=='L1Md_T' & l1$Distance<100000]#
+l1gf = l1$TSS[l1$L1=='L1Md_Gf' & l1$Distance<100000]#
+#
+fc.list = list(all=fc[min.exp],#
+			twoc=fc[gene %in% twoc & min.exp],#
+			ribo=fc[gene %in% ribo & min.exp],#
+			isg=fc[gene %in% isg & min.exp],#
+			l1a=fc[gene %in% l1a & min.exp],#
+			l1tf=fc[gene %in% l1t & min.exp],#
+			l1gf=fc[gene %in% l1gf & min.exp])#
+#
+##Plot#
+#
+boxplot(fc.list, outline=F, lty=1)#
+abline(h=0, lty=2)
+hist(rna[,2])
+hist(rna[,4])
+min(rna[,4])
+l1a = l1$TSS[l1$L1=='L1Md_A' & l1$Distance<50000]#
+l1t = l1$TSS[l1$L1=='L1Md_T' & l1$Distance<50000]#
+l1gf = l1$TSS[l1$L1=='L1Md_Gf' & l1$Distance<50000]#
+#
+fc.list = list(all=fc[min.exp],#
+			twoc=fc[gene %in% twoc & min.exp],#
+			ribo=fc[gene %in% ribo & min.exp],#
+			isg=fc[gene %in% isg & min.exp],#
+			l1a=fc[gene %in% l1a & min.exp],#
+			l1tf=fc[gene %in% l1t & min.exp],#
+			l1gf=fc[gene %in% l1gf & min.exp])
+boxplot(fc.list, outline=F, lty=1)#
+abline(h=0, lty=2)
+head(l1a)
+l1[l1$TSS=='Kcnb2']
+l1[l1$TSS=='Kcnb2',]
+l1[l1$TSS=='Crispld1',]
+l1a = l1$TSS[l1$L1=='L1Md_A' & l1$Distance<100000]#
+l1t = l1$TSS[l1$L1=='L1Md_T' & l1$Distance<100000]#
+l1gf = l1$TSS[l1$L1=='L1Md_Gf' & l1$Distance<100000]#
+#
+fc.list = list(all=fc[min.exp],#
+			twoc=fc[gene %in% twoc & min.exp],#
+			ribo=fc[gene %in% ribo & min.exp],#
+			isg=fc[gene %in% isg & min.exp],#
+			l1a=fc[gene %in% l1a & min.exp],#
+			l1tf=fc[gene %in% l1t & min.exp],#
+			l1gf=fc[gene %in% l1gf & min.exp])#
+#
+##Plot#
+#
+boxplot(fc.list, outline=F, lty=1)#
+abline(h=0, lty=2)

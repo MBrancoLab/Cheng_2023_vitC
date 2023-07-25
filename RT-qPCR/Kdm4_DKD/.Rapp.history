@@ -1,0 +1,107 @@
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/Kdm4_DKD')#
+##data#
+#
+x = read.csv('Kdm4_DKD_export_all.csv')#
+##TEs to plot#
+#
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*2-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('Scr-VC',x$all_data1)]#
+	data[[i*2]] = x$all_data3[x$all_data2==te.list[i] & grepl('Kdm4a/c-VC',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('Kdm4a/c-Ctrl',x$all_data1)]#
+}#
+##plot#
+#
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,6),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+tet.list = c('Kdm4a','Kdm4b')#
+tet = list()#
+for (i in 1:length(tet.list)) {#
+	tet[[i*4-3]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Scr-Ctrl',x$all_data1)]#
+	tet[[i*4-2]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Scr-VC',x$all_data1)]#
+	tet[[i*4-1]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Kdm4a/c-Ctrl',x$all_data1)]#
+	tet[[i*4]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Kdm4a/c-VC',x$all_data1)]#
+}#
+#
+quartz(w=4, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+tet.list = c('Kdm4a','Kdm4c')#
+tet = list()#
+for (i in 1:length(tet.list)) {#
+	tet[[i*4-3]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Scr-Ctrl',x$all_data1)]#
+	tet[[i*4-2]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Scr-VC',x$all_data1)]#
+	tet[[i*4-1]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Kdm4a/c-Ctrl',x$all_data1)]#
+	tet[[i*4]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Kdm4a/c-VC',x$all_data1)]#
+}#
+#
+quartz(w=4, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,0.2),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,6),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,7),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,9),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,12),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,6),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)

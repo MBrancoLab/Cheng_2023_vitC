@@ -1,0 +1,438 @@
+library('DESeq2')
+subf.files = list.files(pattern='subFcounts.txt')
+subf = list()#
+for (i in 1:length(subf.files)) {#
+	data = read.delim(subf.files[i],as.is=T)#
+	if (i==1) {#
+		order = data$Subfamily.Family.Class#
+		subf[[i]] = data#
+	} else {#
+		subf[[i]] = data[match(order,data$Subfamily.Family.Class),]#
+	}#
+}#
+names(subf) = gsub('_subFcounts.txt','',subf.files)
+reads = matrix(unlist(lapply(subf, function(x) x$tot_counts)),ncol=length(subf))#
+rownames(reads) = order
+colData = DataFrame(sample=factor(rep(c('Ctrl','VitC'),4)),replicate=factor(rep(c('10','11','35B','35C'),each=2)))
+dds = DESeqDataSetFromMatrix(round(reads),colData,design=~sample+replicate)#
+sizeFactors(dds) = unlist(lapply(subf,function(x) x$aligned_libsize[1]))/1e6#
+#
+dds = DESeq(dds)#
+res = results(dds,contrast=c('sample','VitC','Ctrl'))#
+sig = as.data.frame(subset(res,padj<0.05))#
+sig = sig[order(sig$log2FoldChange,decreasing=T),]
+plot(res$log2FoldChange,-log10(res$padj),pch=19,cex=0.3,col='grey',#
+ xlab='log2 FC',ylab='-log10 p-value',las=1)#
+points(sig$log2FoldChange,-log10(sig$padj),pch=19,cex=0.5,col='red')#
+lines(c(0,0),c(-10,200),lty=2)
+plot(log2(res$baseMean),res$log2FoldChange,pch=19,cex=0.3,col='grey',#
+ xlab='log2 expression',ylab='log2 FC',las=1)#
+points(log2(sig$baseMean),sig$log2FoldChange,pch=19,cex=0.5,col='red')#
+abline(0,0,lty=2)
+counts = lapply(subf, function(x) x$tot_counts/x$aligned_libsize*1e6)#
+ctrl.id = grep('-Ctrl-',names(counts))#
+vc.id = grep('-VC-',names(counts))#
+##average ctrl count expression and FC#
+#
+ctrl = matrix(unlist(counts[ctrl.id]),ncol=length(ctrl.id))#
+vc = matrix(unlist(counts[vc.id]),ncol=length(vc.id))#
+rownames(ctrl) = rownames(vc) = subf[[1]]$Subfamily.Family.Class#
+#
+av.ctrl = rowMeans(log2(ctrl+0.05))#
+av.fc = rowMeans(log2(vc+0.05)-log2(ctrl+0.05))
+plot(av.ctrl,av.fc,pch=19,cex=0.3,col='grey')
+plot(log2(res$baseMean),res$log2FoldChange,pch=19,cex=0.3,col='grey',#
+ xlab='log2 expression',ylab='log2 FC',las=1)#
+points(log2(sig$baseMean),sig$log2FoldChange,pch=19,cex=0.5,col='red')#
+abline(0,0,lty=2)
+head(res)
+plot(log2(res$baseMean),res$log2FoldChange,pch=19,cex=0.3,col='grey',#
+ xlab='log2 expression',ylab='log2 FC',las=1)#
+points(log2(sig$baseMean),sig$log2FoldChange,pch=19,cex=0.5,col='red')#
+abline(0,0,lty=2)
+quartz(w=4,h=4)#
+plot(log2(res$baseMean),res$log2FoldChange,pch=19,cex=0.3,col='grey',#
+ xlab='log2 expression',ylab='log2 FC',las=1)#
+points(log2(sig$baseMean),sig$log2FoldChange,pch=19,cex=0.5,col='red')#
+abline(0,0,lty=2)
+plot(log2(res$baseMean),res$log2FoldChange,pch=19,cex=0.3,col='grey',#
+ xlab='log2 baseMean',ylab='log2 Fold change',las=1)#
+points(log2(sig$baseMean),sig$log2FoldChange,pch=19,cex=0.5,col='red')#
+abline(0,0,lty=2)
+sig
+points(log2(sig$baseMean)[10],sig$log2FoldChange[10],pch=19,cex=0.5,col='blue')
+points(log2(sig$baseMean)[11],sig$log2FoldChange[11],pch=19,cex=0.5,col='blue')
+points(log2(sig$baseMean)[1],sig$log2FoldChange[1],pch=19,cex=0.5,col='blue')
+points(log2(sig$baseMean)[2],sig$log2FoldChange[2],pch=19,cex=0.5,col='blue')
+points(log2(sig$baseMean)[7],sig$log2FoldChange[7],pch=19,cex=0.5,col='blue')
+reads = read.table('squire_miguel_counttable.txt.gz', header = T, row.names = 1)
+head(reads)
+colData = DataFrame(sample=factor(rep(c('VitC','Ctrl'),each=4)),#
+ replicate=factor(c('35C','10','11','35B','10','11','35B','35C')))#
+##Get DE transcripts#
+#
+dds = DESeqDataSetFromMatrix(round(reads),colData,design=~sample+replicate)#
+sizeFactors(dds) = c(6.55,6.45,7.23,4.72,7.51,6.32,6.06,9.33) ##aligned_libsize from subfamily count files#
+#
+dds = DESeq(dds)#
+res = results(dds,contrast=c('sample','VitC','Ctrl'))#
+sig = as.data.frame(subset(res,padj<0.05))#
+sig = sig[order(sig$log2FoldChange,decreasing=T),]
+library('DESeq2')
+colData = DataFrame(sample=factor(rep(c('VitC','Ctrl'),each=4)),#
+ replicate=factor(c('35C','10','11','35B','10','11','35B','35C')))#
+##Get DE transcripts#
+#
+dds = DESeqDataSetFromMatrix(round(reads),colData,design=~sample+replicate)#
+sizeFactors(dds) = c(6.55,6.45,7.23,4.72,7.51,6.32,6.06,9.33) ##aligned_libsize from subfamily count files#
+#
+dds = DESeq(dds)#
+res = results(dds,contrast=c('sample','VitC','Ctrl'))#
+sig = as.data.frame(subset(res,padj<0.05))#
+sig = sig[order(sig$log2FoldChange,decreasing=T),]
+nrow(sig)
+sig
+plot(res$log2FoldChange,-log10(res$padj),pch=19,cex=0.3,col='grey',#
+ xlab='log2 FC',ylab='-log10 p-value',las=1)#
+sig = res$padj<0.05 & abs(res$log2FoldChange)>log2(1.5)#
+points(res$log2FoldChange[sig],-log10(res$padj[sig]),pch=19,cex=0.5,col='red')#
+lines(c(0,0),c(-10,200),lty=2)
+plot(log2(res$baseMean+1),res$log2FoldChange,pch=19,cex=0.3,col='grey',#
+ xlab='log2 expression',ylab='log2 FC',las=1)#
+sig = res$padj<0.05 & abs(res$log2FoldChange)>log2(1.5)#
+points(log2(res$baseMean[sig]),res$log2FoldChange[sig],pch=19,cex=0.5,col='red')#
+abline(0,0,lty=2)
+library('DESeq2')
+subf.files = list.files(pattern='subFcounts.txt')#
+#
+subf = list()#
+for (i in 1:length(subf.files)) {#
+	data = read.delim(subf.files[i],as.is=T)#
+	if (i==1) {#
+		order = data$Subfamily.Family.Class#
+		subf[[i]] = data#
+	} else {#
+		subf[[i]] = data[match(order,data$Subfamily.Family.Class),]#
+	}#
+}#
+names(subf) = gsub('_subFcounts.txt','',subf.files)#
+##make total count matrix (unique + squire-assigned fraction of multimappers)#
+#
+reads = matrix(unlist(lapply(subf, function(x) x$tot_counts)),ncol=length(subf))#
+rownames(reads) = order#
+##colData#
+colData = DataFrame(sample=factor(rep(c('Ctrl','VitC'),4)),replicate=factor(rep(c('10','11','35B','35C'),each=2)))
+dds = DESeqDataSetFromMatrix(round(reads),colData,design=~sample+replicate)#
+sizeFactors(dds) = unlist(lapply(subf,function(x) x$aligned_libsize[1]))/1e6#
+#
+dds = DESeq(dds)#
+res = results(dds,contrast=c('sample','VitC','Ctrl'))#
+sig = as.data.frame(subset(res,padj<0.05))#
+sig = sig[order(sig$log2FoldChange,decreasing=T),]
+plot(res$log2FoldChange,-log10(res$padj),pch=19,cex=0.3,col='grey',#
+ xlab='log2 FC',ylab='-log10 p-value',las=1)#
+points(sig$log2FoldChange,-log10(sig$padj),pch=19,cex=0.5,col='red')#
+lines(c(0,0),c(-10,200),lty=2)
+quartz(w=4,h=4)#
+plot(log2(res$baseMean),res$log2FoldChange,pch=19,cex=0.3,col='grey',#
+ xlab='log2 baseMean',ylab='log2 Fold change',las=1)#
+points(log2(sig$baseMean),sig$log2FoldChange,pch=19,cex=0.5,col='red')#
+abline(0,0,lty=2)
+subf.files = list.files(path='subFcounts', pattern='subFcounts.txt')
+subf.files
+subf.files = list.files(path='subFcounts', pattern='subFcounts.txt', full.names=T)
+subf.files
+subf = list()#
+for (i in 1:length(subf.files)) {#
+	data = read.delim(subf.files[i],as.is=T)#
+	if (i==1) {#
+		order = data$Subfamily.Family.Class#
+		subf[[i]] = data#
+	} else {#
+		subf[[i]] = data[match(order,data$Subfamily.Family.Class),]#
+	}#
+}#
+names(subf) = gsub('_subFcounts.txt','',basename(subf.files))
+str(subf)
+flag.files = list.files(path='flagSubset', pattern='_flag.txt')
+flag.files
+subf.files = list.files(path='subFcounts', full.names=T)
+subF.files
+subf.files
+flag.files = list.files(path='flagSubset', full.names=T)
+flag.files
+flag = list()#
+for (i in 1:length(flag.files)) flag[[i]] = read.delim(flag.files[i],as.is=T)#
+names(flag) = gsub('_flagSubset.txt.gz','',basename(flag.files))
+str(flag)
+names(flag)
+sense = lapply(flag, function(x) x[x$tx_strand==x$TE_strand,])#
+##Select LTR families#
+#
+te = lapply(sense, function(x) x[x$TE_name=='ETnERV3-int:ERVK:LTR' |#
+ x$TE_name=='RLTR13B2:ERVK:LTR' |#
+ x$TE_name=='RLTR13A3:ERVK:LTR' ,])
+all.te = unique(unlist(lapply(te,function(x) x$TE_ID)))
+te.match = lapply(te, function(x) x[match(all.te,x$TE_ID),])
+all.te
+for (i in 1:length(te.match)) {#
+	te.match[[i]]$TE_ID = all.te#
+	na.lines = is.na(te.match[[i]]$fpkm)#
+	te.match[[i]]$fpkm[na.lines] = te.match[[i]]$uniq_counts[na.lines] = te.match[[i]]$tot_counts[na.lines] = te.match[[i]]$tot_reads[na.lines] = 0#
+	te.match[[i]]$alignedsize[na.lines] = te.match[[i]]$alignedsize[!na.lines][1]#
+}
+counts = lapply(te.match, function(x) log2(x$tot_counts/x$alignedsize*1e6 + 0.05))
+fc1 = counts$'VC10-VC-54801786' - counts$'VC10-Ctrl-54801785'#
+fc2 = counts$'VC11-VC-54807786' - counts$'VC12-Ctrl-54809768'#
+fc3 = counts$'VC35B-VC-54809771' - counts$'VC35B-Ctrl-54808775'#
+fc4 = counts$'VC35C-VC-54809772' - counts$'VC35C-Ctrl-54799820'#
+#
+mean.counts = rowMeans(matrix(unlist(counts),ncol=length(counts)))#
+mean.fc = rowMeans(cbind(fc1,fc2,fc3,fc4))#
+##Subgroups#
+#
+etn = grep('ETnERV3',all.te)#
+b2 = grep('RLTR13B2',all.te)#
+a3 = grep('RLTR13A3',all.te)
+plot(mean.counts[etn],mean.fc[etn],pch=19,cex=0.5,las=1,#
+ col='grey',xlab='log2 RPM',ylab='log2 FC',main='ETnERV3-int',#
+ ylim=c(-2,4.5))#
+points(mean.counts[b2],mean.fc[b2],pch=19,cex=0.5,col='red')#
+points(mean.counts[a3],mean.fc[a3],pch=19,cex=0.5,col='blue')#
+abline(h=0,lty=2)
+up = mean.counts>-2 & mean.fc>2#
+#
+up.te = lapply(strsplit(all.te[up], split='\\|'), function(x) x[1:3])#
+up.mat = matrix(unlist(up.te), ncol=3, byrow=TRUE)
+up.mat
+up.te
+str(te.match)
+head(te.match[[1]])
+head(te.match[[2]])
+all.te
+up.id = strsplit(all.te[up], split='\\|')
+up.te = data.frame(chr=unlist(lapply(up.id, function(x) x[1])),#
+			start=unlist(lapply(up.id, function(x) x[2])),#
+			end=unlist(lapply(up.id, function(x) x[3])),#
+			strand=unlist(lapply(up.id, function(x) x[6])),#
+			name=unlist(lapply(up.id, function(x) x[4])),#
+			log2rpm = mean.counts[up],#
+			foldChange = mean.fc[up])
+up.te
+write.table(up.te, 'up_ETnERV3.txt', sep='\t', quote=F, col.names=F, row.names=F)
+write.table(up.te, 'up_ETnERV3.txt', sep='\t', quote=F, row.names=F)
+flag.files = list.files(path='flagSubset')
+flag.files = list.files(path='flagSubset', full.names=T)
+flag.files
+flag = list()#
+for (i in 1:length(flag.files)) flag[[i]] = read.delim(flag.files[i],as.is=T)#
+names(flag) = gsub('_flagSubset.txt.gz','',basename(flag.files))
+sense = lapply(flag, function(x) x[x$tx_strand==x$TE_strand,])#
+##Select L1 families#
+#
+te = lapply(sense, function(x) x[x$TE_name=='L1Md_T:L1:LINE' | x$TE_name=='L1Md_A:L1:LINE' | x$TE_name=='L1Md_Gf:L1:LINE',])#
+##Merge elements across samples#
+#
+all.te = unique(unlist(lapply(te,function(x) x$TE_ID)))#
+te.match = lapply(te, function(x) x[match(all.te,x$TE_ID),])#
+#
+for (i in 1:length(te.match)) {#
+	te.match[[i]]$TE_ID = all.te#
+	na.lines = is.na(te.match[[i]]$fpkm)#
+	te.match[[i]]$fpkm[na.lines] = te.match[[i]]$uniq_counts[na.lines] = te.match[[i]]$tot_counts[na.lines] = te.match[[i]]$tot_reads[na.lines] = 0#
+	te.match[[i]]$alignedsize[na.lines] = te.match[[i]]$alignedsize[!na.lines][1]#
+}#
+##Get normalised counts#
+#
+counts = lapply(te.match, function(x) log2(x$tot_counts/x$alignedsize*1e6 + 0.05))#
+##Calculate mean fold change#
+#
+fc1 = counts$'VC10-VC-54801786' - counts$'VC10-Ctrl-54801785'#
+fc2 = counts$'VC11-VC-54807786' - counts$'VC12-Ctrl-54809768'#
+fc3 = counts$'VC35B-VC-54809771' - counts$'VC35B-Ctrl-54808775'#
+fc4 = counts$'VC35C-VC-54809772' - counts$'VC35C-Ctrl-54799820'#
+#
+mean.counts = rowMeans(matrix(unlist(counts),ncol=length(counts)))#
+mean.fc = rowMeans(cbind(fc1,fc2,fc3,fc4))#
+##Identify ITLs#
+#
+tx.type = matrix(unlist(lapply(te.match,function(x) x$transcript_type)),ncol=length(te.match))#
+itl = rowSums(tx.type=='pot_unit_ITL',na.rm=T)>=1
+te.split = strsplit(all.te,split='\\|')#
+te.length = unlist(lapply(te.split,function(x) as.numeric(x[3])-as.numeric(x[2])))#
+fl = te.length>5000#
+##Confidence values#
+#
+conf = matrix(unlist(lapply(te.match,function(x) x$avg_conf)),ncol=length(te.match))#
+mean.conf = rowMeans(conf,na.rm=T)#
+#
+hist(mean.conf)#
+high.conf = mean.conf>50
+tf = grepl('L1Md_T',all.te)#
+a = grepl('L1Md_A',all.te)#
+gf = grepl('L1Md_Gf',all.te)#
+#
+plot(mean.counts[itl&fl&tf],mean.fc[itl&fl&tf],pch=19,cex=0.5,las=1,#
+ col='grey',xlab='log2 RPM',ylab='log2 FC',main='L1Md_T',ylim=c(-4,4))#
+points(mean.counts[itl&fl&high.conf&tf],mean.fc[itl&fl&high.conf&tf],pch=19,cex=0.5,col='black')#
+abline(h=0,lty=2)
+quartz(w=4.5, h=3)#
+par(mar=c(4,4,2,5))#
+boxplot(mean.fc[itl&fl&a & mean.counts>-2],#
+	mean.fc[itl&fl&tf & mean.counts>-2],#
+	lty=1, outline=FALSE,#
+	col='orange', las=1,#
+	xlab='log2 fold change',#
+	boxwex=0.6,#
+	horizontal=TRUE)
+y = rep(1:2, c(sum(itl&fl&high.conf&a & mean.counts>-2),#
+	sum(itl&fl&high.conf&tf & mean.counts>-2)))#
+points(c(mean.fc[itl&fl&a&high.conf & mean.counts>-2],#
+	mean.fc[itl&fl&tf&high.conf & mean.counts>-2]),#
+	y + rnorm(length(x),sd=0.05),#
+	pch=19, cex=0.7)#
+#
+abline(v=0,lty=2)
+y = rep(1:2, c(sum(itl&fl&high.conf&a & mean.counts>-2),#
+	sum(itl&fl&high.conf&tf & mean.counts>-2)))#
+points(c(mean.fc[itl&fl&a&high.conf & mean.counts>-2],#
+	mean.fc[itl&fl&tf&high.conf & mean.counts>-2]),#
+	y + rnorm(length(y),sd=0.05),#
+	pch=19, cex=0.7)
+p1 = t.test(mean.fc[itl&fl&a & mean.counts>-2])
+p1
+p2 = t.test(mean.fc[itl&fl&tf & mean.counts>-2])
+p2
+p.adjust(p1, p2, method='BH')
+p.adjust(c(p1, p2), method='BH')
+p.adjust(c(p1$p.value, p2$p.value), method='BH')
+quartz(w=4.5, h=3)#
+par(mar=c(4,4,2,5))#
+boxplot(mean.fc[itl&fl&a & mean.counts>-2],#
+	mean.fc[itl&fl&tf & mean.counts>-2],#
+	lty=1, outline=FALSE,#
+	col='orange', las=1,#
+	xlab='log2 fold change',#
+	boxwex=0.6,#
+	horizontal=TRUE)#
+#
+y = rep(1:2, c(sum(itl&fl&high.conf&a & mean.counts>-2),#
+	sum(itl&fl&high.conf&tf & mean.counts>-2)))
+?points
+points(c(mean.fc[itl&fl&a&high.conf & mean.counts>-2],#
+	mean.fc[itl&fl&tf&high.conf & mean.counts>-2]),#
+	y + rnorm(length(y),sd=0.05),#
+	pch=24, cex=0.7)#
+#
+abline(v=0,lty=2)
+par(mar=c(4,4,2,5))#
+boxplot(mean.fc[itl&fl&a & mean.counts>-2],#
+	mean.fc[itl&fl&tf & mean.counts>-2],#
+	lty=1, outline=FALSE,#
+	col='orange', las=1,#
+	xlab='log2 fold change',#
+	boxwex=0.6,#
+	horizontal=TRUE)#
+#
+y = rep(1:2, c(sum(itl&fl&high.conf&a & mean.counts>-2),#
+	sum(itl&fl&high.conf&tf & mean.counts>-2)))#
+points(c(mean.fc[itl&fl&a&high.conf & mean.counts>-2],#
+	mean.fc[itl&fl&tf&high.conf & mean.counts>-2]),#
+	y + rnorm(length(y),sd=0.05),#
+	pch=17, cex=0.7)
+##Data#
+#
+flag.files = list.files(path='flagSubset', full.names=T)#
+#
+flag = list()#
+for (i in 1:length(flag.files)) flag[[i]] = read.delim(flag.files[i],as.is=T)#
+names(flag) = gsub('_flagSubset.txt.gz','',basename(flag.files))#
+##Keep only sense transcripts#
+#
+sense = lapply(flag, function(x) x[x$tx_strand==x$TE_strand,])#
+##Select L1 families#
+#
+te = lapply(sense, function(x) x[x$TE_name=='L1Md_T:L1:LINE' | x$TE_name=='L1Md_A:L1:LINE' | x$TE_name=='L1Md_Gf:L1:LINE',])#
+##Merge elements across samples#
+#
+all.te = unique(unlist(lapply(te,function(x) x$TE_ID)))#
+te.match = lapply(te, function(x) x[match(all.te,x$TE_ID),])#
+#
+for (i in 1:length(te.match)) {#
+	te.match[[i]]$TE_ID = all.te#
+	na.lines = is.na(te.match[[i]]$fpkm)#
+	te.match[[i]]$fpkm[na.lines] = te.match[[i]]$uniq_counts[na.lines] = te.match[[i]]$tot_counts[na.lines] = te.match[[i]]$tot_reads[na.lines] = 0#
+	te.match[[i]]$alignedsize[na.lines] = te.match[[i]]$alignedsize[!na.lines][1]#
+}#
+##Get normalised counts#
+#
+counts = lapply(te.match, function(x) log2(x$tot_counts/x$alignedsize*1e6 + 0.05))#
+##Calculate mean fold change#
+#
+fc1 = counts$'VC10-VC-54801786' - counts$'VC10-Ctrl-54801785'#
+fc2 = counts$'VC11-VC-54807786' - counts$'VC12-Ctrl-54809768'#
+fc3 = counts$'VC35B-VC-54809771' - counts$'VC35B-Ctrl-54808775'#
+fc4 = counts$'VC35C-VC-54809772' - counts$'VC35C-Ctrl-54799820'#
+#
+mean.counts = rowMeans(matrix(unlist(counts),ncol=length(counts)))#
+mean.fc = rowMeans(cbind(fc1,fc2,fc3,fc4))#
+##Identify ITLs#
+#
+tx.type = matrix(unlist(lapply(te.match,function(x) x$transcript_type)),ncol=length(te.match))#
+itl = rowSums(tx.type=='pot_unit_ITL',na.rm=T)>=1#
+##Full-length elements#
+#
+te.split = strsplit(all.te,split='\\|')#
+te.length = unlist(lapply(te.split,function(x) as.numeric(x[3])-as.numeric(x[2])))#
+fl = te.length>5000#
+##Confidence values#
+#
+conf = matrix(unlist(lapply(te.match,function(x) x$avg_conf)),ncol=length(te.match))#
+mean.conf = rowMeans(conf,na.rm=T)#
+#
+#hist(mean.conf)#
+high.conf = mean.conf>50#
+##Scatter plots#
+#
+tf = grepl('L1Md_T',all.te)#
+a = grepl('L1Md_A',all.te)#
+gf = grepl('L1Md_Gf',all.te)#
+#
+plot(mean.counts[itl&fl&tf],mean.fc[itl&fl&tf],pch=19,cex=0.5,las=1,#
+ col='grey',xlab='log2 RPM',ylab='log2 FC',main='L1Md_T',ylim=c(-4,4))#
+points(mean.counts[itl&fl&high.conf&tf],mean.fc[itl&fl&high.conf&tf],pch=19,cex=0.5,col='black')#
+abline(h=0,lty=2)#
+#
+plot(mean.counts[itl&fl&a],mean.fc[itl&fl&a],pch=19,cex=0.5,las=1,#
+ col='grey',xlab='log2 RPM',ylab='log2 FC',main='L1Md_A',ylim=c(-4,4))#
+points(mean.counts[itl&fl&high.conf&a],mean.fc[itl&fl&high.conf&a],pch=19,cex=0.5,col='black')#
+abline(h=0,lty=2)#
+#
+plot(mean.counts[itl&fl&gf],mean.fc[itl&fl&gf],pch=19,cex=0.5,las=1,#
+ col='grey',xlab='log2 RPM',ylab='log2 FC',main='L1Md_Gf',ylim=c(-4,4))#
+points(mean.counts[itl&fl&high.conf&gf],mean.fc[itl&fl&high.conf&gf],pch=19,cex=0.5,col='black')#
+abline(h=0,lty=2)#
+##boxplot#
+#
+quartz(w=4.5, h=3)#
+par(mar=c(4,4,2,5))#
+boxplot(mean.fc[itl&fl&a & mean.counts>-2],#
+	mean.fc[itl&fl&tf & mean.counts>-2],#
+	lty=1, outline=FALSE,#
+	col='orange', las=1,#
+	xlab='log2 fold change',#
+	boxwex=0.6,#
+	horizontal=TRUE)#
+#
+y = rep(1:2, c(sum(itl&fl&high.conf&a & mean.counts>-2),#
+	sum(itl&fl&high.conf&tf & mean.counts>-2)))#
+points(c(mean.fc[itl&fl&a&high.conf & mean.counts>-2],#
+	mean.fc[itl&fl&tf&high.conf & mean.counts>-2]),#
+	y + rnorm(length(y),sd=0.05),#
+	pch=17, cex=0.7)#
+#
+abline(v=0,lty=2)#
+#
+p1 = t.test(mean.fc[itl&fl&a & mean.counts>-2])#
+p2 = t.test(mean.fc[itl&fl&tf & mean.counts>-2])#
+p.adjust(c(p1$p.value, p2$p.value), method='BH')

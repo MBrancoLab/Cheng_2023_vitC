@@ -1,0 +1,14 @@
+Var1,Var2,Var3,Var4,Var5,Var6,Var7
+sampleID,sampleName,cellType,cellID,medium,treatment,expID
+qp88,2i-Ctrl-DMSO1,E14,2i-7,2i,Ctrl,VC14
+qp89,2i-VC-DMSO1,E14,2i-7,2i,24hrs-VC,VC14
+qp90,2i-Ctrl-DMOG1,E14,2i-7,2i,24hrs-DMOG,VC14
+qp91,2i-VC-DMOG1,E14,2i-7,2i,24hrs-VC-DMOG,VC14
+qp118,2i-Ctrl-DMSO5,E14,2i-5,2i,Ctrl,VC17C
+qp119,2i-VC-DMSO5,E14,2i-5,2i,24hrs-VC,VC17C
+qp120,2i-Ctrl-DMOG5,E14,2i-5,2i,24hrs-DMOG,VC17C
+qp121,2i-VC-DMOG5,E14,2i-5,2i,24hrs-VC-DMOG,VC17C
+qp222,2i-Ctrl-DMSO19,E14,2i-8,2i,Ctrl,VC31
+qp223,2i-VC-DMSO19,E14,2i-8,2i,24hrs-VC,VC31
+qp224,2i-Ctrl-DMOG7,E14,2i-8,2i,24hrs-DMOG,VC31
+qp225,2i-VC-DMOG7,E14,2i-8,2i,24hrs-VC-DMOG,VC31

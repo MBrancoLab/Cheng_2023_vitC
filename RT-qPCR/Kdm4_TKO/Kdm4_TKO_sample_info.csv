@@ -1,0 +1,30 @@
+Var1,Var2,Var3,Var4,Var5,Var6,Var7,Var8
+sampleID,sampleName,cellType,cellID,medium,treatment,expID,plotTag
+qp258,2i-Jmjd-WT-Ctrl1,Jmjd_2abc 1,2i-Jmjd-TKO-2abc1,2i,Ctrl,VC33A,WT-Ctrl
+qp259,2i-Jmjd-WT-VC1,Jmjd_2abc 1,2i-Jmjd-TKO-2abc1,2i,24hrs-VC,VC33A,WT-24hrs-VC
+qp260,2i-Jmjd-KO-Ctrl1,Jmjd_2abc OHT1,2i-Jmjd-TKO-2abc-OHT1,2i,Ctrl,VC33A,Jmjd TKO-Ctrl
+qp261,2i-Jmjd-KO-VC1,Jmjd_2abc OHT1,2i-Jmjd-TKO-2abc-OHT1,2i,24hrs-VC,VC33A,Jmjd TKO-24hrs-VC
+qp266,2i-Jmjd-WT-Ctrl3,Jmjd_2abc 1,2i-Jmjd-TKO-2abc1,2i,Ctrl,VC33B,WT-Ctrl
+qp267,2i-Jmjd-WT-VC3,Jmjd_2abc 1,2i-Jmjd-TKO-2abc1,2i,24hrs-VC,VC33B,WT-24hrs-VC
+qp268,2i-Jmjd-KO-Ctrl3,Jmjd_2abc OHT1,2i-Jmjd-TKO-2abc-OHT1,2i,Ctrl,VC33B,Jmjd TKO-Ctrl
+qp269,2i-Jmjd-KO-VC3,Jmjd_2abc OHT1,2i-Jmjd-TKO-2abc-OHT1,2i,24hrs-VC,VC33B,Jmjd TKO-24hrs-VC
+qp270,2i-Jmjd-WT-Ctrl4,Jmjd_2abc 2,2i-Jmjd-TKO-2abc2,2i,Ctrl,VC33B,WT-Ctrl
+qp271,2i-Jmjd-WT-VC4,Jmjd_2abc 2,2i-Jmjd-TKO-2abc2,2i,24hrs-VC,VC33B,WT-24hrs-VC
+qp272,2i-Jmjd-KO-Ctrl4,Jmjd_2abc OHT2,2i-Jmjd-TKO-2abc-OHT2,2i,Ctrl,VC33B,Jmjd TKO-Ctrl
+qp273,2i-Jmjd-KO-VC4,Jmjd_2abc OHT2,2i-Jmjd-TKO-2abc-OHT2,2i,24hrs-VC,VC33B,Jmjd TKO-24hrs-VC
+qp281,2i-Jmjd-KO-VC6,Jmjd_2abc OHT2,2i-Jmjd-TKO-2abc-OHT2,2i,24hrs-VC,VC33C,Jmjd TKO-24hrs-VC
+qp280,2i-Jmjd-KO-Ctrl6,Jmjd_2abc OHT2,2i-Jmjd-TKO-2abc-OHT2,2i,Ctrl,VC33C,Jmjd TKO-Ctrl
+qp279,2i-Jmjd-WT-VC6,Jmjd_2abc 2,2i-Jmjd-TKO-2abc2,2i,24hrs-VC,VC33C,WT-24hrs-VC
+qp278,2i-Jmjd-WT-Ctrl6,Jmjd_2abc 2,2i-Jmjd-TKO-2abc2,2i,Ctrl,VC33C,WT-Ctrl
+qp277,2i-Jmjd-KO-VC5,Jmjd_2abc OHT1,2i-Jmjd-TKO-2abc-OHT1,2i,24hrs-VC,VC33C,Jmjd TKO-24hrs-VC
+qp276,2i-Jmjd-KO-Ctrl5,Jmjd_2abc OHT1,2i-Jmjd-TKO-2abc-OHT1,2i,Ctrl,VC33C,Jmjd TKO-Ctrl
+qp275,2i-Jmjd-WT-VC5,Jmjd_2abc 1,2i-Jmjd-TKO-2abc1,2i,24hrs-VC,VC33C,WT-24hrs-VC
+qp274,2i-Jmjd-WT-Ctrl5,Jmjd_2abc 1,2i-Jmjd-TKO-2abc1,2i,Ctrl,VC33C,WT-Ctrl
+qp290,2i-Jmjd-WT-Ctrl8,Jmjd_2abc 2,2i-Jmjd-TKO-2abc2,2i,Ctrl,VC33D,WT-Ctrl
+qp291,2i-Jmjd-WT-VC8,Jmjd_2abc 2,2i-Jmjd-TKO-2abc2,2i,24hrs-VC,VC33D,WT-24hrs-VC
+qp292,2i-Jmjd-KO-Ctrl8,Jmjd_2abc OHT2,2i-Jmjd-TKO-2abc-OHT2,2i,Ctrl,VC33D,Jmjd TKO-Ctrl
+qp293,2i-Jmjd-KO-VC8,Jmjd_2abc OHT2,2i-Jmjd-TKO-2abc-OHT2,2i,24hrs-VC,VC33D,Jmjd TKO-24hrs-VC
+qp286,2i-Jmjd-WT-Ctrl7,Jmjd_2abc 1,2i-Jmjd-TKO-2abc1,2i,Ctrl,VC33D,WT-Ctrl
+qp287,2i-Jmjd-WT-VC7,Jmjd_2abc 1,2i-Jmjd-TKO-2abc1,2i,24hrs-VC,VC33D,WT-24hrs-VC
+qp288,2i-Jmjd-KO-Ctrl7,Jmjd_2abc OHT1,2i-Jmjd-TKO-2abc-OHT1,2i,Ctrl,VC33D,Jmjd TKO-Ctrl
+qp289,2i-Jmjd-KO-VC7,Jmjd_2abc OHT1,2i-Jmjd-TKO-2abc-OHT1,2i,24hrs-VC,VC33D,Jmjd TKO-24hrs-VC

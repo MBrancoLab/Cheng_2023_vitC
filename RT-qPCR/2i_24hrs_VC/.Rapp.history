@@ -1,0 +1,440 @@
+tabulate(c(1,1,1,3,4,5))
+?tabulate
+match(c(1,1,1,3,4,5),unique(c(1,1,1,3,4,4,5,5,5,5)))
+match(c(1,1,1,3,4,4,5,5,5,5),unique(c(1,1,1,3,4,4,5,5,5,5)))
+getmax <- function(v) {#
+   uniqv <- unique(v)#
+   max(tabulate(match(v, uniqv)))#
+}
+getmaxf <- function(v) {#
+   uniqv <- unique(v)#
+   max(tabulate(match(v, uniqv)))#
+}
+getmaxf(c(1,1,1,3,4,5))
+getmaxf(c(1,1,1,1,3,4,5))
+getmaxf(c(1,1,1,1,3,4,5,5,5,5,5))
+head(rna1)
+rna1.f = apply(rna[,-c(1,2)],1,getmaxf)
+rna1.f = apply(rna1[,-c(1,2)],1,getmaxf)
+rna2.f = apply(rna2[,-c(1,2)],1,getmaxf)
+hist(rna1.f)
+hist(rna2.f)
+l1.1
+min(rna[,-c(1,2)])
+min(rna1[,-c(1,2)])
+min(rna2[,-c(1,2)])
+getmaxf <- function(v) {#
+   uniqv <- unique(v[v>0])#
+   max(tabulate(match(v[v>0], uniqv)))#
+}#
+#
+rna1.f = apply(rna1[,-c(1,2)],1,getmaxf)#
+rna2.f = apply(rna2[,-c(1,2)],1,getmaxf)
+hist(rna2.f)
+hist(rna1.f)
+hist(rna2.f)
+h=barplot(rowMeans(l1.fc1), names.arg=l1.1$name,las=2, ylim=c(0, max(l1.fc1)*1.05), ylab='Fold change')#
+for (i in 1:nrow(l1.fc1)) {#
+	points(rep(h[i],ncol(l1.fc1)), l1.fc1[i,], pch=19, cex=0.5)#
+}
+par(mfrow=c(1,2))#
+#
+h1=barplot(rowMeans(l1.fc1), names.arg=l1.1$name,las=2, ylim=c(0, max(l1.fc1)*1.05), ylab='Fold change', main='Ythcd1 KO')#
+for (i in 1:nrow(l1.fc1)) {#
+	points(rep(h1[i],ncol(l1.fc1)), l1.fc1[i,], pch=19, cex=0.5)#
+}#
+#
+h2=barplot(rowMeans(l1.fc2), names.arg=l1.2$name,las=2, ylim=c(0, max(l1.fc2)*1.05), ylab='Fold change', main='Mettl3 KO')#
+for (i in 1:nrow(l1.fc2)) {#
+	points(rep(h2[i],ncol(l1.fc2)), l1.fc2[i,], pch=19, cex=0.5)#
+}
+h1=barplot(rowMeans(l1.fc1), names.arg=l1.1$name,las=2, ylim=c(0, max(l1.fc1)*1.05), ylab='Fold change', main='Ythcd1 KO')#
+for (i in 1:nrow(l1.fc1)) {#
+	points(rep(h1[i],ncol(l1.fc1)), l1.fc1[i,], pch=19, cex=0.5)#
+}#
+#
+h2=barplot(rowMeans(l1.fc2), names.arg=l1.2$name,las=2, ylim=c(0, max(l1.fc1)*1.05), ylab='Fold change', main='Mettl3 KO')#
+for (i in 1:nrow(l1.fc2)) {#
+	points(rep(h2[i],ncol(l1.fc2)), l1.fc2[i,], pch=19, cex=0.5)#
+}
+rna2[grep('Zscan4',rna2$name),]
+rna2[grep('Zscan4',rna1$name),]
+rna1[grep('Zscan4',rna1$name),]
+reps = rna1[!grepl('ENS',rna1$ensg),]
+head(reps)
+l1.1 = rna1[grep('L1Md',rna1$name),]
+l1.2 = rna2[grep('L1Md',rna2$name),]
+l1.1
+l1.2
+rna1[grep('IAPLTR',rna1$name),]
+rna1[grep('IAPEz',rna1$name),]
+rna1[grep('IAPA',rna1$name),]
+rna2[grep('IAPEz',rna2$name),]
+l1.2
+rna2[grep('IAPA',rna2$name),]
+colSums(rna1)
+colSums(rna1[,c(1,2)])
+head(rna1)
+colSums(rna1[,-c(1,2)])
+colSums(rna2[,-1])
+rna2[grep('IAPEz',rna2$name),]
+rna2[grep('IAPLTR',rna2$name),]
+rna2[grep('RLTR10',rna2$name),]
+rna2[grep('L1Md',rna2$name),]
+head(rna1)
+rna1[grep('L1Md',rna2$name),]
+rna1[grep('L1Md',rna1$name),]
+sub=c('IAPEz-int','IAPEY4_LTR','IAPEY4_I-int','IAP1-MM_I-int','IAPLTR1_Mm','IAPLTR2a','IAPLTR1a_Mm','IAPLTR2_Mm', 'IAPLTR2a2_Mm','L1Md_F','L1Md_F3','L1Md_Gf','MMERVK10C-int','RLTR10-int')
+rna1[rna1$name %in% sub,]
+rna1[match(rna1$name, sub),]
+rna1[rna1$name %in% sub,]
+rna1[grep('L1Md',rna1$name),]
+write.table(rna1[grep('L1Md',rna1$name),],'Downloads/368048_3_other_1_q5ypp5/L1Md_Ythdc1KO.txt', sep='\t', quote=F, row.names=F)
+head(rna2)
+x=c(1,0.145,0.798,1,0.771,0.158,1,0.956,0.804)
+barplot(x)
+?barplot
+barplot(x,space=c(0,0,1,0,0,1,0,0))
+barplot(x,space=c(0,0,1,0,0,1,0,0,1))
+barplot(x,space=c(0,.5,.5,1,.5,.5,1,.5,.5))
+barplot(x,space=c(0,.1,.1,1,.1,.1,1,.1,.1))
+barplot(x,space=c(0,.1,.1,1,.1,.1,1,.1,.1),las=2,col='black', names.arg=rep(c('shScr','shTet1','shTet2'),3), ylim='Relative expression')
+barplot(x,space=c(0,.1,.1,1,.1,.1,1,.1,.1),las=2,col='black', names.arg=rep(c('shScr','shTet1','shTet2'),3), ylab='Relative expression')
+barplot(x,space=c(0,.1,.1,1,.1,.1,1,.1,.1),las=2,col='lightblue', names.arg=rep(c('shScr','shTet1','shTet2'),3), ylab='Relative expression')
+43538/2
+85/21769
+9/21769
+0.0004134319/0.003904635
+9/94
+6/8
+5/8
+7/8
+mean(c(75,62.5,62.5,87.5))
+23/32
+barplot(c(71.9,67,33,25,57))
+barplot(c(71.9,67,33,25,57),las=2,ylim=c(0,100),ylab='TRIM55 methylation (%)', names.arg=c('hESCs',1:4))
+barplot(c(71.9,67,33,25,57),las=2,ylim=c(0,100),ylab='TRIM55 methylation (%)', col=c('black',rep('lightblue',4)))
+barplot(c(71.9,67,33,25,57),las=2,ylim=c(0,100),ylab='TRIM55 methylation (%)', col=c('grey',rep('lightblue',4)))
+barplot(c(71.9,67,33,25,57),las=2,ylim=c(0,100),ylab='TRIM55 methylation (%)', col=c('grey',rep('orange',4)))
+barplot(c(71.9,67,23,25,57),las=2,ylim=c(0,100),ylab='TRIM55 methylation (%)', col=c('grey',rep('orange',4)))
+6737449/48144090
+6737449/(6737449+ 48144090)
+6737449+ 48144090
+3e9/300
+?read.delim
+11.4
+3,2
+3.2
+1.83*3.2/11.4
+4.42*3.2/11.4
+5.54*3.2/11.4
+8*3.2/11.4
+2/3
+x=read.delim('Documents/Annotations/Repeatmasker_mm10.txt',as.is=T)
+head(x)
+x$repFamily[grep('ERV',x$repFamily)]
+head(x)
+t=unique(x$repFamily)
+t[grep('ERV',t)]
+sum(x$repFamily=='ERVK')
+sum(x$repFamily=='ERV1')
+x=read.delim('Documents/Annotations/Repeatmasker_hg38.txt',as.is=T)
+sum(x$repFamily=='ERVK')
+sum(x$repFamily=='ERV1')
+t=unique(x$repFamily)
+t[grep('ERV',t)]
+?poines
+?points
+150*1e9
+150*1e9/3e9
+library(GEOquery)
+gset <- getGEO("GSE10588", GSEMatrix =TRUE, getGPL=FALSE)
+if (length(gset) > 1) idx <- grep("GPL2986", attr(gset, "names")) else idx <- 1
+gset <- gset[[idx]]
+ex <- exprs(gset)
+head(ex)
+qx <- as.numeric(quantile(ex, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))#
+LogC <- (qx[5] > 100) ||#
+          (qx[6]-qx[1] > 50 && qx[2] > 0)#
+if (LogC) { ex[which(ex <= 0)] <- NaN#
+  ex <- log2(ex) }
+head(ex)
+x=c('A','B','C')
+'A' %in% x
+y=c('A','D','E')
+x %in% y
+x[x %in% y]
+x11()
+plot(1:10,1:10)
+dev.off()
+x11()
+dev.off()
+x11()
+dev.off()
+830/3
+x=read.delim('Downloads/H3K27ac.relaxed.bed_overlap.txt',)
+head(x)
+plot(x$log10(total),x$log.enrich,pch=19,cex=0.3)
+plot(log10(x$total),x$log.enrich,pch=19,cex=0.3)
+log2(1/10)
+log2(1/1000)
+plot(log10(x$total),x$log.enrich,pch=19,cex=0.3)
+x=read.delim('Downloads/H3K4me1.relaxed.bed_overlap.txt',)
+plot(log10(x$total),x$log.enrich,pch=19,cex=0.3)
+x=read.delim('Downloads/H3K4me3.relaxed.bed_overlap.txt',)
+plot(log10(x$total),x$log.enrich,pch=19,cex=0.3)
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/2i_time_pt')
+x = read.csv('2i_time_pt_export_all.csv')
+head(x)
+x[x$all_data2=='ORF1a',]
+x[x$all_data2=='HSPCB',]
+x[x$all_data2=='HSPC',]
+2^(17.90000-23.92000)
+2^(18.05000-22.37333)
+0.04995144/0.01540989
+0.014609893/0.004904258
+x
+te='ORF1a'
+sub = x[x$all_data2==te,]
+sub
+sub = x[x$all_data2=='HSPC',]
+sub
+sub = x[x$all_data2==te,]
+nhk = numeric(nrow(sub))
+hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HCPC',]
+i=1
+hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HCPC',]
+hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HCPC']
+hk1
+sub$all_data1[i]
+hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HSPC']
+hk1
+hk2 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='ATP5B']
+hk2
+hk2 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='ATP5b']
+hk2
+?mean
+mean(1,3)
+nhk[i] = 2^(mean(c(hk1,hk2))-sub$all_data7[i])
+nhk
+for (i in 1:nrow(sub)) {#
+		hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HSPC']#
+		hk2 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='ATP5b']#
+		nhk[i] = 2^(mean(c(hk1,hk2))-sub$all_data7[i])#
+	}
+nhk
+sub
+plot(x$all_data4, x$all_data6)
+plot(x$all_data6, x$all_data8)
+sub = x[x$all_data5==te,]
+sub = x[x$all_data2==te,]
+sub
+ctrl = sub$all_data5[grep('Ctrl', sub$all_data1)]
+ctrl
+ctrl = sub$all_data5[grep('Ctrl', sub$all_data1)]
+t24 = sub$all_data5[grep('24hrs', sub$all_data1)]
+t48 = sub$all_data5[grep('48hrs', sub$all_data1)]
+t1wk = sub$all_data5[grep('1week', sub$all_data1)]
+barplot(c(mean(ctrl), mean(t24), mean(t48), mean(t1wk)))
+data = list(#
+		ctrl = sub$all_data5[grep('Ctrl', sub$all_data1)]#
+		t24 = sub$all_data5[grep('24hrs', sub$all_data1)]#
+		t48 = sub$all_data5[grep('48hrs', sub$all_data1)]#
+		t1wk = sub$all_data5[grep('1week', sub$all_data1)])#
+	h = barplot(lapply(data,mean))
+data = list(#
+		ctrl = sub$all_data5[grep('Ctrl', sub$all_data1)],#
+		t24 = sub$all_data5[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data5[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data5[grep('1week', sub$all_data1)])
+h = barplot(lapply(data,mean))
+lapply(data,mean)
+h = barplot(unlist(lapply(data,mean)))
+points(rep(h,unlist(lapply(data,length))),#
+		unlist(data))
+data = list(#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	h = barplot(unlist(lapply(data,mean)))#
+	points(rep(h,unlist(lapply(data,length))),#
+		unlist(data))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05))#
+	points(rep(h,unlist(lapply(data,length))),#
+		unlist(data))
+n = unlist(lapply(data,length))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05))#
+	points(rep(h,n) + rnorm(n, sd=0.01),#
+		unlist(data))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05))#
+	points(rep(h,n) + rnorm(n, sd=0.1),#
+		unlist(data))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05))#
+	points(rep(h,n) + rnorm(n, sd=0.05),#
+		unlist(data))
+abline(h=1, lty=2)
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n), unlist(data), pch=19,)#
+	abline(h=1, lty=2)
+plot.te = function(te) {#
+	sub = x[x$all_data2==te,]#
+	data = list(#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	n = unlist(lapply(data,length))#
+	h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n), unlist(data), pch=19,)#
+	abline(h=1, lty=2)#
+}
+plot.te('ORF1a')
+plot.te('ORF1b')
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/2i_24hrs_VC')
+x = read.csv('2i_24hrs_VC_export_all.csv')
+head(x)
+sub = x[x$all_data2==te,]
+sub
+te.list=c('ORF1a','ORF1b')
+sub = x[x$all_data2 %in% te,]
+sub
+sub = x[x$all_data2 %in% te.list,]
+sub
+data = list()#
+	for (i in 1:length(te.list)) {#
+		data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('24hrs',x$all_data1)]#
+	}
+data
+names(data) = te.list
+data
+n = unlist(lapply(data,length))#
+	h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n) + rnorm(n, sd=0.05),#
+		unlist(data), pch=19,)#
+	abline(h=1, lty=2)
+n = length(unlist(data))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+		unlist(data), pch=19,)#
+	abline(h=1, lty=2)
+levels(x$all_data2)
+te.list = c('ORF1a', 'ORF1b', 'ORF2', 'ORF2b', 'L1 TF', 'L1 A', 'L1 TF',#
+	'IAP GAG', 'IAP LTR1', 'IAP LTR2', 'IAP LTR3',#
+	'MuLV GAG', 'MuLV', 'EtnI', 'Etn/EtnII', 'MuSD GAG', 'MuSD',#
+	'MERV GAG', 'MERV')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('24hrs',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=1, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,)#
+abline(h=1, lty=2)
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+te.list = c('ORF1a', 'ORF1b', 'ORF2', 'ORF2b', 'L1 TF', 'L1 A', 'L1 GF',#
+	'IAP GAG', 'IAP LTR1', 'IAP LTR2', 'IAP LTR3',#
+	'MuLV GAG', 'MuLV', 'EtnI', 'Etn/EtnII', 'MuSD GAG', 'MuSD',#
+	'MERV GAG', 'MERV')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('24hrs',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+?t.test
+p = lapply(data, function(x) t.test(x, mu=1)$p.value)
+p
+p = unlist(lapply(data, function(x) t.test(x, mu=1)$p.value))
+p
+p.adj = p.adjust(p, method='BH')
+p.adj
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+x = read.csv('2i_24hrs_VC_export_all.csv')
+tet.list = c('mTET1','mTET2')#
+tet = list()#
+for (i in 1:length(tet.list)) {#
+	tet[[i*2-1]] = x$all_data5[x$all_data2==tet.list[i] & grepl('Ctrl',x$all_data1)]#
+	tet[[i*2]] = x$all_data5[x$all_data2==tet.list[i] & grepl('24hrs',x$all_data1)]#
+}#
+#
+quartz(w=4, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,0.1),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,0.08),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,0.07),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,0.08),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+quartz(w=3, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,0.08),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)

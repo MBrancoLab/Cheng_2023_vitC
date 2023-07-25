@@ -1,0 +1,1232 @@
+dnmt = read.csv('Dnmt_TKO/Dnmt_TKO_export_all.csv', as.is=T)#
+for (i in 1:nrow(dnmt)) {#
+	e14 = median(x24$all_data5[grepl('Ctrl',x24$all_data1) & x24$all_data2==dnmt$all_data2[i]])#
+	dnmt$all_data3[i] = dnmt$all_data5[i]/e14#
+}
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=3,#
+		ylab='Expression relative to TKO Ctrl',#
+		col=c('grey','darkred'))
+dnmt
+dnmt = read.csv('Dnmt_TKO/Dnmt_TKO_export_all.csv', as.is=T)#
+for (i in 1:nrow(dnmt)) {#
+	e14 = median(x24$all_data5[grepl('Ctrl',x24$all_data1) & x24$all_data2==dnmt$all_data2[i]], na.rm=T)#
+	dnmt$all_data3[i] = dnmt$all_data5[i]/e14#
+}#
+#
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=3,#
+		ylab='Expression relative to TKO Ctrl',#
+		col=c('grey','darkred'))
+dnmt
+x24
+dnmt$all_data2[dnmt$all_data2=='ORF2a'] = 'ORF2'
+succ
+succ[grepl('2i-Ctrl',succ$all_data1) & succ$all_data2=='ETnERV3-int-B2']
+succ[grepl('2i-Ctrl',succ$all_data1) & succ$all_data2=='ETnERV3-int-B2',]
+succ[grepl('2i-Ctrl[[:digit:]]',succ$all_data1) & succ$all_data2=='ETnERV3-int-B2',]
+median(succ$all_data5[grepl('2i-Ctrl[[:digit:]]',succ$all_data1) & succ$all_data2=='ETnERV3-int-B2'])
+dnmt = read.csv('Dnmt_TKO/Dnmt_TKO_export_all.csv', as.is=T)#
+dnmt$all_data2[dnmt$all_data2=='ORF2a'] = 'ORF2'#
+for (i in 1:nrow(dnmt)) {#
+	e14 = median(x24$all_data5[grepl('Ctrl',x24$all_data1) & x24$all_data2==dnmt$all_data2[i]])#
+	if (dnmt$all_data2[i]=='ETnERV3') e14 = 0.0005621853 #from succinate dataset#
+	dnmt$all_data3[i] = dnmt$all_data5[i]/e14#
+}#
+#
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=3,#
+		ylab='Expression relative to TKO Ctrl',#
+		col=c('grey','darkred'))
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=3,#
+		ylab='Expression relative to TKO Ctrl',#
+		col=c('grey','darkred'))
+dnmt = read.csv('Dnmt_TKO/Dnmt_TKO_export_all.csv', as.is=T)#
+#
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=3,#
+		ylab='Expression relative to TKO Ctrl',#
+		col=c('grey','darkred'))
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=3,#
+		ylab='Expression relative to TKO Ctrl',#
+		col=c('grey','darkred'))
+dnmt.df
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=3,#
+		ylab='Expression relative to TKO Ctrl',#
+		col=c('grey','darkred'))
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=4,#
+		ylab='Expression relative to TKO Ctrl',#
+		col=c('grey','darkred'))
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=4,#
+		ylab='Expression relative to Ctrl',#
+		col=c('grey','darkred'))
+model = aov(dnmt.df$val ~ dnmt.df$te * dnmt.df$gr)
+summary(model)
+TukeyHSD(model)
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=4,#
+		ylab='Fold change',#
+		col=c('grey','darkred'))
+kdm4.df = paper.plot(data=kdm4,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'Dazl'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr')
+kdm4.kdm = paper.plot(data=kdm4,	#
+		te.list=c('Kdm4a', 'Kdm4c'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3)
+model = aov(kdm4.df$val ~ kdm4.df$te * kdm4.df$gr)#
+summary(model)#
+TukeyHSD(model)
+kdm4
+kdm4.kdm = paper.plot(data=kdm4,	#
+		te.list=c('Oct4', 'Nanog', 'Sox2'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3)
+kdm4.ons = paper.plot(data=kdm4,	#
+		te.list=c('Oct4', 'Nanog', 'Sox2'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3)
+kdm4.ons
+kdm4.ons = paper.plot(data=kdm4,	#
+		te.list=c('Oct4', 'Nanog', 'Sox2'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3)
+kdm4.ons = paper.plot(data=kdm4,	#
+		te.list=c('Oct4', 'Nanog', 'Sox2'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3.5)
+kdm4.df = paper.plot(data=kdm4,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr')
+model = aov(kdm4.df$val ~ kdm4.df$te * kdm4.df$gr)
+summary(model)
+TukeyHSD(model)
+kdm4 = read.csv('Kdm4_TKO/Kdm4_TKO_export_all.csv', as.is=T)
+kdm4.tko = read.csv('Kdm4_TKO/Kdm4_TKO_export_all.csv', as.is=T)
+kdm4.tko
+kdm4.tko.df = paper.plot(data=kdm4.tko,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT')
+model = aov(kdm4.tko.df$val ~ kdm4.tko.df$te * kdm4.tko.df$gr)
+summary(model)
+TukeyHSD(model)
+kdm4.tko.df = paper.plot(data=kdm4.tko,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT')
+kdm4.tko.df = paper.plot(data=kdm4.tko,	#
+		te.list=c('L1 TF', 'L1 GF', 'ORF1a'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT')#
+#
+model = aov(kdm4.tko.df$val ~ kdm4.tko.df$te * kdm4.tko.df$gr)#
+summary(model)#
+TukeyHSD(model)
+kdm3.df = paper.plot(data=kdm3,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a'),#
+		g.list=c('shScr-VC','shKdm3a/b-Ctrl','shKdm3a/b-VC'),#
+		ylab='Expression relative to shScr')
+model = aov(kdm3.df$val ~ kdm3.df$te * kdm3.df$gr)
+summary(model)
+TukeyHSD(model)
+kdm3.df = paper.plot(data=kdm3,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a'),#
+		g.list=c('shScr-VC','shKdm3a/b-Ctrl','shKdm3a/b-VC'),#
+		ylab='Expression relative to shScr')
+kdm3
+kdm3.gene = paper.plot(data=kdm3,	#
+		te.list=c('Kdm3a', 'Kdm3b', 'Oct4', 'Sox2', 'Nanog', 'Dazl'),#
+		g.list=c('shScr-VC','shKdm3a/b-Ctrl','shKdm3a/b-VC'),#
+		ylab='Expression relative to shScr')
+model = aov(kdm3.gene$val ~ kdm3.gene$te * kdm3.gene$gr)#
+summary(model)#
+TukeyHSD(model)
+x=TukeyHSD(model$'kdm3.gene$te:kdm3.gene$gr')
+x=TukeyHSD(model)$'kdm3.gene$te:kdm3.gene$gr'
+x
+head(x)
+x[grep('Kdm3a[[:alnum:]]+Kdm3a',rownames(x)),]
+?grep
+x[grep('Kdm3a[[:alpha:]]+Kdm3a',rownames(x)),]
+?grep
+x[grep('Kdm3a[[:print:]]+Kdm3a',rownames(x)),]
+x[grep('^Kdm3a[[:print:]]+-Kdm3a',rownames(x)),]
+x[grep('^Kdm3b[[:print:]]+-Kdm3b',rownames(x)),]
+x[grep('^Oct4[[:print:]]+-Oct4',rownames(x)),]
+x[grep('^Sox2[[:print:]]+-Sox2',rownames(x)),]
+x[grep('^Nanog[[:print:]]+-Nanog',rownames(x)),]
+x[grep('^Dazl[[:print:]]+-Dazl',rownames(x)),]
+kdm4.genes = paper.plot(data=kdm4,	#
+		te.list=c('Kdm4a', 'Kdm4c', 'Oct4', 'Sox2', 'Nanog', 'Dazl'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr')
+kdm4 = read.csv('Kdm4_DKD/Kdm4_DKD_export_all.csv', as.is=T)
+kdm4.genes = paper.plot(data=kdm4,	#
+		te.list=c('Kdm4a', 'Kdm4c', 'Oct4', 'Sox2', 'Nanog', 'Dazl'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr')
+kdm4.genes = paper.plot(data=kdm4,	#
+		te.list=c('Kdm4a', 'Kdm4c', 'Oct4', 'Sox2', 'Nanog', 'Dazl'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr', y.lim=c(0,7))
+model = aov(kdm4.gene$val ~ kdm4.gene$te * kdm4.gene$gr)#
+summary(model)#
+TukeyHSD(model)
+kdm4.gene = paper.plot(data=kdm4,	#
+		te.list=c('Kdm4a', 'Kdm4c', 'Oct4', 'Sox2', 'Nanog', 'Dazl'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr')#
+#
+model = aov(kdm4.gene$val ~ kdm4.gene$te * kdm4.gene$gr)#
+summary(model)#
+TukeyHSD(model)
+x=TukeyHSD(model)$'kdm4.gene$te:kdm4.gene$gr'
+x[grep('^Dazl[[:print:]]+-Dazl',rownames(x)),]
+x[grep('^Nanog[[:print:]]+-Nanog',rownames(x)),]
+x[grep('^Sox2[[:print:]]+-Sox2',rownames(x)),]
+x[grep('^Oct4[[:print:]]+-Oct4',rownames(x)),]
+x[grep('^Kdm4a[[:print:]]+-Kdm4a',rownames(x)),]
+x[grep('^Kdm4c[[:print:]]+-Kdm4c',rownames(x)),]
+p = tapply(kdm4.gene$val, kdm4.gene$te, function(x) t.test(x, mu=1)$p.value)
+p.adj = p.adjust(p, method='BH')
+p.adj
+kdm4.gene
+str(kdm4.gene)
+factor(paste(kdm4.gene$te,kdm4.gene$gr))
+p = tapply(kdm4.gene$val, factor(paste(kdm4.gene$te,kdm4.gene$gr)), function(x) t.test(x, mu=1)$p.value)#
+p.adj = p.adjust(p, method='BH')
+p.adj
+kdm4.gene = kdm4.gene[kdm4.gene$te!='Sox2',] #Sox2 has only one replicate
+p = tapply(kdm4.gene$val, factor(paste(kdm4.gene$te,kdm4.gene$gr)), function(x) t.test(x, mu=1)$p.value)
+p.adj = p.adjust(p, method='BH')
+p.adj
+p = tapply(kdm3.gene$val, factor(paste(kdm3.gene$te,kdm3.gene$gr)), function(x) t.test(x, mu=1)$p.value)#
+p.adj = p.adjust(p, method='BH')
+p.adj
+kdm4.tko = read.csv('Kdm4_TKO/Kdm4_TKO_export_all.csv', as.is=T)#
+#
+kdm4.tko.df = paper.plot(data=kdm4.tko,	#
+		te.list=c('L1 TF', 'L1 GF', 'ORF1a'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT')
+kdm4.tko
+kdm4.tko.df = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog','Dazl',#
+				'L1 TF', 'L1A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF4b'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT')
+kdm4.tko.df = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog','Dazl',#
+				'L1 TF', 'L1A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF4b'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=6)
+kdm4.tko.df = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog','Dazl',#
+				'L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF4b'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=6)
+kdm4.tko.df = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog','Dazl',#
+				'L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=6)
+kdm4.tko1 = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=3)
+kdm4.tko1 = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=3, y.lim=c(0,2))
+kdm4.tko1 = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=3, y.lim=c(0,1.5))
+kdm4.tko1 = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=4, y.lim=c(0,1.5))
+kdm4.tko2 = paper.plot(data=kdm4.tko,	#
+		te.list=c('Dazl', 'L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT')
+kdm4.tko1 = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=3.5, y.lim=c(0,1.5))
+kdm4.tko1 = paper.plot(data=kdm4.tko,	#
+		te.list=c('KDM4A-GT','KDM4B-GT','KDM4C','Nanog'),#
+		g.list=c('2i-Jmjd-WT-VC','2i-Jmjd-KO-Ctrl','2i-Jmjd-KO-VC'),#
+		ylab='Expression relative to WT',#
+		width=3.5, y.lim=c(0,2))
+p = tapply(kdm4.tko1$val, factor(paste(kdm4.tko1$te,kdm4.tko1$gr)), function(x) t.test(x, mu=1)$p.value)
+p.adj = p.adjust(p, method='BH')
+p.adj
+model = aov(kdm4.tko2$val ~ kdm4.tko2$te * kdm4.tko2$gr)#
+summary(model)
+x=TukeyHSD(model)$'kdm4.tko2$te:kdm4.tko2$gr'
+x[grep('^Dazl[[:print:]]+-Dazl',rownames(x)),]
+TukeyHSD(model)
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+primed = read.csv('hESC_prime/hESC_prime_export_all.csv', as.is=T)
+primed
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change',#
+		width=3.5, y.lim=c(0,2))
+primed.df
+x24 = read.csv('2i_24hrs_VC/2i_24hrs_VC_export_all.csv')
+head(x24)
+x24
+primed = read.csv('hESC_prime/hESC_prime_export_all.csv', as.is=T)
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change',#
+		width=3.5, y.lim=c(0,2))
+primed
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'HERVK', 'HERVH-gag', 'HERVH-pro', 'HERVW'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change')
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'HERVK', 'HERVH-gag', 'HERVH-pro', 'HERVW'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+primed = read.csv('hESC_reset/hESC_reset_export_all.csv', as.is=T)
+naive = read.csv('hESC_reset/hESC_reset_export_all.csv', as.is=T)
+naive
+naive.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2', 'HERVH-gag', 'HERVH-pro'),#
+		g.list=c('reset-VC-24hrs', 'reset-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+##plot function#
+#
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+primed = read.csv('hESC_prime/hESC_prime_export_all.csv', as.is=T)#
+#
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2', 'HERVK', 'HERVH-gag', 'HERVH-pro', 'HERVW'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+primed.df
+naive.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('reset-VC-24hrs', 'reset-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3),#
+		width=4)
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3),#
+		width=4,#
+		col=c('orange','darkred'))
+primed
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('primed-VC-24hrs', 'primed-aKG-24hrs', 'primed-VC-aKG-24hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+plot(p5)
+p5 = c(1.012, 0.289)#
+p3 = c(1.259, 0.312)#
+n5 = c(0.841, 0.065)#
+n3 = c(0.917, 0.121)#
+plot(p5)
+plot(p5, xlim=c(0,3))
+plot(p5, xlim=c(0.5,2.5))
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,2))
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5))
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19)
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n')
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1)
+axis(1,c(1,2),labels=c('VC','HEF'))
+points(c(1,2),p3,pch=19,col='blue')
+p.av = rowMeans(cbind(p5,p3))
+n.av = rowMeans(cbind(n5,n3))
+lines(c(0.8,1.2),c(p.av[1],p.av[1]))
+lines(c(0.8,1.2),c(p.av[1],p.av[1]), lwd=2)
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),p3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(p.av[1],p.av[1]), lwd=2)
+lines(c(1.8,2.2),c(p.av[2],p.av[2]), lwd=2)
+abline(h=1, lty=2)
+quartz(w=3, h=4)#
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),p3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(p.av[1],p.av[1]), lwd=2)#
+lines(c(1.8,2.2),c(p.av[2],p.av[2]), lwd=2)#
+abline(h=1, lty=2)
+quartz(w=3, h=4)#
+plot(n5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),n3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(n.av[1],n.av[1]), lwd=2)#
+lines(c(1.8,2.2),c(n.av[2],n.av[2]), lwd=2)#
+abline(h=1, lty=2)
+quartz(w=2.5, h=3)#
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),p3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(p.av[1],p.av[1]), lwd=2)#
+lines(c(1.8,2.2),c(p.av[2],p.av[2]), lwd=2)#
+abline(h=1, lty=2)
+par(mar=c(5,4,2,2))#
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),p3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(p.av[1],p.av[1]), lwd=2)#
+lines(c(1.8,2.2),c(p.av[2],p.av[2]), lwd=2)#
+abline(h=1, lty=2)
+quartz(w=3, h=3)#
+par(mar=c(5,4,2,2))#
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),p3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(p.av[1],p.av[1]), lwd=2)#
+lines(c(1.8,2.2),c(p.av[2],p.av[2]), lwd=2)#
+abline(h=1, lty=2)
+quartz(w=2.7, h=3)#
+par(mar=c(5,4,2,2))#
+plot(p5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),p3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(p.av[1],p.av[1]), lwd=2)#
+lines(c(1.8,2.2),c(p.av[2],p.av[2]), lwd=2)#
+abline(h=1, lty=2)
+quartz(w=2.7, h=3)#
+plot(n5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),n3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(n.av[1],n.av[1]), lwd=2)#
+lines(c(1.8,2.2),c(n.av[2],n.av[2]), lwd=2)#
+abline(h=1, lty=2)
+par(mar=c(5,4,2,2))#
+plot(n5, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1, col='blue')#
+points(c(1,2),n3,pch=19,col='red')#
+axis(1,c(1,2),labels=c('VC','HEF'))#
+lines(c(0.8,1.2),c(n.av[1],n.av[1]), lwd=2)#
+lines(c(1.8,2.2),c(n.av[2],n.av[2]), lwd=2)#
+abline(h=1, lty=2)
+p = c(1.012, 1.259)#
+n = c(0.841, 0.917)#
+h = c(0.289, 0.312, 0.065, 0.121)
+plot(p, xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1,#
+	col=c('blue','red'))
+plot(c(1,1), p,#
+	xlim=c(0.5,2.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1,#
+	col=c('blue','red'))
+plot(c(1,1), p,#
+	xlim=c(0.5,3.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1,#
+	col=c('blue','red'))
+points(c(2,2),n,pch=19,col=c('blue','red'))
+points(rep(3,4),h,pch=19,col=c('blue','red'))
+axis(1,c(1,2),labels=c('VC','HEF'))
+axis(1,1:3,labels=c('Primed','Naive','HEF'))
+lines(c(0.8,1.2),c(mean(p),mean(p)), lwd=2)#
+lines(c(1.8,2.2),c(mean(n),mean(n)), lwd=2)#
+lines(c(2.8,3.2),c(mean(h),mean(h)), lwd=2)#
+abline(h=1, lty=2)
+quartz(w=4, h=3)#
+par(mar=c(5,4,2,2))#
+#
+plot(c(1,1), p,#
+	xlim=c(0.5,3.5), ylim=c(0,1.5),#
+	xaxt='n', xlab='', ylab='Fold change',#
+	pch=19, bty='n', las=1,#
+	col=c('blue','red'))#
+axis(1,1:3,labels=c('Primed','Naive','HEF'))#
+#
+points(c(2,2),n,pch=19,col=c('blue','red'))#
+points(rep(3,4),h,pch=19,col=c('blue','red'))#
+#
+lines(c(0.8,1.2),c(mean(p),mean(p)), lwd=2)#
+lines(c(1.8,2.2),c(mean(n),mean(n)), lwd=2)#
+lines(c(2.8,3.2),c(mean(h),mean(h)), lwd=2)#
+abline(h=1, lty=2)
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+x24 = read.csv('2i_24hrs_VC/2i_24hrs_VC_export_all.csv')
+x24.df = paper.plot(data=x24,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b', #
+				'IAP LTR1', 'IAP LTR2', 'IAP LTR3','IAP GAG', #
+				'MuLV', 'MuLV GAG', 'EtnI', 'MuSD','MuSD GAG', #
+				'MERV', 'MERV GAG'),#
+		g.list='2i-24hrs-VC',#
+		width=5.5, height=4.5, space=0.2,#
+		ylab='Fold change',#
+		col=rep(c('orange','grey'),c(7,11)))
+x24.df = paper.plot(data=x24,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b', #
+				'IAP LTR1', 'IAP LTR2', 'IAP LTR3','IAP GAG', #
+				'MuLV', 'MuLV GAG', 'EtnI', 'MuSD','MuSD GAG', #
+				'MERV', 'MERV GAG'),#
+		g.list='2i-24hrs-VC',#
+		width=5.5, height=4.5,#
+		ylab='Fold change',#
+		col=rep(c('orange','grey'),c(7,11)))
+library(gplots)
+x2i = read.csv('2i_time_pt/2i_time_pt_export_all.csv')#
+ser = read.csv('Serum_time_pt/Serum_time_pt_export_all.csv')#
+get.val = function(data, te) {#
+	sub = data[data$all_data2 %in% te,]#
+	sub$group = factor(as.character(sub$all_data2), levels=te)#
+	t0 = sub[grep('Ctrl', sub$all_data1),]#
+	t24 = sub[grep('24hrs', sub$all_data1),]#
+	t48 = sub[grep('48hrs', sub$all_data1),]#
+	t1wk = sub[grep('1week', sub$all_data1),]#
+	mat = cbind(#
+		tapply(t0$all_data3, t0$group, median),#
+		tapply(t24$all_data3, t24$group, median),#
+		tapply(t48$all_data3, t48$group, median),#
+		tapply(t1wk$all_data3, t1wk$group, median))#
+	colnames(mat) = c('Ctrl', '24h','48h','1wk')#
+	return(mat)#
+}#
+te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b',#
+	'IAP LTR1', 'IAP LTR2', 'IAP LTR3', 'IAP GAG',#
+	'MuSD GAG', 'MuLV', 'MuLV GAG', 'MERV', 'MERV GAG')#
+mat.2i = get.val(x2i, te)#
+mat.ser = get.val(ser, te)#
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none', density.info='none',#
+	colsep=4)
+akg = read.csv('Serum_aKG/Serum_aKG_export_all.csv', as.is=T)#
+akg = akg[akg$all_data3>0.1,]#
+#
+akg.df = paper.plot(data=akg,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a'),#
+		g.list=c('ser-24hrs-VC','ser-Ctrl-aKG','ser-VC-aKG'),#
+		y.lim=c(0,7.5))
+succ = read.csv('2i_Succ/2i_Succ_export_all.csv', as.is=T)#
+#
+succ.df = paper.plot(data=succ,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a'),#
+		g.list=c('2i-24hrs-VC','2i-Ctrl-Succ','2i-VC-Succ'),#
+		y.lim=c(0,7.5))
+etn = read.csv('2i_Succ/2i_Succ_export_all.csv', as.is=T)#
+#
+etn.df = paper.plot(data=etn,	#
+		te.list=c('ETnERV3-int-B2', 'RLTR13B2', 'RLTR13A3', 'RLTR10D2'),#
+		g.list=c('2i-24hrs-VC'),#
+		width=3)
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+etn = read.csv('2i_Succ/2i_Succ_export_all.csv', as.is=T)#
+#
+etn.df = paper.plot(data=etn,	#
+		te.list=c('ETnERV3-int-B2', 'RLTR13B2', 'RLTR13A3', 'RLTR10D2'),#
+		g.list=c('2i-24hrs-VC'),#
+		width=3)
+etn.df
+p = tapply(etn.df$val, etn.df$te, function(x) t.test(x, mu=1)$p.value)
+p.adj = p.adjust(p, method='BH')
+p.adj
+p
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+x24.tet = paper.plot(data=x24,	#
+		te.list=c('mTET1', 'mTET2'),#
+		g.list='2i-24hrs-VC',#
+		width=2,#
+		ylab='Expression relative to control')
+x24 = read.csv('2i_24hrs_VC/2i_24hrs_VC_export_all.csv')
+x24.tet = paper.plot(data=x24,	#
+		te.list=c('mTET1', 'mTET2'),#
+		g.list='2i-24hrs-VC',#
+		width=2,#
+		ylab='Expression relative to control')
+dmog = read.csv('2i_DMOG/2i_DMOG_export_all.csv', as.is=T)#
+#
+dmog.df = paper.plot(data= dmog,	#
+		te.list=c('ORF1a', 'ORF1b'),#
+		g.list=c('2i-VC-DMSO','2i-Ctrl-DMOG','2i-VC-DMOG'),#
+		width=3,#
+		ylab='Expression relative to DMSO',#
+		y.lim=c(0,4))#
+#
+model = aov(dmog.df$val ~ dmog.df$te * dmog.df$gr)#
+summary(model)
+p = tapply(dmog.df$val, dmog.df$te, function(x) t.test(x, mu=1)$p.value)#
+p.adj = p.adjust(p, method='BH')
+p.adj
+model = aov(dmog.df$val ~ dmog.df$te * dmog.df$gr)#
+summary(model)
+tet = read.csv('Tet_TKO/Tet_TKO_export_all.csv', as.is=T)#
+#
+tet.l1 = paper.plot(data=tet,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b'),#
+		g.list=c('2iTTWT-VC','2iTTKO-Ctrl','2iTTKO-VC'),#
+		ylab='Expression relative to WT')
+tet.erv = paper.plot(data=tet,	#
+		te.list=c('ETnERV3', 'RLTR13B2', 'RLTR10D2', 'MuLV', 'MuLV GAG'),#
+		g.list=c('2iTTWT-VC','2iTTKO-Ctrl','2iTTKO-VC'),#
+		width=4,#
+		ylab='Expression relative to WT')
+tet.tet = paper.plot(data=tet,	#
+		te.list=c('mTET1','mTET2'),#
+		g.list=c('2iTTWT-VC','2iTTKO-Ctrl','2iTTKO-VC'),#
+		width=3,#
+		ylab='Expression relative to WT')
+dnmt = read.csv('Dnmt_TKO/Dnmt_TKO_export_all.csv', as.is=T)#
+#
+dnmt.df = paper.plot(data=dnmt,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
+		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
+		width=4,#
+		ylab='Fold change',#
+		col=c('grey','darkred'))
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+kdm4 = read.csv('Kdm4_DKD/Kdm4_DKD_export_all.csv', as.is=T)#
+#
+kdm4.df = paper.plot(data=kdm4,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr')
+kdm4.df = paper.plot(data=kdm4,	#
+		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ETnERV3'),#
+		g.list=c('shScr-VC','shKdm4a/c-Ctrl','shKdm4a/c-VC'),#
+		ylab='Expression relative to shScr')
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+setdb1.kd = read.csv('Setdb1_KD/Setdb1_KD.csv', as.is=T)
+setdb1.kd = read.csv('Setdb1_KD/Setdb1_KD.csv', as.is=T)#
+#
+setdb1.df = paper.plot(data=setdb1.kd,	#
+		te.list=c( 'L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b'),#
+		g.list=c('shScr-Ctrl','shScr-VC','shSetdb1-Ctrl','shSetdb1-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3.5, y.lim=c(0,20))
+setdb1.df = paper.plot(data=setdb1.kd,	#
+		te.list=c( 'L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b'),#
+		g.list=c('shScr-VC','shSetdb1-Ctrl','shSetdb1-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3.5, y.lim=c(0,20))
+setdb1.df = paper.plot(data=setdb1.kd,	#
+		te.list=c( 'L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a'),#
+		g.list=c('shScr-VC','shSetdb1-Ctrl','shSetdb1-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3.5, y.lim=c(0,35))
+p = tapply(setdb1.df$val, factor(paste(setdb1.df$te,setdb1.df$gr)), function(x) t.test(x, mu=1)$p.value)
+p
+model = aov(setdb1.df$val ~ setdb1.df$te * setdb1.df$gr)
+summary(model)
+TukeyHSD(model)
+summary(model)
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+primed = read.csv('hESC_prime/hESC_prime_export_all.csv', as.is=T)#
+#
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3),#
+		width=4,#
+		col=c('orange','darkred'))
+naive = read.csv('hESC_reset/hESC_reset_export_all.csv', as.is=T)#
+#
+naive.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('reset-VC-24hrs', 'reset-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+naive
+primed
+paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('reset-VC-24hrs', 'reset-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+naive.df = paper.plot(data=naive,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('reset-VC-24hrs', 'reset-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3))
+paper.plot(data=naive,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('reset-VC-24hrs', 'reset-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,6))
+naive.df = paper.plot(data=naive,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('reset-VC-24hrs', 'reset-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,6),#
+		col=c('orange','darkred'))
+paper.plot(data=primed,	#
+		te.list=c('HERVH-pro', 'HERVH-gag', 'HERVK', 'HERVW'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3),#
+		width=4,#
+		col=c('orange','darkred'))
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+primed = read.csv('hESC_prime/hESC_prime_export_all.csv', as.is=T)#
+#
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3),#
+		width=4,#
+		col=c('orange','darkred'))
+primed.df
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+setdb1.kd = read.csv('Setdb1_KD/Setdb1_KD.csv', as.is=T)#
+#
+setdb1.df = paper.plot(data=setdb1.kd,	#
+		te.list=c( 'L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a'),#
+		g.list=c('shScr-VC','shSetdb1-Ctrl','shSetdb1-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3.5, y.lim=c(0,35))
+library(DWLS)
+install.packages('MAST')
+install.packages('MASS')
+BiocManager::install("MAST")
+library(DWLS)
+install.packages('fitdistrplus')
+library(DWLS)
+install.packages('igraph')
+library(DWLS)
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+setdb1.kd = read.csv('Setdb1_KD/Setdb1_KD.csv', as.is=T)#
+#
+setdb1.df = paper.plot(data=setdb1.kd,	#
+		te.list=c( 'L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a'),#
+		g.list=c('shScr-VC','shSetdb1-Ctrl','shSetdb1-VC'),#
+		ylab='Expression relative to shScr',#
+		width=3.5, y.lim=c(0,35))
+model = aov(setdb1.df$val ~ setdb1.df$te * setdb1.df$gr)#
+summary(model)#
+TukeyHSD(model)
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+primed = read.csv('hESC_prime/hESC_prime_export_all.csv', as.is=T)#
+#
+primed.df = paper.plot(data=primed,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('primed-VC-24hrs', 'primed-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,3),#
+		width=4,#
+		col=c('orange','darkred'))
+naive = read.csv('hESC_reset/hESC_reset_export_all.csv', as.is=T)#
+#
+naive.df = paper.plot(data=naive,	#
+		te.list=c('L1-5UTR', 'L1-HS-1', 'L1-HS-2', 'hORF1', 'hORF2'),#
+		g.list=c('reset-VC-24hrs', 'reset-VC-48hrs'),#
+		ylab='Fold change', y.lim=c(0,6),#
+		col=c('orange','darkred'))

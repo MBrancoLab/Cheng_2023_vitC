@@ -1,0 +1,289 @@
+library(tidyverse)
+te.files = list.files(pattern='TEcounts')#
+#
+te = tibble()#
+for (f in te.files) {#
+	sub = read_tsv(f) %>%#
+		mutate(group = strsplit(f, split='[_]')[[1]][2])#
+	te = rbind(te, sub)#
+}
+l1 = filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>6000, tx_strand==TE_strand) %>%#
+	select(TE_ID, fpkm, group) %>%#
+	pivot_wider(names_from=group, values_from=fpkm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC))
+l1
+filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>6000, tx_strand==TE_strand)
+filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>6000, tx_strand==TE_strand) %>%#
+	select(TE_ID, fpkm, group)
+filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>6000, tx_strand==TE_strand) %>%#
+	select(TE_ID, fpkm, score group)
+filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>6000, tx_strand==TE_strand) %>%#
+	select(TE_ID, fpkm, score, group)
+l1 = filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>6000, tx_strand==TE_strand) %>%#
+	select(TE_ID, fpkm, score, group)
+hist(l1$score)
+av.score = group_by(l1, TE_ID) %>% summarise(score = mean(score))
+av.score
+select(l1, !score) %>%#
+	pivot_wider(names_from=group, values_from=fpkm)
+select(l1, !score) %>%#
+	pivot_wider(names_from=group, values_from=fpkm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC))
+?inner_join
+select(l1, !score) %>%#
+	pivot_wider(names_from=group, values_from=fpkm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC)) %>%#
+	inner_join(av.score)
+filter(av.score, TE_ID=='chr20|26233677|26239735|L1PA2:L1:LINE|29|+')
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point()
+l1.wide = select(l1, !score) %>%#
+	pivot_wider(names_from=group, values_from=fpkm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC)) %>%#
+	inner_join(av.score)#
+#
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point()
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point()
+filter(l1.wide, vitC>1)
+filter(te, TE_ID=='chr13|106929331|106935363|L1PA2:L1:LINE|25|-')
+filter(te, TE_ID=='chr13|106929331|106935363|L1PA2:L1:LINE|25|-') %>% select(TE_ID:tx_strand,uniq_counts:score)
+l1 = filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>5000, tx_strand==TE_strand) %>%#
+	select(TE_ID, fpkm, score, group)#
+#
+av.score = group_by(l1, TE_ID) %>% summarise(score = mean(score))#
+l1.wide = select(l1, !score) %>%#
+	pivot_wider(names_from=group, values_from=fpkm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC)) %>%#
+	inner_join(av.score)#
+#
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point()
+filter(te, TE_chr=='chr17', TE_start>60861439, TE_stop<60917725)
+filter(te, TE_chr=='chr17', TE_start>60861439, TE_stop<60917725)  %>% select(TE_ID:tx_strand,uniq_counts:score)
+l1
+l1 = filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>5000, tx_strand==TE_strand) %>%#
+	select(TE_ID, alignedsize, tot_counts, score, group)
+l1
+l1 = filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name),#
+			TE_stop-TE_start>5000, tx_strand==TE_strand) %>%#
+	select(TE_ID, alignedsize, tot_counts, score, group) %>%#
+	mutate(rpm = tot_counts/alignedsize*1e6)
+l1
+l1.wide = select(l1, TE_ID, group, rpm) %>%#
+	pivot_wider(names_from=group, values_from=rpm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC)) %>%#
+	inner_join(av.score)
+l1.wide
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point()
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+l1 = filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name) | grepl('L1PA3',TE_name),#
+			TE_stop-TE_start>5000, tx_strand==TE_strand) %>%#
+	select(TE_ID, alignedsize, tot_counts, score, group) %>%#
+	mutate(rpm = tot_counts/alignedsize*1e6)#
+#
+av.score = group_by(l1, TE_ID) %>% summarise(score = mean(score))#
+l1.wide = select(l1, TE_ID, group, rpm) %>%#
+	pivot_wider(names_from=group, values_from=rpm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC)) %>%#
+	inner_join(av.score)#
+#
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+min(l1$rpm[l1$rpm>0])
+ggplot(l1.wide, aes(x=log2(ctrl+0.001), y=log2(vitc+0.001), col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=log2(ctrl+0.001), y=log2(vitC+0.001), col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=log2(ctrl+0.01), y=log2(vitC+0.01), col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=log2(ctrl+0.1), y=log2(vitC+0.1), col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+filter(l1.wide, vitC>6)
+gplot(l1.wide, aes(x=log2(ctrl+0.1), y=log2(vitC+0.1), col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=log2(ctrl+0.1), y=log2(vitC+0.1), col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC, col=score)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point() +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+l1_wide
+l1.wide
+l1 = filter(te, grepl('L1HS',TE_name) | grepl('L1PA2',TE_name) | grepl('L1PA3',TE_name),#
+			TE_stop-TE_start>5000, tx_strand==TE_strand) %>%#
+	select(TE_ID, TE_chr, TE_start, TE_stop, alignedsize, tot_counts, score, group) %>%#
+	mutate(rpm = tot_counts/alignedsize*1e6)
+l1
+l1.wide = select(l1:TE_stop, group, rpm) %>%#
+	pivot_wider(names_from=group, values_from=rpm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC)) %>%#
+	inner_join(av.score)
+l1.wide = select(l1, TE_ID:TE_stop, group, rpm) %>%#
+	pivot_wider(names_from=group, values_from=rpm) %>%#
+	filter(!is.na(ctrl), !is.na(vitC)) %>%#
+	inner_join(av.score)
+l1.wide
+kdm = read_tsv('ENCFF021QGZ.bed', col_names=NA)
+kdm
+has.kdm = logical(nrow(l1.wide))
+has.kdm
+kdm = read_tsv('ENCFF021QGZ.bed', col_names=NA)#
+has.kdm = logical(nrow(l1.wide))#
+for (i in 1:nrow(l1.wide)) {#
+	sub = filter(kdm, X1==l1.wide$TE_chr[i], X3>l1.wide$TE_start[i], X3<l1.wide$TE_stop[i])#
+	if (nrow(sub)>0) has.kdm=TRUE#
+}
+has.kdm
+kdm = read_tsv('ENCFF021QGZ.bed', col_names=NA)#
+has.kdm = logical(nrow(l1.wide))#
+for (i in 1:nrow(l1.wide)) {#
+	sub = filter(kdm, X1==l1.wide$TE_chr[i], X3>l1.wide$TE_start[i], X3<l1.wide$TE_stop[i])#
+	if (nrow(sub)>0) has.kdm[i] = TRUE#
+}
+has.kdm
+sum(has.kdm)
+which(has.kdm)
+l1.wide[301,]
+write_tsv(l1.wide, '~/Downloads/temp.txt')
+kdm = read_tsv('ENCFF021QGZ.bed', col_names=NA)#
+has.kdm = logical(nrow(l1.wide))#
+for (i in 1:nrow(l1.wide)) {#
+	sub = filter(kdm, X1==l1.wide$TE_chr[i],#
+		(X3>l1.wide$TE_start[i] & X3<l1.wide$TE_stop[i]) | (X2>l1.wide$TE_start[i] & X2<l1.wide$TE_stop[i]))#
+	if (nrow(sub)>0) has.kdm[i] = TRUE#
+}
+sum(has.kdm)
+l1.wide[has.kdm,]
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point(size=0.5, col='grey') +#
+	geom_poont(data=filter(l1.wide,score>50), aes(x=ctrl,y=vitC), col='red') +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point(size=0.5, col='grey') +#
+	geom_point(data=filter(l1.wide,score>50), aes(x=ctrl,y=vitC), col='red') +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point(size=0.5, col='grey') +#
+	geom_point(data=filter(l1.wide,score>70), aes(x=ctrl,y=vitC), col='red') +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point(size=0.5, col='grey') +#
+	geom_point(data=filter(l1.wide,score>80), aes(x=ctrl,y=vitC), col='red') +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point(size=0.8, col='grey') +#
+	#geom_point(data=filter(l1.wide,score>80), aes(x=ctrl,y=vitC), col='red') +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+texp.files = list.files(pattern='TExP')#
+#
+texp = tibble()#
+for (f in texp.files) {#
+	sub = read_delim(f, delim=' ', skip=1, col_names=c('L1','rpkm')) %>%#
+		add_column(group = strsplit(f, split='[_.]')[[1]][2])#
+	texp = rbind(texp, sub)#
+}#
+#
+filter(texp, grepl('L1HS', L1) | grepl('L1PA2', L1) | grepl('L1PA3', L1)) %>%#
+ggplot(aes(x=L1, y=rpkm, fill=group)) +#
+	geom_bar(stat='identity', position=position_dodge()) +#
+	theme_classic()
+tetr.files = list.files(pattern='TEtranscripts')#
+#
+tetr = tibble()#
+for (f in tetr.files) {#
+	sub = read_tsv(f, skip = 1, col_names=c('feature','count')) %>%#
+		add_column(group = strsplit(f, split='[_.]')[[1]][2]) %>%#
+		mutate(rpm = count/sum(count)*1e6)#
+	tetr = rbind(tetr, sub)#
+}#
+#
+filter(tetr, grepl('L1HS', feature) | grepl('L1PA2', feature) | grepl('L1PA3', feature)) %>%#
+ggplot(aes(x=feature, y=rpm, fill=group)) +#
+	geom_bar(stat='identity', position=position_dodge()) +#
+	theme_classic()
+subf.files = list.files(pattern='subFcounts')#
+#
+subf = tibble()#
+for (f in subf.files) {#
+	sub = read_tsv(f) %>%#
+		mutate(group = strsplit(f, split='[_]')[[1]][2])#
+	subf = rbind(subf, sub)#
+}#
+colnames(subf)[3] = 'te'#
+#
+filter(subf, grepl('L1HS', te) | grepl('L1PA2', te) | grepl('L1PA3', te)) %>%#
+ggplot(aes(x=te, y=fpkm, fill=group)) +#
+	geom_bar(stat='identity', position=position_dodge()) +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point(size=0.8, col='grey') +#
+	#geom_point(data=filter(l1.wide,score>80), aes(x=ctrl,y=vitC), col='red') +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+filter(texp, grepl('L1HS', L1) | grepl('L1PA2', L1) | grepl('L1PA3', L1)) %>%#
+ggplot(aes(x=L1, y=rpkm, fill=group)) +#
+	geom_bar(stat='identity', position=position_dodge()) +#
+	theme_classic()
+ggsave('texp.svg')
+filter(tetr, grepl('L1HS', feature) | grepl('L1PA2', feature) | grepl('L1PA3', feature)) %>%#
+ggplot(aes(x=feature, y=rpm, fill=group)) +#
+	geom_bar(stat='identity', position=position_dodge()) +#
+	theme_classic()
+ggsave('tetr.svg')
+filter(subf, grepl('L1HS', te) | grepl('L1PA2', te) | grepl('L1PA3', te)) %>%#
+ggplot(aes(x=te, y=fpkm, fill=group)) +#
+	geom_bar(stat='identity', position=position_dodge()) +#
+	theme_classic()
+ggsave('squire.svg')
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point(size=0.8, col='grey') +#
+	#geom_point(data=filter(l1.wide,score>80), aes(x=ctrl,y=vitC), col='red') +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggplot(l1.wide, aes(x=ctrl, y=vitC)) +#
+	geom_point(col='grey') +#
+	#geom_point(data=filter(l1.wide,score>80), aes(x=ctrl,y=vitC), col='red') +#
+	geom_abline(slope=1, intercept=0, linetype='dashed') +#
+	theme_classic()
+ggsave('televel.svg')

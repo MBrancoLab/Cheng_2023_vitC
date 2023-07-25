@@ -1,0 +1,1018 @@
+?dnabin
+??dnabin
+al = read.dna('HERVK11D_chr2_101242149_pan2nal.txt', format='clustal')
+read.dna
+al = read.dna('HERVK11D_chr2_101242149_pan2nal.txt', format='clustal')
+al = read.dna('HERVK11D_chr2_101242149_pan2nal.txt', format='clustal', skip=2)
+X <- scan('HERVK11D_chr2_101242149_pan2nal.txt', what = "", sep = "\n", quiet = TRUE)
+X
+X <- scan('HERVK11D_chr2_101242149_pan2nal.txt', what = "", sep = "\n", quiet = TRUE,skip=2)
+X
+X[-1]
+al = read.dna('HERVK11D_chr2_101242149_pan2nal.txt', format='clustal')
+X <- scan('HERVK11D_chr2_101242149_pan2nal.txt', what = "", sep = "\n", quiet = TRUE)
+X[-1]
+X <- scan('HERVK11D_chr2_101242149_pan2nal.txt', what = "", sep = "\n", quiet = TRUE,skip=2)
+findFirstNucleotide <- function(x) {#
+        tmp <- regexpr("[[:blank:]]+", x[1])#
+        tmp[1] + attr(tmp, "match.length")#
+    }#
+    getTaxaNames <- function(x) {#
+        x <- sub("^['\" ]+", "", x)#
+        x <- sub("['\" ]+$", "", x)#
+        x#
+    }#
+    getNucleotide <- function(x) {#
+        x <- gsub(" ", "", x)#
+        x <- strsplit(x, NULL)#
+        tolower(unlist(x))#
+    }
+findFirstNucleotide(X[1])
+getTaxaNames(substr(X[j], 1, 14))
+start.seq <- findFirstNucleotide(X[1])
+nspaces <- paste("^ {", start.seq - 1, "}", sep = "", #
+                collapse = "")
+nspaces
+stars <- grep(nspaces, X)
+start
+stars
+n <- stars[1] - 1
+n
+taxa <- getTaxaNames(substr(X[1:n], 1, start.seq - #
+                1))
+X[1]
+regexpr("[[:blank:]]+", X[1])
+start.seq <- findFirstNucleotide(X[1])
+start.seq
+al = read.dna('HERVK11D_chr2_101242149_pan2nal.txt', format='clustal')
+al
+dnds(al)
+class(al)
+print(al)
+as.matrix(al)
+??dnabin
+as.list(al)
+dnds
+.buildDegeneracyMatrix(1)
+buildDegeneracyMatrix(1)
+nrow(al)
+ncol(al)
+??buildDegeneracyMatrix
+code = 1
+codonstart = 1
+quiet = FALSE
+details = FALSE
+return.categories = FALSE
+x=al
+if (is.list(x)) #
+        x <- as.matrix(x)#
+    n <- nrow(x)#
+    if (nrow(unique.matrix(x)) != n) #
+        stop("sequences are not unique")#
+    if (codonstart > 1) {#
+        del <- -(1:(codonstart - 1))#
+        x <- x[, del]#
+    }#
+    p <- ncol(x)#
+    rest <- p%%3
+p
+n
+x
+rest
+degMat <- .buildDegeneracyMatrix(code)
+Lcat <- matrix(0L, n, p)#
+    V1 <- V2 <- V3 <- integer(136)#
+    i <- c(136L, 72L, 40L, 24L)#
+    V1[i] <- c(1L, 17L, 33L, 49L)#
+    V2[i] <- c(0L, 4L, 8L, 12L)#
+    V3[i] <- 0:3#
+    class(x) <- NULL#
+    z <- as.integer(x)#
+    N <- length(x)#
+    SHIFT <- c(0L, n, 2L * n)#
+    p <- 1L + SHIFT
+Lcat
+V1
+i
+V2
+V3
+p
+SHIFT
+N
+i=1
+codon <- z[p]
+codon
+ii <- V1[codon[1]] + V2[codon[2]] + V3[codon[3]]
+ii
+Lcat[p] <- degMat[ii, ]
+dnds(al)
+al = read.dna('HERVK11D_chr2_101242149_pan2nal.txt', format='clustal')#
+dnds(al)
+al = read.dna('HERVK11D_chr2_101242149_trimal.txt', format='clustal')
+dnds(al)
+al = read.dna('temp.txt', format='clustal')
+dnds(al)
+?dnds
+dnds
+test = function (x, code = 1, codonstart = 1, quiet = FALSE, details = FALSE, #
+    return.categories = FALSE) #
+{#
+    if (code > 6) #
+        stop("only the genetic codes 1--6 are available for now")#
+    if (is.list(x)) #
+        x <- as.matrix(x)#
+    n <- nrow(x)#
+    if (nrow(unique.matrix(x)) != n) #
+        stop("sequences are not unique")#
+    if (codonstart > 1) {#
+        del <- -(1:(codonstart - 1))#
+        x <- x[, del]#
+    }#
+    p <- ncol(x)#
+    rest <- p%%3#
+    if (rest) {#
+        p <- p - rest#
+        x <- x[, 1:p]#
+        msg <- sprintf("sequence length not a multiple of 3: %d %s dropped", #
+            rest, ngettext(rest, "base", "bases"))#
+        warning(msg)#
+    }#
+    degMat <- .buildDegeneracyMatrix(code)#
+    Lcat <- matrix(0L, n, p)#
+    V1 <- V2 <- V3 <- integer(136)#
+    i <- c(136L, 72L, 40L, 24L)#
+    V1[i] <- c(1L, 17L, 33L, 49L)#
+    V2[i] <- c(0L, 4L, 8L, 12L)#
+    V3[i] <- 0:3#
+    class(x) <- NULL#
+    z <- as.integer(x)#
+    N <- length(x)#
+    SHIFT <- c(0L, n, 2L * n)#
+    p <- 1L + SHIFT#
+    while (p[3] <= N) {#
+        for (i in 1:n) {#
+            codon <- z[p]#
+            ii <- V1[codon[1]] + V2[codon[2]] + V3[codon[3]]#
+            if (!is.na(ii)) #
+                Lcat[p] <- degMat[ii, ]#
+            p <- p + 1L#
+        }#
+        p <- p[3] + SHIFT#
+    }#
+    if (return.categories) #
+        return(Lcat)#
+    if (details) #
+        quiet <- TRUE#
+    deg <- c(0, 2, 4)#
+    nout <- n * (n - 1)/2#
+    res <- numeric(nout)#
+    k <- 1L#
+    for (i in 1:(n - 1)) {#
+        for (j in (i + 1):n) {#
+            if (!quiet) #
+                cat("\r", round(100 * k/nout), "%")#
+            z <- x[c(i, j), ]#
+            Lavg <- (Lcat[i, ] + Lcat[j, ])/2#
+            Lavg[Lavg == 1] <- 2#
+            Lavg[Lavg == 3] <- 4#
+            ii <- lapply(deg, function(x) which(x == Lavg))#
+            L <- lengths(ii)#
+            S <- lapply(ii, function(id) dist.dna(z[, id, drop = FALSE], #
+                "TS"))#
+            V <- lapply(ii, function(id) dist.dna(z[, id, drop = FALSE], #
+                "TV"))#
+            S <- unlist(S, use.names = FALSE)#
+            V <- unlist(V, use.names = FALSE)#
+            if (details) {#
+                cat(sprintf("\nComparing sequences %d and %d:\n", #
+                  i, j))#
+                tmp <- rbind(S, V)#
+                dimnames(tmp) <- list(c("Transitions", "Transversions"), #
+                  c("Nondegenerate", "Twofold", "Fourfold"))#
+                print(tmp)#
+            }#
+            P <- S/L#
+            Q <- V/L#
+            a <- 1/(1 - 2 * P - Q)#
+            b <- 1/(1 - 2 * Q)#
+            c <- (a - b)/2#
+            A <- log(a)/2 - log(b)/4#
+            B <- log(b)/2#
+            dS <- (L[2] * A[2] + L[3] * A[3])/sum(L[2:3]) + B[3]#
+            dN <- A[1] + (L[1] * B[1] + L[2] * B[2])/sum(L[1:2])#
+            res[k] <- dN/dS#
+            k <- k + 1L#
+        }#
+    }#
+    print(dS)#
+    print(dN)#
+    if (!quiet) #
+        cat("... done\n")#
+    attr(res, "Size") <- n#
+    attr(res, "Labels") <- rownames(x)#
+    attr(res, "Diag") <- attr(res, "Upper") <- FALSE#
+    attr(res, "call") <- match.call()#
+    attr(res, "method") <- "dNdS (Li 1993)"#
+    class(res) <- "dist"#
+    res#
+}
+test(al)
+?ds
+test = function (x, code = 1, codonstart = 1, quiet = FALSE, details = FALSE, #
+    return.categories = FALSE) #
+{#
+    if (code > 6) #
+        stop("only the genetic codes 1--6 are available for now")#
+    if (is.list(x)) #
+        x <- as.matrix(x)#
+    n <- nrow(x)#
+    if (nrow(unique.matrix(x)) != n) #
+        stop("sequences are not unique")#
+    if (codonstart > 1) {#
+        del <- -(1:(codonstart - 1))#
+        x <- x[, del]#
+    }#
+    p <- ncol(x)#
+    rest <- p%%3#
+    if (rest) {#
+        p <- p - rest#
+        x <- x[, 1:p]#
+        msg <- sprintf("sequence length not a multiple of 3: %d %s dropped", #
+            rest, ngettext(rest, "base", "bases"))#
+        warning(msg)#
+    }#
+    degMat <- buildDegeneracyMatrix(code)#
+    Lcat <- matrix(0L, n, p)#
+    V1 <- V2 <- V3 <- integer(136)#
+    i <- c(136L, 72L, 40L, 24L)#
+    V1[i] <- c(1L, 17L, 33L, 49L)#
+    V2[i] <- c(0L, 4L, 8L, 12L)#
+    V3[i] <- 0:3#
+    class(x) <- NULL#
+    z <- as.integer(x)#
+    N <- length(x)#
+    SHIFT <- c(0L, n, 2L * n)#
+    p <- 1L + SHIFT#
+    while (p[3] <= N) {#
+        for (i in 1:n) {#
+            codon <- z[p]#
+            ii <- V1[codon[1]] + V2[codon[2]] + V3[codon[3]]#
+            if (!is.na(ii)) #
+                Lcat[p] <- degMat[ii, ]#
+            p <- p + 1L#
+        }#
+        p <- p[3] + SHIFT#
+    }#
+    if (return.categories) #
+        return(Lcat)#
+    if (details) #
+        quiet <- TRUE#
+    deg <- c(0, 2, 4)#
+    nout <- n * (n - 1)/2#
+    res <- numeric(nout)#
+    k <- 1L#
+    for (i in 1:(n - 1)) {#
+        for (j in (i + 1):n) {#
+            if (!quiet) #
+                cat("\r", round(100 * k/nout), "%")#
+            z <- x[c(i, j), ]#
+            Lavg <- (Lcat[i, ] + Lcat[j, ])/2#
+            Lavg[Lavg == 1] <- 2#
+            Lavg[Lavg == 3] <- 4#
+            ii <- lapply(deg, function(x) which(x == Lavg))#
+            L <- lengths(ii)#
+            S <- lapply(ii, function(id) dist.dna(z[, id, drop = FALSE], #
+                "TS"))#
+            V <- lapply(ii, function(id) dist.dna(z[, id, drop = FALSE], #
+                "TV"))#
+            S <- unlist(S, use.names = FALSE)#
+            V <- unlist(V, use.names = FALSE)#
+            if (details) {#
+                cat(sprintf("\nComparing sequences %d and %d:\n", #
+                  i, j))#
+                tmp <- rbind(S, V)#
+                dimnames(tmp) <- list(c("Transitions", "Transversions"), #
+                  c("Nondegenerate", "Twofold", "Fourfold"))#
+                print(tmp)#
+            }#
+            P <- S/L#
+            Q <- V/L#
+            a <- 1/(1 - 2 * P - Q)#
+            b <- 1/(1 - 2 * Q)#
+            c <- (a - b)/2#
+            A <- log(a)/2 - log(b)/4#
+            B <- log(b)/2#
+            dS <- (L[2] * A[2] + L[3] * A[3])/sum(L[2:3]) + B[3]#
+            dN <- A[1] + (L[1] * B[1] + L[2] * B[2])/sum(L[1:2])#
+            res[k] <- dN/dS#
+            k <- k + 1L#
+        }#
+    }#
+    print(dS)#
+    print(dN)#
+    if (!quiet) #
+        cat("... done\n")#
+    attr(res, "Size") <- n#
+    attr(res, "Labels") <- rownames(x)#
+    attr(res, "Diag") <- attr(res, "Upper") <- FALSE#
+    attr(res, "call") <- match.call()#
+    attr(res, "method") <- "dNdS (Li 1993)"#
+    class(res) <- "dist"#
+    res#
+}
+test(al)
+buildDegeneracyMatrix
+ape::: buildDegeneracyMatrix
+ape:::buildDegeneracyMatrix
+getAnywhere
+getAnywhere('buildDegeneracyMatrix')
+al = read.dna('HERVK11D_chr2_101242149_trimal.txt', format='clustal')#
+dnds(al)
+?dsdn
+?dnds
+dnds(al, details=TRUE)
+?dnds
+dnds(al, return.categories=TRUE)
+dnds(al, details=TRUE)
+16/19
+?dnds
+al = read.dna('ERVW-1-pal2nal.txt', format='clustal')
+al = read.dna('ERVW-1_pal2nal.txt', format='clustal')
+dnds(al, details=TRUE)
+setwd('~/Dropbox/Cheng_2022_vitC/ChIP-qPCR/')
+library(tidyverse)
+dkd = read_tsv('DKD_ChIP.txt')
+dkd
+filter(dkd, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd,exp=='VC70B')
+filter(dkd,exp=='VC70D')
+print(filter(dkd,exp=='VC70D'),n=50)
+filter(dkd,exp=='VC70D',mark=='H3K9me3')
+filter(dkd,exp=='VC70C',mark=='H3K9me3')
+unique(dkd$exp)
+dkd = read_tsv('DKD_ChIP.txt')
+filter(dkd, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3', exp!='VC70A') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+devtools::install_github("HajkD/orthologr")
+library(devtools)
+devtools::install_github("HajkD/orthologr")
+library(orthologr)
+?dNdS
+dNdS('ERVW-1_hg38.fa','ERVW-1_ponAbe3.fa')
+dNdS('ERVW-1_hg38.fa','ERVW-1_ponAbe3.fa',#
+	blast_path = '/usr/local/ncbi/blast/bin/')
+library(orthologr)
+dNdS('ERVW-1_hg38.fa','ERVW-1_ponAbe3.fa',#
+	blast_path = '/usr/local/ncbi/blast/bin/')
+library(stringt)
+library(stringr)
+dNdS('ERVW-1_hg38.fa','ERVW-1_ponAbe3.fa',#
+	blast_path = '/usr/local/ncbi/blast/bin/')
+library(tidyverse)
+dkd = read_tsv('DKD_ChIP.txt')#
+#
+filter(dkd, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+quartz()
+filter(dkd, mark=='H3K9me3', exp!='VC70A') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3', exp!='VC70A' & exp!='VC70B') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3', exp!='VC70A' & exp!='VC70C') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3', exp!='VC70A' & exp!='VC70E') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3', exp!='VC70A') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+dkd
+dkd = read_tsv('DKD_ChIP.txt')#
+#
+filter(dkd, mark=='H3K9me3', exp!='VC70A') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+quartz()#
+filter(dkd, mark=='H3K9me3', exp!='VC70A') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+quartz()#
+filter(dkd, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3', exp!='VC70B') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+t=filter(dkd, mark=='H3K9me3', exp!='VC70B')
+t
+model = aov(t$norm2 ~ t$cells + t$target)
+summary(model)
+TukeyHSD(model)
+model = aov(t$norm2 ~ t$cells * t$target)
+TukeyHSD(model)
+library(tidyverse)
+dkd = read_tsv('DKD_ChIP.txt')#
+#
+quartz()#
+filter(dkd, mark=='H3K9me3', exp!='VC70B') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+quartz()#
+filter(dkd, mark=='H3K9me3', exp!='VC70B') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+dkd
+quartz()#
+filter(dkd, mark=='H3K9me3', exp!='VC70B', target!='MajSat') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+e14 = read_tsv('E14_ChIP.txt')#
+#
+filter(e14, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+quartz()#
+filter(dkd, mark=='H3K9me3', exp!='VC70B', target!='MajSat') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+tko = read_tsv('TKO_ChIP.txt')#
+#
+filter(tko, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3', exp!='VC70B', target!='MajSat') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me3', exp!='VC70B', target!='MajSat', !grepl('ctrl', cells))
+t = filter(dkd, mark=='H3K9me3', exp!='VC70B', target!='MajSat', !grepl('ctrl', cells))
+print(t,n=40)
+summary(aov(t$norm2 ~ t$cells))
+filter(dkd, mark=='H3K9me3', exp!='VC70B', target!='MajSat') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me2') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me2') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(dkd, mark=='H3K9me2') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+dkd = read.delim('DKD_ChIP.txt')
+head(dkd)
+sub = dkd[dkd$mark=='H3K9me3' & grepl('vitC',dkd$cells)]
+sub = dkd[dkd$mark=='H3K9me3' & grepl('vitC',dkd$cells),]
+sub
+sub = dkd[dkd$mark=='H3K9me3' & grepl('vitC',dkd$cells) & dkd$target!='MajSat',]
+sub
+av = tapply(dkd$norm2, dkd$target)
+av
+av = tapply(dkd$norm2, dkd$target, mean)
+av
+av = tapply(sub$norm2, sub$target, mean)
+av
+dkd = read_tsv('DKD_ChIP.txt')#
+#
+sub = filter(dkd, mark=='H3K9me3', grepl('vitC',target), target!='MajSat')
+sub
+dkd
+sub = filter(dkd, mark=='H3K9me3', grepl('vitC',cells), target!='MajSat')
+sub
+quartz(w=4, h=4)#
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+dkd = read_tsv('DKD_ChIP.txt')#
+#
+sub = filter(dkd, mark=='H3K9me3', grepl('vitC',cells), target!='MajSat') #
+#
+quartz(w=4, h=4)#
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+summary(aov(norm2~cells, data=sub))
+sub = filter(dkd, mark=='H3K9me2', grepl('vitC',cells), target!='MajSat') #
+#
+quartz(w=4, h=4)#
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()#
+#
+summary(aov(norm2~cells, data=sub))
+quartz(w=4, h=4)#
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+quartz(w=4, h=4)#
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+library(svglite)
+ggsave('~/Downloads/k9me2.svg')
+sub = filter(dkd, mark=='H3K9me3', grepl('vitC',cells), target!='MajSat')
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+ggsave('~/Downloads/k9me3.svg')
+tko = read_tsv('TKO_ChIP.txt')#
+#
+filter(tko, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+filter(tko, mark=='H3K9me3') %>%#
+ggplot(aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+sub = filter(dkd, mark=='H3K9me3', grepl('vitC',cells), target!='MajSat')
+sub = filter(tko, mark=='H3K9me3', grepl('vitC',cells), target!='MajSat')
+ggplot(sub, aes(x=target, y=norm2, fill=factor(cells, levels=unique(cells)))) +#
+	geom_bar(stat='summary', fun='mean', colour='black', position=position_dodge()) +#
+	geom_point(position=position_dodge(0.9)) +#
+	geom_hline(yintercept=1, linetype='dashed') +#
+	ylab('Fold change') +#
+	xlab('') +#
+	theme_classic()
+summary(aov(norm2~cells, data=sub))
+group_by(sub, target, cells) %>% summarise(p = t.test(norm2, mu=1)$p.pvalue)
+?t.test
+group_by(sub, target, cells) %>% summarise(p = t.test(norm2, mu=1)$pvalue)
+group_by(sub, target, cells) %>% summarise(p = t.test(norm2, mu=1)$p.value)
+data=read.delim('DKD_ChIP.txt')
+te.list = c('L1Tf','L1A','L1Gf')
+g.list = c('SCR vitC','SCR ctrl')
+sel = data$target %in% te.list & data$cells %in% g.list
+val = data$norm2[sel]
+val
+g.list = c('SCR vitC','DKD vitC')
+sel = data$target %in% te.list & data$cells %in% g.list
+val = data$norm2[sel]
+val
+te = factor(data$target[sel], levels=te.list)
+gr = factor(data$cells[sel], levels=g.list)
+te
+gr
+vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}
+vlist
+if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)
+y.lim=NULL
+col=c('orange','darkred')[1:length(g.list)]
+width=5
+height=4
+if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)
+quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)
+ylab='Expression relative to untreated'
+quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)
+data.frame(gr,te,val)
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to untreated',#
+				col=c('orange','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	sel = data$target %in% te.list & data$cells %in% g.list#
+	val = data$norm2[sel]#
+	te = factor(data$target[sel], levels=te.list)#
+	gr = factor(data$cells[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+paper.plot(dkd, te.list=c('L1Tf','L1A','L1Gf'), g.list=c('SCR vitC','DKD vitC', mark='H3K9me3'))
+paper.plot = function(data, te.list, g.list, mark, ylab='Expression relative to untreated',#
+				col=c('orange','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	sel = data$target %in% te.list & data$cells %in% g.list & data$mark==mark#
+	val = data$norm2[sel]#
+	te = factor(data$target[sel], levels=te.list)#
+	gr = factor(data$cells[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}#
+##KDM4 DKD
+dkd = read.delim('DKD_ChIP.txt')#
+#
+paper.plot(dkd, te.list=c('L1Tf','L1A','L1Gf'), g.list=c('SCR vitC','DKD vitC', mark='H3K9me3'))
+paper.plot(dkd, te.list=c('L1Tf','L1A','L1Gf'), g.list=c('SCR vitC','DKD vitC'), mark='H3K9me3')
+paper.plot = function(data, te.list, g.list, mark, ylab='Expression relative to untreated',#
+				col=c('orange','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=4, height=4) {#
+#
+	sel = data$target %in% te.list & data$cells %in% g.list & data$mark==mark#
+	val = data$norm2[sel]#
+	te = factor(data$target[sel], levels=te.list)#
+	gr = factor(data$cells[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}#
+##KDM4 DKD#
+#
+dkd = read.delim('DKD_ChIP.txt')#
+#
+paper.plot(dkd, te.list=c('L1Tf','L1A','L1Gf'), g.list=c('SCR vitC','DKD vitC'), mark='H3K9me3')
+me3 = paper.plot(dkd, te.list=c('L1Tf','L1A','L1Gf'),#
+				g.list=c('SCR vitC','DKD vitC'), mark='H3K9me3')
+me2 = paper.plot(dkd, te.list=c('L1Tf','L1A','L1Gf'),#
+				g.list=c('SCR vitC','DKD vitC'), mark='H3K9me2')
+summary(aov(val~cells, data=me3))
+summary(aov(val~gr, data=me3))
+summary(aov(val~gr, data=me2))
+paper.plot = function(data, te.list, g.list, mark, ylab='Expression relative to untreated',#
+				col=c('orange','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=4, height=4) {#
+#
+	sel = data$target %in% te.list & data$cells %in% g.list & data$mark==mark#
+	val = data$norm2[sel]#
+	te = factor(data$target[sel], levels=te.list)#
+	gr = factor(data$cells[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+paper.plot = function(data, te.list, g.list, mark, ylab='ChIP signal relative to untreated',#
+				col=c('orange','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=4, height=4) {#
+#
+	sel = data$target %in% te.list & data$cells %in% g.list & data$mark==mark#
+	val = data$norm2[sel]#
+	te = factor(data$target[sel], levels=te.list)#
+	gr = factor(data$cells[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+dkd = read.delim('DKD_ChIP.txt')#
+#
+me3 = paper.plot(dkd, te.list=c('L1Tf','L1A','L1Gf'),#
+				g.list=c('SCR vitC','DKD vitC'), mark='H3K9me3')
+me2 = paper.plot(dkd, te.list=c('L1Tf','L1A','L1Gf'),#
+				g.list=c('SCR vitC','DKD vitC'), mark='H3K9me2')

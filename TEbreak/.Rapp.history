@@ -1,0 +1,80 @@
+library(tidyverse)
+r1 = read_tsv('Kiko_Branco_VitC_1read.txt')#
+r4 = read_tsv('Kiko_Branco_VitC_4reads.txt')
+d13 = read_tsv('RCseq_13days_TEbreak.txt.gz')
+d41 = read_tsv('RCseq_41days_TEbreak.txt.gz')
+r4
+d41
+sum(r4$UUID==d41$UUID)
+tail(r4)
+tail(d41)
+d13 = read_tsv('RCseq_13days_TEbreak.txt.gz')#
+r1 = read_tsv('RCseq_41days_TEbreak_1read.txt.gz')#
+r4 = read_tsv('RCseq_41days_TEbreak_4reads.txt.gz')
+d13
+filter(d13, Sample_count<=2)
+f = filter(d13, Sample_count<=2)
+f$Sample_support_5p
+f$Sample_support_3p
+clone = unlist(lapply(strsplit(f$Sample_support_5p, ','), function(x) substr(x,1,1)))
+clone
+clone = lapply(strsplit(f$Sample_support_5p, ','), function(x) substr(x,1,1))
+clone
+all.support = paste(f$Sample_support_5p, f$Sample_support_3p, collapse=',')
+all.suport
+all.support
+all.support = paste(f$Sample_support_5p, f$Sample_support_3p, sep=',')
+all.support
+all.support = gsub('NA,', '', paste(f$Sample_support_5p, f$Sample_support_3p, sep=','))
+all.support
+all.support = gsub('NA', '', paste(f$Sample_support_5p, f$Sample_support_3p, sep=','))
+clone = lapply(strsplit(f$Sample_support_5p, ','), function(x) substr(x,1,1))
+clone
+clone = lapply(strsplit(all_support, ','), function(x) substr(x,1,1))
+clone = lapply(strsplit(all.support, ','), function(x) substr(x,1,1))
+clone
+clone = lapply(strsplit(all.support, ','), function(x) unique(substr(x,1,1)))
+clone
+all.support = gsub('NA,|,NA', '', paste(f$Sample_support_5p, f$Sample_support_3p, sep=','))
+all.support
+clone = lapply(strsplit(all.support, ','), function(x) unique(substr(x,1,1)))
+clone
+unlist(lapply(clone, length))
+sum(unlist(lapply(clone, length))>1)
+f
+d41.r4 = read_tsv('RCseq_41days_TEbreak_4reads.txt.gz')#
+d41.r1 = read_tsv('RCseq_41days_TEbreak_1read.txt.gz')
+head(d41.r4$Sample_support_3p)
+d13.support = gsub('NA,|,NA', '', paste(d13$Sample_support_5p, d13$Sample_support_3p, sep=','))
+d13.support = gsub('NA,|,NA', '', paste(d13$Sample_support_5p, d13$Sample_support_3p, sep=','))#
+d13.unique = unlist(lapply(strsplit(all.support, ','), function(x) length(unique(substr(x,1,1))))) == 1
+sum(d13.unique)
+write_tsv(d13[d13.unique,], 'clonal_insertions_d13.txt')
+d13.unique = unlist(lapply(strsplit(d13.support, ','), function(x) length(unique(substr(x,1,1))))) == 1
+sum(d13.unique)
+write_tsv(d13[d13.unique,], 'clonal_insertions_d13.txt')
+d41.support = gsub('NA,|,NA', '', paste(d41$Sample_support_5p, d41$Sample_support_3p, sep=','))
+d41.support = gsub('NA,|,NA', '', paste(d41.r4$Sample_support_5p, d41.r4$Sample_support_3p, sep=','))
+d41.unique = unlist(lapply(strsplit(d41.support, ','), function(x) length(unique(substr(x,1,7))))) == 1
+sum(d41.unique)
+write_tsv(d41[d41.unique,], 'clonal_insertions_d41.txt')
+lapply(strsplit(d41.support, ','), function(x) length(unique(substr(x,1,7))))[[1:2]]
+lapply(strsplit(d41.support, ','), function(x) length(unique(substr(x,1,7))))[[1]]
+lapply(strsplit(d41.support, ','), function(x) unique(substr(x,1,7)))[[1]]
+lapply(strsplit(d41.support, ','), function(x) unique(substr(x,1,7)))[[1:3]]
+lapply(strsplit(d41.support, ','), function(x) unique(substr(x,1,7)))[[2]]
+l1 = filter(d41.r1, Sample_count==1, !grepl('Day_0', Sample_support_5p), !grepl('Day_0', Sample_support_3p)) %>%#
+		mutate(group = case_when(grepl('No_VitC',Sample_support_5p) | grepl('No_VitC',Sample_support_3p) ~ 'Ctrl',#
+								grepl('YesVitC',Sample_support_5p) | grepl('YesVitC',Sample_support_3p) ~ 'VitC'))#
+#
+l4 = filter(d41.r4, Sample_count==1, !grepl('Day_0', Sample_support_5p), !grepl('Day_0', Sample_support_3p)) %>%#
+		mutate(group = case_when(grepl('No_VitC',Sample_support_5p) | grepl('No_VitC',Sample_support_3p) ~ 'Ctrl',#
+								grepl('YesVitC',Sample_support_5p) | grepl('YesVitC',Sample_support_3p) ~ 'VitC'))#
+##summarise#
+#
+group_by(l1, Superfamily, group) %>% summarise(count = length(group))#
+group_by(l4, Superfamily, group) %>% summarise(count = length(group))
+nrow(d13)
+nrow(d41.r4)
+sum(d13.unique)
+sum(d41.unique)

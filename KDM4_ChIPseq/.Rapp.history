@@ -1,0 +1,114 @@
+x = read.delim('Kdm4_L1_profile.txt')
+ip = x[,grep('2i_ChIP',colnames(x))]#
+input = x[,grep('2i_input',colnames(x))]
+head(x)
+head(ip)
+head(input)
+ip = x[,grep('2i_ChIP',colnames(x))]#
+input = x[,grep('2i_input',colnames(x))]#
+#
+quartz(w=5.5,h=3.5)#
+plot(x$Position,ip$L1Gf.Jmjd2c_2i_ChIP,#
+	type='l',lwd=2,col='blue',#
+	bty='n',las=1,#
+	xlab='Relative position',ylab='Normalised read count')#
+lines(x$Position,input$L1Gf.Jmjd2c_2i_input,lwd=2,lty=2,col='blue')#
+#
+lines(x$Position,ip$L1A.Jmjd2c_2i_ChIP,lwd=2,col='grey')#
+lines(x$Position,input$L1A.Jmjd2c_2i_input,lwd=2,lty=2,col='grey')#
+#
+lines(x$Position,ip$L1Tf.Jmjd2c_2i_ChIP,lwd=2,col='red')#
+lines(x$Position,input$L1Tf.Jmjd2c_2i_input,lwd=2,lty=2,col='red')
+x = read.table('TSC_vsd_expr.txt.gz')#
+#
+kdm4 = grep('Kdm4',rownames(x))#
+#
+quartz(w=5,h=5)#
+plot(x$ES_E14,x$ES_J1,pch=19,cex=0.3,col='grey',xlab='J1',ylab='E14')#
+points(x$ES_E14[kdm4],x$ES_J1[kdm4],pch=19,cex=0.5,col='blue')#
+#
+x[kdm4,]
+l1 = c('Lx','L1_Mus4','L1_Mus3','L1_Mus2','L1_Mus1','L1Md_F','L1Md_F2','L1Md_F3','L1Md_Gf','L1Md_A','L1Md_T')#
+#
+all = c(24769,11854,48280,21044,27127,3988,64716,16093,1077,16802,23639)#
+all.inc = c(20,8,71,27,34,116,142,114,319,1239,3292)/all*100#
+all.uni = c(8,3,19,10,5,37,57,69,35,66,373)/all*100#
+#
+fl = c(170,130,449,349,705,157,3941,841,110,3295,5046)#
+fl.inc = c(4,2,1,7,11,12,69,83,71,1070,2984)/fl*100#
+fl.uni = c(2,1,0,3,4,4,36,54,8,47,335)/fl*100#
+#
+par(mfrow=c(1,2))#
+plot(1:length(fl),fl.uni,pch=15,col='orange',xaxt='n',ylab='% bound',main='Unique',xlab='')#
+lines(1:length(fl),fl.uni,lwd=2,col='orange')#
+points(1:length(all),all.uni,pch=15,col='black')#
+lines(1:length(all),all.uni,lwd=2,col='black')#
+axis(1,1:length(all),labels=l1,las=2)#
+#
+plot(1:length(fl),fl.inc,pch=15,col='orange',xaxt='n',ylab='% bound',main='Ambiguous',xlab='')#
+lines(1:length(fl),fl.inc,lwd=2,col='orange')#
+points(1:length(all),all.inc,pch=15,col='black')#
+lines(1:length(all),all.inc,lwd=2,col='black')#
+axis(1,1:length(all),labels=l1,las=2)
+par(mfrow=c(1,2))#
+plot(1:length(fl),fl.uni,pch=15,col='orange',xaxt='n',ylab='% bound',main='Unique',xlab='')#
+lines(1:length(fl),fl.uni,lwd=2,col='orange')#
+points(1:length(all),all.uni,pch=15,col='black')#
+lines(1:length(all),all.uni,lwd=2,col='black')#
+axis(1,1:length(all),labels=l1,las=1)#
+#
+plot(1:length(fl),fl.inc,pch=15,col='orange',xaxt='n',ylab='% bound',main='Ambiguous',xlab='')#
+lines(1:length(fl),fl.inc,lwd=2,col='orange')#
+points(1:length(all),all.inc,pch=15,col='black')#
+lines(1:length(all),all.inc,lwd=2,col='black')#
+axis(1,1:length(all),labels=l1,las=1)
+par(mfrow=c(1,2))#
+plot(1:length(fl),fl.uni,pch=15,col='orange',xaxt='n',ylab='% bound',main='Unique',xlab='')#
+lines(1:length(fl),fl.uni,lwd=2,col='orange')#
+points(1:length(all),all.uni,pch=15,col='black')#
+lines(1:length(all),all.uni,lwd=2,col='black')#
+axis(1,1:length(all),labels=l1,las=3)#
+#
+plot(1:length(fl),fl.inc,pch=15,col='orange',xaxt='n',ylab='% bound',main='Ambiguous',xlab='')#
+lines(1:length(fl),fl.inc,lwd=2,col='orange')#
+points(1:length(all),all.inc,pch=15,col='black')#
+lines(1:length(all),all.inc,lwd=2,col='black')#
+axis(1,1:length(all),labels=l1,las=3)
+par(mfrow=c(1,2))#
+plot(1:length(fl),fl.uni,pch=15,col='orange',xaxt='n',ylab='% bound',main='Unique',xlab='',las=1)#
+lines(1:length(fl),fl.uni,lwd=2,col='orange')#
+points(1:length(all),all.uni,pch=15,col='black')#
+lines(1:length(all),all.uni,lwd=2,col='black')#
+axis(1,1:length(all),labels=l1,las=2)#
+#
+plot(1:length(fl),fl.inc,pch=15,col='orange',xaxt='n',ylab='% bound',main='Ambiguous',xlab='',las=1)#
+lines(1:length(fl),fl.inc,lwd=2,col='orange')#
+points(1:length(all),all.inc,pch=15,col='black')#
+lines(1:length(all),all.inc,lwd=2,col='black')#
+axis(1,1:length(all),labels=l1,las=2)
+x = read.delim('hKDM4_L1_profile.txt')
+head(x)
+quartz(w=5.5,h=3.5)#
+plot(x$Position,x$L1Hs.ENCFF000AZD.bam,#
+	type='l',lwd=2,col='blue',#
+	bty='n',las=1,#
+	xlab='Relative position',ylab='Normalised read count')#
+lines(x$Position,ko$L1Hs.ENCFF303YPV.bam,lwd=2,lty=2,col='blue')
+quartz(w=5.5,h=3.5)#
+plot(x$Position,x$L1Hs.ENCFF000AZD.bam,#
+	type='l',lwd=2,col='blue',#
+	bty='n',las=1,#
+	xlab='Relative position',ylab='Normalised read count')#
+lines(x$Position,x$L1Hs.ENCFF303YPV.bam,lwd=2,lty=2,col='blue')
+quartz(w=5.5,h=3.5)#
+plot(x$Position,x$L1Hs.ENCFF000AZD.bam,#
+	type='l',lwd=2,col='blue',#
+	bty='n',las=1,#
+	xlab='Relative position',ylab='Normalised read count')#
+lines(x$Position,x$L1Hs.ENCFF303YPV.bam,lwd=2,lty=2,col='blue')#
+#
+lines(x$Position,x$L1PA2.ENCFF000AZD.bam,lwd=2,col='red')#
+lines(x$Position,x$L1PA2.ENCFF303YPV.bam,lwd=2,lty=2,col='red')#
+#
+lines(x$Position,x$L1PA3.ENCFF000AZD.bam,lwd=2,col='grey')#
+lines(x$Position,x$L1PA3.ENCFF303YPV.bam,lwd=2,lty=2,col='grey')

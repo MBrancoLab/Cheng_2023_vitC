@@ -1,0 +1,119 @@
+x = read.csv('Dnmt_TKO_export_all.csv')
+x
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a', 'ETnERV3')
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC',x$all_data1)]#
+}#
+names(data) = te.list
+quartz(w=5.5, h=4.5)#
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a')
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC',x$all_data1)]#
+}#
+names(data) = te.list
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+quartz(w=4, h=4.5)#
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+quartz(w=3, h=4.5)#
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+p = unlist(lapply(data, function(x) t.test(x, mu=1)$p.value))#
+p.adj = p.adjust(p, method='BH')
+p.adj
+p
+data
+t.test(data[[1]])
+t.test(data[[1]],mu=1)
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,6),#
+	las=2, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,7),#
+	las=2, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+val = unlist(data)
+val
+l1 = factor(substr(names(val),1,nchar(names(val)-1)))
+l1 = factor(substr(names(val),1,nchar(names(val))-1))
+l1
+summary(aov(val~l1))
+summary(aov(val~l1+1))
+val = x$all_data3[x$all_data2==te.list[i]]
+val
+val = x$all_data3[x$all_data2 %in% te.list]
+val
+x
+x$all_data1[x$all_data2 %in% te.list]
+tr = rep(rep(c('Ctrl','VC'),each=5),length(te.list))
+tr
+tr = factor(rep(rep(c('Ctrl','VC'),each=5),length(te.list)))
+tr
+x$all_data2[x$all_data2 %in% te.list]
+l1 = factor(rep(te.list,6))
+l1
+summary(aov(val~l1+tr))
+val = x$all_data3[x$all_data2 %in% te.list]#
+l1 = factor(rep(te.list,6))#
+tr = factor(rep(rep(c('Ctrl','VC'),each=5),length(te.list)))#
+#
+summary(aov(val~l1+tr))
+length(val)
+length(l1)
+length(tr)
+tr = factor(rep(rep(c('Ctrl','VC'),each=5),length(te.list)/2))
+length(tr)
+rep(c('Ctrl','VC'),each=5)
+tr = factor(rep(rep(c('Ctrl','VC'),each=length(te.list)),3)
+tr
+tr = factor(rep(rep(c('Ctrl','VC'),each=length(te.list)),3))
+tr
+summary(aov(val~l1+tr))
+x[x$all_data2=='Dazl',]

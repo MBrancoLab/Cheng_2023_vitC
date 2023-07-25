@@ -1,0 +1,646 @@
+oxbs.data = read.delim('ox_data.txt',as.is=T)
+get.data = function(data, amp, exp, sample) {#
+	sub = data[data$amp==amp,]#
+	if (!missing(exp)) {#
+		sub = sub[sub$exp %in% exp,]#
+	}#
+	if (!missing(sample)) {#
+		sub = sub[sub$sample %in% sample,]#
+	}#
+	return(sub)#
+}#
+#
+get.means = function(data) {#
+	mc.mean = hmc.mean = numeric()#
+	for (s in unique(data$sample)) {#
+		id = data$sample==s#
+		mc = matrix(data$met[id],nrow=length(unique(data$pos)))#
+		hmc = matrix(data$hmet[id],nrow=length(unique(data$pos)))#
+		mc.mean = cbind(mc.mean,rowMeans(mc,na.rm=T))#
+		hmc.mean = cbind(hmc.mean,rowMeans(hmc,na.rm=T))#
+	}#
+	colnames(mc.mean) = colnames(hmc.mean) = unique(data$sample)#
+	rownames(mc.mean) = rownames(hmc.mean) = unique(data$pos)#
+	out = list(mc.mean[order(unique(data$pos)),],hmc.mean[order(unique(data$pos)),])#
+	names(out) = c('mc','hmc')#
+	return(out)#
+}#
+#
+get.sds = function(data) {#
+	mc.sd = hmc.sd = numeric()#
+	for (s in unique(data$sample)) {#
+		id = data$sample==s#
+		mc = matrix(data$met[id],nrow=length(unique(data$pos)))#
+		hmc = matrix(data$hmet[id],nrow=length(unique(data$pos)))#
+		mc.sd = cbind(mc.sd,apply(mc,1,function(x) sd(x,na.rm=T)))#
+		hmc.sd = cbind(hmc.sd,apply(hmc,1,function(x) sd(x,na.rm=T)))#
+	}#
+	colnames(mc.sd) = colnames(hmc.sd) = unique(data$sample)#
+	rownames(mc.sd) = rownames(hmc.sd) = unique(data$pos)#
+	out = list(mc.sd[order(unique(data$pos)),],hmc.sd[order(unique(data$pos)),])#
+	names(out) = c('mc','hmc')#
+	return(out)#
+}#
+#
+error.bars = function(x,y,ci,width=0.4) {#
+	for (i in 1:length(x)) {#
+		lines(c(x[i],x[i]),c(y[i],y[i]+ci[i]))#
+		lines(c(x[i]-width/2,x[i]+width/2),c(y[i]+ci[i],y[i]+ci[i]))#
+	}#
+}#
+#
+bplot = function(data,ylim1=c(0,100),ylim2=c(0,20),cols=rainbow(length(unique(data$sample))),order=NA) {#
+	av = get.means(data)#
+	err = get.sds(data)#
+	if (!is.na(order[1])) {#
+		av = lapply(av,function(x) x[,match(order,colnames(x))])#
+		err = lapply(err,function(x) x[,match(order,colnames(x))])#
+	}#
+	par(mfrow=c(1,2))#
+	h = barplot(t(av$mc),beside=T,las=2,main='5mC',ylim=ylim1,col=cols,#
+	 cex.names=0.8,xlab='CpG',ylab='% 5mC')#
+	error.bars(h,t(av$mc),t(err$mc))#
+	h = barplot(t(av$hmc),beside=T,las=2,main='5hmC',ylim=ylim2,col=cols,#
+	 cex.names=0.8,xlab='CpG',ylab='% 5hmC')#
+	error.bars(h,t(av$hmc),t(err$hmc))#
+}#
+test = function(data) {#
+	pos = as.factor(data$pos)#
+	sample = as.factor(data$sample)#
+	mc.aov = aov(data$met~sample+pos)#
+	hmc.aov = aov(data$hmet~sample+pos)#
+	out = list(mc.aov,hmc.aov)#
+	names(out) = c('mc','hmc')#
+	return(out)#
+}
+e14.plot = function (te) {#
+	quartz(w=8,h=3)#
+	bplot(get.data(oxbs.data,amp=te,exp='E14'),order=c('Ctrl','VC'),#
+	 cols=c('black','orange'))#
+}#
+#
+e14.plot('L1Tf')
+oxbs.data = read.delim('ox_data.txt',as.is=T)
+get.data = function(data, amp, exp, sample) {#
+	sub = data[data$amp==amp,]#
+	if (!missing(exp)) {#
+		sub = sub[sub$exp %in% exp,]#
+	}#
+	if (!missing(sample)) {#
+		sub = sub[sub$sample %in% sample,]#
+	}#
+	return(sub)#
+}#
+#
+get.means = function(data) {#
+	mc.mean = hmc.mean = numeric()#
+	for (s in unique(data$sample)) {#
+		id = data$sample==s#
+		mc = matrix(data$met[id],nrow=length(unique(data$pos)))#
+		hmc = matrix(data$hmet[id],nrow=length(unique(data$pos)))#
+		mc.mean = cbind(mc.mean,rowMeans(mc,na.rm=T))#
+		hmc.mean = cbind(hmc.mean,rowMeans(hmc,na.rm=T))#
+	}#
+	colnames(mc.mean) = colnames(hmc.mean) = unique(data$sample)#
+	rownames(mc.mean) = rownames(hmc.mean) = unique(data$pos)#
+	out = list(mc.mean[order(unique(data$pos)),],hmc.mean[order(unique(data$pos)),])#
+	names(out) = c('mc','hmc')#
+	return(out)#
+}#
+#
+dot.plot = function(values, groups, order = levels(groups), y.lab = '', width = 3, height = 4, point.size = 1, xlab.ori = 1, bottom.mar = 1, line.col='blue',y.lim=c(0,100)) {#
+#
+	##Get plot area#
+	plot.area.x = width - 1.2#
+	plot.area.ratio = plot.area.x / (height - bottom.mar - 0.2)#
+	##Define plot axis limits#
+	x.lim = c(0.5, nlevels(groups) + 0.5)#
+	##Define spacing between points#
+	threshold = point.size * (x.lim[2] - x.lim[1]) / (plot.area.x * 12)#
+	##Initialize plot#
+	quartz(w=width,h=height)#
+	par(mai = c(bottom.mar, 0.8, 0.2, 0.4))#
+	plot(NA, NA, xlim = x.lim, ylim = y.lim, xlab = '', ylab = y.lab, las = 1, xaxt = 'n')#
+	axis(1, at = 1:nlevels(groups), labels = order, las = xlab.ori, cex.axis=0.6)#
+	for (i in 1:length(order)) {#
+		##Get group data#
+		x = rep(i, length(groups == order[i]))#
+		y = sort(values[groups == order[i]])#
+		av = mean(y)#
+		ci = sd(y)#
+		##Normalise y values to x dimensions#
+		y.norm = y * (x.lim[2] - x.lim[1]) / ((y.lim[2] - y.lim[1]) * plot.area.ratio)#
+		##Plot first point#
+		points(x[1], y[1], cex = point.size, pch=19, col='grey')#
+		plot.x = x[1]#
+		plot.y = y.norm[1]#
+		##Find space for remaining points#
+		for (i in 2:length(y.norm)) {#
+			dist = sqrt((y.norm[i] - plot.y)^2 + (x[i] - plot.x)^2)#
+			inc = 0  ##current x distance from centre#
+			dir = 1  ##current left-right position from centre#
+			while (min(dist) < threshold) {#
+				if (dir == 1) inc = inc + threshold / 10#
+				x[i] = x[1] + dir * inc#
+				dist = sqrt((y.norm[i] - plot.y)^2 + (x[i] - plot.x)^2)#
+				dir = -dir#
+			}#
+			points(x[i], y[i], cex = point.size, pch=19, col='grey')#
+			plot.x = c(plot.x, x[i])#
+			plot.y = c(plot.y, y.norm[i])#
+		}#
+		##Draw mean line#
+		lines(c(x[1]-0.3, x[1]+0.3), c(av, av), lwd = 2, col = line.col)#
+		##Draw error bars#
+		##lines(c(x[1]-0.2, x[1]+0.2), c(av-ci, av-ci), col = 'red',lwd=2)#
+		##lines(c(x[1]-0.2, x[1]+0.2), c(av+ci, av+ci), col = 'red',lwd=2)#
+		##lines(c(x[1], x[1]), c(av-ci, av+ci), col = 'red',lwd=2)#
+	}#
+	##dev.off()#
+}
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',y.lim=c(0,20))#
+}#
+#
+e14.plot('L1Tf')
+e14.plot('L1A')
+e14.plot('RLTR4_MM')
+e14.plot('IAP1a_2')
+head(oxbs.data)
+get.data(oxbs.data,'L1Tf','E14','Ctrl')
+e14.plot('L1Tf')
+dot.plot = function(values, groups, order = levels(groups), y.lab = '', width = 3, height = 4, point.size = 1, xlab.ori = 1, bottom.mar = 1, line.col='blue',y.lim=c(0,100)) {#
+#
+	##Get plot area#
+	plot.area.x = width - 1.2#
+	plot.area.ratio = plot.area.x / (height - bottom.mar - 0.2)#
+	##Define plot axis limits#
+	x.lim = c(0.5, nlevels(groups) + 0.5)#
+	##Define spacing between points#
+	threshold = point.size * (x.lim[2] - x.lim[1]) / (plot.area.x * 12)#
+	##Initialize plot#
+	quartz(w=width,h=height)#
+	par(mai = c(bottom.mar, 0.8, 0.2, 0.4))#
+	plot(NA, NA, xlim = x.lim, ylim = y.lim, xlab = '', ylab = y.lab, las = 1, xaxt = 'n')#
+	axis(1, at = 1:nlevels(groups), labels = order, las = xlab.ori, cex.axis=1)#
+	for (i in 1:length(order)) {#
+		##Get group data#
+		x = rep(i, length(groups == order[i]))#
+		y = sort(values[groups == order[i]])#
+		av = mean(y)#
+		ci = sd(y)#
+		##Normalise y values to x dimensions#
+		y.norm = y * (x.lim[2] - x.lim[1]) / ((y.lim[2] - y.lim[1]) * plot.area.ratio)#
+		##Plot first point#
+		points(x[1], y[1], cex = point.size, pch=19, col='grey')#
+		plot.x = x[1]#
+		plot.y = y.norm[1]#
+		##Find space for remaining points#
+		for (i in 2:length(y.norm)) {#
+			dist = sqrt((y.norm[i] - plot.y)^2 + (x[i] - plot.x)^2)#
+			inc = 0  ##current x distance from centre#
+			dir = 1  ##current left-right position from centre#
+			while (min(dist) < threshold) {#
+				if (dir == 1) inc = inc + threshold / 10#
+				x[i] = x[1] + dir * inc#
+				dist = sqrt((y.norm[i] - plot.y)^2 + (x[i] - plot.x)^2)#
+				dir = -dir#
+			}#
+			points(x[i], y[i], cex = point.size, pch=19, col='grey')#
+			plot.x = c(plot.x, x[i])#
+			plot.y = c(plot.y, y.norm[i])#
+		}#
+		##Draw mean line#
+		lines(c(x[1]-0.3, x[1]+0.3), c(av, av), lwd = 2, col = line.col)#
+		##Draw error bars#
+		##lines(c(x[1]-0.2, x[1]+0.2), c(av-ci, av-ci), col = 'red',lwd=2)#
+		##lines(c(x[1]-0.2, x[1]+0.2), c(av+ci, av+ci), col = 'red',lwd=2)#
+		##lines(c(x[1], x[1]), c(av-ci, av+ci), col = 'red',lwd=2)#
+	}#
+	##dev.off()#
+}#
+##E14#
+#
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',y.lim=c(0,20))#
+}
+e14.plot('L1Tf')
+e14.plot('L1A')
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',y.lim=c(-20,20))#
+}#
+#
+e14.plot('L1Tf')
+e14.plot('L1A')
+e14.plot('L1Gf')
+e14.plot('RLTR4_MM')
+e14.plot('IAP1a_2')
+e14.plot('RLTR4_MM')
+e14.plot('L1A')
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',y.lim=c(-5,20))#
+}
+e14.plot('L1A')
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',y.lim=c(-3,20))#
+}
+e14.plot('L1A')
+e14.plot('L1Gf')
+e14.plot('L1A')
+e14.plot('L1Tf')
+e14.plot('L1A')
+e14.plot('L1Gf')
+test = function(data) {#
+	pos = as.factor(data$pos)#
+	sample = as.factor(data$sample)#
+	mc.aov = aov(data$met~sample+pos)#
+	hmc.aov = aov(data$hmet~sample+pos)#
+	out = list(mc.aov,hmc.aov)#
+	names(out) = c('mc','hmc')#
+	return(out)#
+}
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',y.lim=c(-3,20))#
+	test(te.data)#
+}#
+#
+e14.plot('L1Tf')
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',y.lim=c(-3,20))#
+	lapply(test(te.data), summary)#
+}#
+#
+e14.plot('L1Tf')
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),height=3, point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',height=3,y.lim=c(-3,20))#
+	lapply(test(te.data), summary)#
+}#
+#
+e14.plot('L1Tf')
+e14.plot('L1A')
+e14.plot('L1Gf')
+oxbs.data = read.delim('ox_data.txt',as.is=T)#
+##define functions#
+#
+get.data = function(data, amp, exp, sample) {#
+	sub = data[data$amp==amp,]#
+	if (!missing(exp)) {#
+		sub = sub[sub$exp %in% exp,]#
+	}#
+	if (!missing(sample)) {#
+		sub = sub[sub$sample %in% sample,]#
+	}#
+	return(sub)#
+}#
+#
+get.means = function(data) {#
+	mc.mean = hmc.mean = numeric()#
+	for (s in unique(data$sample)) {#
+		id = data$sample==s#
+		mc = matrix(data$met[id],nrow=length(unique(data$pos)))#
+		hmc = matrix(data$hmet[id],nrow=length(unique(data$pos)))#
+		mc.mean = cbind(mc.mean,rowMeans(mc,na.rm=T))#
+		hmc.mean = cbind(hmc.mean,rowMeans(hmc,na.rm=T))#
+	}#
+	colnames(mc.mean) = colnames(hmc.mean) = unique(data$sample)#
+	rownames(mc.mean) = rownames(hmc.mean) = unique(data$pos)#
+	out = list(mc.mean[order(unique(data$pos)),],hmc.mean[order(unique(data$pos)),])#
+	names(out) = c('mc','hmc')#
+	return(out)#
+}#
+#
+dot.plot = function(values, groups, order = levels(groups), y.lab = '', width = 3, height = 4, point.size = 1, xlab.ori = 1, bottom.mar = 1, line.col='blue',y.lim=c(0,100)) {#
+#
+	##Get plot area#
+	plot.area.x = width - 1.2#
+	plot.area.ratio = plot.area.x / (height - bottom.mar - 0.2)#
+	##Define plot axis limits#
+	x.lim = c(0.5, nlevels(groups) + 0.5)#
+	##Define spacing between points#
+	threshold = point.size * (x.lim[2] - x.lim[1]) / (plot.area.x * 12)#
+	##Initialize plot#
+	quartz(w=width,h=height)#
+	par(mai = c(bottom.mar, 0.8, 0.2, 0.4))#
+	plot(NA, NA, xlim = x.lim, ylim = y.lim, xlab = '', ylab = y.lab, las = 1, xaxt = 'n')#
+	axis(1, at = 1:nlevels(groups), labels = order, las = xlab.ori, cex.axis=1)#
+	for (i in 1:length(order)) {#
+		##Get group data#
+		x = rep(i, length(groups == order[i]))#
+		y = sort(values[groups == order[i]])#
+		av = mean(y)#
+		ci = sd(y)#
+		##Normalise y values to x dimensions#
+		y.norm = y * (x.lim[2] - x.lim[1]) / ((y.lim[2] - y.lim[1]) * plot.area.ratio)#
+		##Plot first point#
+		points(x[1], y[1], cex = point.size, pch=19, col='grey')#
+		plot.x = x[1]#
+		plot.y = y.norm[1]#
+		##Find space for remaining points#
+		for (i in 2:length(y.norm)) {#
+			dist = sqrt((y.norm[i] - plot.y)^2 + (x[i] - plot.x)^2)#
+			inc = 0  ##current x distance from centre#
+			dir = 1  ##current left-right position from centre#
+			while (min(dist) < threshold) {#
+				if (dir == 1) inc = inc + threshold / 10#
+				x[i] = x[1] + dir * inc#
+				dist = sqrt((y.norm[i] - plot.y)^2 + (x[i] - plot.x)^2)#
+				dir = -dir#
+			}#
+			points(x[i], y[i], cex = point.size, pch=19, col='grey')#
+			plot.x = c(plot.x, x[i])#
+			plot.y = c(plot.y, y.norm[i])#
+		}#
+		##Draw mean line#
+		lines(c(x[1]-0.3, x[1]+0.3), c(av, av), lwd = 2, col = line.col)#
+		##Draw error bars#
+		##lines(c(x[1]-0.2, x[1]+0.2), c(av-ci, av-ci), col = 'red',lwd=2)#
+		##lines(c(x[1]-0.2, x[1]+0.2), c(av+ci, av+ci), col = 'red',lwd=2)#
+		##lines(c(x[1], x[1]), c(av-ci, av+ci), col = 'red',lwd=2)#
+	}#
+	##dev.off()#
+}#
+#
+test = function(data) {#
+	pos = as.factor(data$pos)#
+	sample = as.factor(data$sample)#
+	mc.aov = aov(data$met~sample+pos)#
+	hmc.aov = aov(data$hmet~sample+pos)#
+	out = list(mc.aov,hmc.aov)#
+	names(out) = c('mc','hmc')#
+	return(out)#
+}
+e14.plot('RLTR4_MM')
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),height=3, point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',height=3,y.lim=c(-3,20))#
+	lapply(test(te.data), summary)#
+}
+e14.plot('RLTR4_MM')
+e14.plot('IAP1a_2')
+e14.plot = function (te) {#
+	te.data = get.data(oxbs.data,amp=te,exp='E14')#
+	dot.plot(te.data$met, groups=factor(te.data$sample),height=3, point.size=0.5)#
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',height=3,y.lim=c(-10,20))#
+	lapply(test(te.data), summary)#
+}
+e14.plot('IAP1a_2')
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/Tet_TKO')#
+##data#
+#
+x = read.csv('Tet_TKO_export_all.csv')
+levels(x$all_data2)
+levels(x$all_data1)
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*2-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('WT-VC',x$all_data1)]#
+	data[[i*2]] = x$all_data3[x$all_data2==te.list[i] & grepl('KO-VC',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+}#
+##plot#
+#
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,3),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*2-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('WT-VC',x$all_data1)]#
+	data[[i*2]] = x$all_data3[x$all_data2==te.list[i] & grepl('KO-VC',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+}#
+##plot#
+#
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,3),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,7),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,6),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+val = unlist(data)#
+l1 = factor(rep(te.list, each=6))#
+tr = factor(rep(rep(c('WT','KO'),each=3),length(te.list)))#
+#
+m = aov(val~l1*tr)#
+summary(m)
+head(x)
+te.list = c('IAP LTR1', 'IAP LTR2', 'IAP LTR3', 'IAP GAG',#
+			'MuLV', 'MuLV GAG', 'ETnERV3', 'RLTR13B2', 'RLTR10D2')
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*2-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('WT-VC',x$all_data1)]#
+	data[[i*2]] = x$all_data3[x$all_data2==te.list[i] & grepl('KO-VC',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+}#
+##plot#
+#
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,6),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,7),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,8),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+val = unlist(data)#
+l1 = factor(rep(te.list, each=6))#
+tr = factor(rep(rep(c('WT','KO'),each=3),length(te.list)))#
+#
+m = aov(val~l1*tr)#
+summary(m)
+head(x)
+tet.list = c('mTET1','mTET2')#
+tet = list()#
+for (i in 1:length(tet.list)) {#
+	tet[[i*2-1]] = x$all_data3[x$all_data2==tet.list[i] & grepl('WT-Ctrl',x$all_data1)]#
+	tet[[i*2]] = x$all_data3[x$all_data2==tet.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+}
+tet[[1]]
+tet.list = c('mTET1','mTET2')#
+tet = list()#
+for (i in 1:length(tet.list)) {#
+	tet[[i*2-1]] = x$all_data5[x$all_data2==tet.list[i] & grepl('WT-Ctrl',x$all_data1)]#
+	tet[[i*2]] = x$all_data5[x$all_data2==tet.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+}
+tet[[1]]
+tet[[2]]
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,6),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,6),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/Tet_TKO')#
+##data#
+#
+x = read.csv('Tet_TKO_export_all.csv')
+tet.list = c('mTET1','mTET2')#
+tet = list()#
+for (i in 1:length(tet.list)) {#
+	tet[[i*2-1]] = x$all_data5[x$all_data2==tet.list[i] & grepl('WT-Ctrl',x$all_data1)]#
+	tet[[i*2]] = x$all_data5[x$all_data2==tet.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+}#
+#
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+head(x)
+tet.list = c('mTET1','mTET2')#
+tet = list()#
+for (i in 1:length(tet.list)) {#
+	tet[[i*4-3]] = x$all_data5[x$all_data2==tet.list[i] & grepl('WT-Ctrl',x$all_data1)]#
+	tet[[i*4-3]] = x$all_data5[x$all_data2==tet.list[i] & grepl('WT-VC',x$all_data1)]#
+	tet[[i*4-1]] = x$all_data5[x$all_data2==tet.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+	tet[[i*4]] = x$all_data5[x$all_data2==tet.list[i] & grepl('KO-VC',x$all_data1)]#
+}#
+#
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+levels(x$all_data1)
+tet.list = c('mTET1','mTET2')#
+tet = list()#
+for (i in 1:length(tet.list)) {#
+	tet[[i*4-3]] = x$all_data5[x$all_data2==tet.list[i] & grepl('WT-Ctrl',x$all_data1)]#
+	tet[[i*4-2]] = x$all_data5[x$all_data2==tet.list[i] & grepl('WT-VC',x$all_data1)]#
+	tet[[i*4-1]] = x$all_data5[x$all_data2==tet.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+	tet[[i*4]] = x$all_data5[x$all_data2==tet.list[i] & grepl('KO-VC',x$all_data1)]#
+}#
+#
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Fold change',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+matrix(unlist(lapply(tet,mean))
+,nrow=4)
+av = matrix(unlist(lapply(tet,mean)), nrow=4)
+av/av[1,]
+quartz(w=4, h=4)#
+h = barplot(atrix(unlist(lapply(tet,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+quartz(w=4, h=4)#
+h = barplot(matrix(unlist(lapply(tet,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,0.05),#
+	las=1, ylab='Normalised expression',#
+	col='wheat')#
+points(rep(h,unlist(lapply(tet,length))) + rnorm(length(unlist(tet)), sd=0.05),#
+	unlist(tet), pch=19,cex=0.4)
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b', 'Dazl')#
+#te.list = c('IAP LTR1', 'IAP LTR2', 'IAP LTR3', 'IAP GAG',#
+#			'MuLV', 'MuLV GAG', 'ETnERV3', 'RLTR13B2', 'RLTR10D2')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*2-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('WT-VC',x$all_data1)]#
+	data[[i*2]] = x$all_data3[x$all_data2==te.list[i] & grepl('KO-VC',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('KO-Ctrl',x$all_data1)]#
+}#
+##plot#
+#
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,6),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+x

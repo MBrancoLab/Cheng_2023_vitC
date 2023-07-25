@@ -1,0 +1,740 @@
+x$repFamily[grep('ERV',x$repFamily)]
+head(x)
+t=unique(x$repFamily)
+t[grep('ERV',t)]
+sum(x$repFamily=='ERVK')
+sum(x$repFamily=='ERV1')
+x=read.delim('Documents/Annotations/Repeatmasker_hg38.txt',as.is=T)
+sum(x$repFamily=='ERVK')
+sum(x$repFamily=='ERV1')
+t=unique(x$repFamily)
+t[grep('ERV',t)]
+?poines
+?points
+150*1e9
+150*1e9/3e9
+library(GEOquery)
+gset <- getGEO("GSE10588", GSEMatrix =TRUE, getGPL=FALSE)
+if (length(gset) > 1) idx <- grep("GPL2986", attr(gset, "names")) else idx <- 1
+gset <- gset[[idx]]
+ex <- exprs(gset)
+head(ex)
+qx <- as.numeric(quantile(ex, c(0., 0.25, 0.5, 0.75, 0.99, 1.0), na.rm=T))#
+LogC <- (qx[5] > 100) ||#
+          (qx[6]-qx[1] > 50 && qx[2] > 0)#
+if (LogC) { ex[which(ex <= 0)] <- NaN#
+  ex <- log2(ex) }
+head(ex)
+x=c('A','B','C')
+'A' %in% x
+y=c('A','D','E')
+x %in% y
+x[x %in% y]
+x11()
+plot(1:10,1:10)
+dev.off()
+x11()
+dev.off()
+x11()
+dev.off()
+830/3
+x=read.delim('Downloads/H3K27ac.relaxed.bed_overlap.txt',)
+head(x)
+plot(x$log10(total),x$log.enrich,pch=19,cex=0.3)
+plot(log10(x$total),x$log.enrich,pch=19,cex=0.3)
+log2(1/10)
+log2(1/1000)
+plot(log10(x$total),x$log.enrich,pch=19,cex=0.3)
+x=read.delim('Downloads/H3K4me1.relaxed.bed_overlap.txt',)
+plot(log10(x$total),x$log.enrich,pch=19,cex=0.3)
+x=read.delim('Downloads/H3K4me3.relaxed.bed_overlap.txt',)
+plot(log10(x$total),x$log.enrich,pch=19,cex=0.3)
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/2i_time_pt')
+x = read.csv('2i_time_pt_export_all.csv')
+head(x)
+x[x$all_data2=='ORF1a',]
+x[x$all_data2=='HSPCB',]
+x[x$all_data2=='HSPC',]
+2^(17.90000-23.92000)
+2^(18.05000-22.37333)
+0.04995144/0.01540989
+0.014609893/0.004904258
+x
+te='ORF1a'
+sub = x[x$all_data2==te,]
+sub
+sub = x[x$all_data2=='HSPC',]
+sub
+sub = x[x$all_data2==te,]
+nhk = numeric(nrow(sub))
+hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HCPC',]
+i=1
+hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HCPC',]
+hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HCPC']
+hk1
+sub$all_data1[i]
+hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HSPC']
+hk1
+hk2 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='ATP5B']
+hk2
+hk2 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='ATP5b']
+hk2
+?mean
+mean(1,3)
+nhk[i] = 2^(mean(c(hk1,hk2))-sub$all_data7[i])
+nhk
+for (i in 1:nrow(sub)) {#
+		hk1 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='HSPC']#
+		hk2 = x$all_data7[x$all_data1==sub$all_data1[i] & x$all_data2=='ATP5b']#
+		nhk[i] = 2^(mean(c(hk1,hk2))-sub$all_data7[i])#
+	}
+nhk
+sub
+plot(x$all_data4, x$all_data6)
+plot(x$all_data6, x$all_data8)
+sub = x[x$all_data5==te,]
+sub = x[x$all_data2==te,]
+sub
+ctrl = sub$all_data5[grep('Ctrl', sub$all_data1)]
+ctrl
+ctrl = sub$all_data5[grep('Ctrl', sub$all_data1)]
+t24 = sub$all_data5[grep('24hrs', sub$all_data1)]
+t48 = sub$all_data5[grep('48hrs', sub$all_data1)]
+t1wk = sub$all_data5[grep('1week', sub$all_data1)]
+barplot(c(mean(ctrl), mean(t24), mean(t48), mean(t1wk)))
+data = list(#
+		ctrl = sub$all_data5[grep('Ctrl', sub$all_data1)]#
+		t24 = sub$all_data5[grep('24hrs', sub$all_data1)]#
+		t48 = sub$all_data5[grep('48hrs', sub$all_data1)]#
+		t1wk = sub$all_data5[grep('1week', sub$all_data1)])#
+	h = barplot(lapply(data,mean))
+data = list(#
+		ctrl = sub$all_data5[grep('Ctrl', sub$all_data1)],#
+		t24 = sub$all_data5[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data5[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data5[grep('1week', sub$all_data1)])
+h = barplot(lapply(data,mean))
+lapply(data,mean)
+h = barplot(unlist(lapply(data,mean)))
+points(rep(h,unlist(lapply(data,length))),#
+		unlist(data))
+data = list(#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	h = barplot(unlist(lapply(data,mean)))#
+	points(rep(h,unlist(lapply(data,length))),#
+		unlist(data))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05))#
+	points(rep(h,unlist(lapply(data,length))),#
+		unlist(data))
+n = unlist(lapply(data,length))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05))#
+	points(rep(h,n) + rnorm(n, sd=0.01),#
+		unlist(data))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05))#
+	points(rep(h,n) + rnorm(n, sd=0.1),#
+		unlist(data))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05))#
+	points(rep(h,n) + rnorm(n, sd=0.05),#
+		unlist(data))
+abline(h=1, lty=2)
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n), unlist(data), pch=19,)#
+	abline(h=1, lty=2)
+plot.te = function(te) {#
+	sub = x[x$all_data2==te,]#
+	data = list(#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	n = unlist(lapply(data,length))#
+	h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n), unlist(data), pch=19,)#
+	abline(h=1, lty=2)#
+}
+plot.te('ORF1a')
+plot.te('ORF1b')
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/2i_24hrs_VC')
+x = read.csv('2i_24hrs_VC_export_all.csv')
+head(x)
+sub = x[x$all_data2==te,]
+sub
+te.list=c('ORF1a','ORF1b')
+sub = x[x$all_data2 %in% te,]
+sub
+sub = x[x$all_data2 %in% te.list,]
+sub
+data = list()#
+	for (i in 1:length(te.list)) {#
+		data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('24hrs',x$all_data1)]#
+	}
+data
+names(data) = te.list
+data
+n = unlist(lapply(data,length))#
+	h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n) + rnorm(n, sd=0.05),#
+		unlist(data), pch=19,)#
+	abline(h=1, lty=2)
+n = length(unlist(data))
+h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+		unlist(data), pch=19,)#
+	abline(h=1, lty=2)
+levels(x$all_data2)
+te.list = c('ORF1a', 'ORF1b', 'ORF2', 'ORF2b', 'L1 TF', 'L1 A', 'L1 TF',#
+	'IAP GAG', 'IAP LTR1', 'IAP LTR2', 'IAP LTR3',#
+	'MuLV GAG', 'MuLV', 'EtnI', 'Etn/EtnII', 'MuSD GAG', 'MuSD',#
+	'MERV GAG', 'MERV')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('24hrs',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=1, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,)#
+abline(h=1, lty=2)
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+te.list = c('ORF1a', 'ORF1b', 'ORF2', 'ORF2b', 'L1 TF', 'L1 A', 'L1 GF',#
+	'IAP GAG', 'IAP LTR1', 'IAP LTR2', 'IAP LTR3',#
+	'MuLV GAG', 'MuLV', 'EtnI', 'Etn/EtnII', 'MuSD GAG', 'MuSD',#
+	'MERV GAG', 'MERV')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('24hrs',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+?t.test
+p = lapply(data, function(x) t.test(x, mu=1)$p.value)
+p
+p = unlist(lapply(data, function(x) t.test(x, mu=1)$p.value))
+p
+p.adj = p.adjust(p, method='BH')
+p.adj
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+x = read.csv('2i_24hrs_VC_export_all.csv')#
+##TEs to plot#
+#
+te.list = c('ORF1a', 'ORF1b', 'ORF2', 'ORF2b', 'L1 TF', 'L1 A', 'L1 GF',#
+	'IAP GAG', 'IAP LTR1', 'IAP LTR2', 'IAP LTR3',#
+	'MuLV GAG', 'MuLV', 'EtnI', 'Etn/EtnII', 'MuSD GAG', 'MuSD',#
+	'MERV GAG', 'MERV')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i]] = x$all_data3[x$all_data2==te.list[i] & grepl('24hrs',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+x
+names(dat)
+names(data)
+data[[14]]
+data[[15]]
+data[[16]]
+data[[17]]
+head(x)
+x[x$all_data2=='EtnI',]
+x[x$all_data2=='MuSD',]
+x[x$all_data2=='Etn/EtnII',]
+h = plot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')
+?points
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+par(mar=c(5,5,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='orange')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+colours()
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='orange1')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='orange2')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='lightblue')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='orange')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.5)#
+abline(h=1, lty=2)
+quartz(w=6, h==4)#
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='orange')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+quartz(w=6, h=4)#
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='orange')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+quartz(w=5, h=4)#
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='orange')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+quartz(w=5, h=4.5)#
+par(mar=c(7,4,2,2))#
+h = barplot(unlist(lapply(data,mean)),#
+	ylim=c(0,max(unlist(data))*1.05),#
+	las=2, ylab='Fold change',#
+	col='orange')#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/2i_time_pt')
+x = read.csv('2i_time_pt_export_all.csv')
+x
+ser = read.csv('../Serum_time_pt/Serum_time_pt_export_all.csv')
+ser
+plot.te = function(te) {#
+	sub = x[x$all_data2==te,]#
+	data = list(#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	n = unlist(lapply(data,length))#
+	h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n), unlist(data), pch=19,)#
+	abline(h=1, lty=2)#
+}#
+#
+plot.te('ORF2')
+plot.te = function(te) {#
+	sub = x[x$all_data2==te,]#
+	data = list(#
+		t0 = sub$all_data3[grep('Ctrl', sub$all_data1)],#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	n = unlist(lapply(data,length))#
+	h = barplot(unlist(lapply(data,mean)),#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n), unlist(data), pch=19,)#
+	abline(h=1, lty=2)#
+}#
+#
+plot.te('ORF2')
+plot.te = function(te) {#
+	sub = x[x$all_data2==te,]#
+	data = list(#
+		t0 = sub$all_data3[grep('Ctrl', sub$all_data1)],#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	n = unlist(lapply(data,length))#
+	h = plot(1:4, unlist(lapply(data,mean)),#
+		type = 'l', lwd = 2,#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(h,n), unlist(data), pch=19,)#
+}#
+#
+plot.te('ORF2')
+plot.te = function(te) {#
+	sub = x[x$all_data2==te,]#
+	data = list(#
+		t0 = sub$all_data3[grep('Ctrl', sub$all_data1)],#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	n = unlist(lapply(data,length))#
+	plot(1:4, unlist(lapply(data,mean)),#
+		type = 'l', lwd = 2,#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change')#
+	points(rep(1:4,n), unlist(data), pch=19,)#
+}#
+#
+plot.te('ORF2')
+plot.te = function(te) {#
+	sub = x[x$all_data2==te,]#
+	data = list(#
+		t0 = sub$all_data3[grep('Ctrl', sub$all_data1)],#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	n = unlist(lapply(data,length))#
+	plot(1:4, unlist(lapply(data,mean)),#
+		type = 'l', lwd = 2,#
+		ylim=c(0,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change',#
+		xlim = c(0,5),#
+		xaxt='n', xlab='')#
+	points(rep(1:4,n), unlist(data), pch=19, cex=0.4)#
+}#
+#
+plot.te('ORF2')
+plot.te = function(te) {#
+	sub = x[x$all_data2==te,]#
+	data = list(#
+		t0 = sub$all_data3[grep('Ctrl', sub$all_data1)],#
+		t24 = sub$all_data3[grep('24hrs', sub$all_data1)],#
+		t48 = sub$all_data3[grep('48hrs', sub$all_data1)],#
+		t1wk = sub$all_data3[grep('1week', sub$all_data1)])#
+	n = unlist(lapply(data,length))#
+	plot(1:4, unlist(lapply(data,mean)),#
+		type = 'l', lwd = 2,#
+		ylim=c(1,max(unlist(data))*1.05),#
+		las=1, ylab='Fold change',#
+		xlim = c(0.5,4.5),#
+		xaxt='n', xlab='')#
+	points(rep(1:4,n), unlist(data), pch=19, cex=0.5)#
+}#
+#
+plot.te('ORF2')
+plot.te = function(te) {#
+	sub.2i = x2i[x2i$all_data2==te,]#
+	sub.ser = ser[ser$all_data2==te,]#
+	data.2i = list(#
+		t0 = sub.2i$all_data3[grep('Ctrl', sub.2i$all_data1)],#
+		t24 = sub.2i$all_data3[grep('24hrs', sub.2i$all_data1)],#
+		t48 = sub.2i$all_data3[grep('48hrs', sub.2i$all_data1)],#
+		t1wk = sub.2i$all_data3[grep('1week', sub.2i$all_data1)])#
+	n.2i = unlist(lapply(data.2i,length))#
+	data.ser = list(#
+		t0 = sub.ser$all_data3[grep('Ctrl', sub.ser$all_data1)],#
+		t24 = sub.ser$all_data3[grep('24hrs', sub.ser$all_data1)],#
+		t48 = sub.ser$all_data3[grep('48hrs', sub.ser$all_data1)],#
+		t1wk = sub.ser$all_data3[grep('1week', sub.ser$all_data1)])#
+	n.ser = unlist(lapply(data.ser,length))#
+	plot(1:4, unlist(lapply(data.2i,mean)),#
+		type = 'l', lwd = 2,#
+		ylim=c(1,max(unlist(data.2i))*1.05),#
+		las=1, ylab='Fold change',#
+		xlim = c(0.5,4.5),#
+		xaxt='n', xlab='')#
+	points(rep(1:4,n.2i), unlist(data.2i), pch=19, cex=0.5)#
+	lines(1:4, unlist(lapply(data.ser,mean)), lwd=2, col='grey')#
+	points(rep(1:4,n.ser), unlist(data.ser), pch=19, cex=0.5)#
+}#
+#
+plot.te('ORF2')
+x2i = read.csv('2i_time_pt_export_all.csv')#
+ser = read.csv('../Serum_time_pt/Serum_time_pt_export_all.csv')#
+plot.te = function(te) {#
+	sub.2i = x2i[x2i$all_data2==te,]#
+	sub.ser = ser[ser$all_data2==te,]#
+	data.2i = list(#
+		t0 = sub.2i$all_data3[grep('Ctrl', sub.2i$all_data1)],#
+		t24 = sub.2i$all_data3[grep('24hrs', sub.2i$all_data1)],#
+		t48 = sub.2i$all_data3[grep('48hrs', sub.2i$all_data1)],#
+		t1wk = sub.2i$all_data3[grep('1week', sub.2i$all_data1)])#
+	n.2i = unlist(lapply(data.2i,length))#
+	data.ser = list(#
+		t0 = sub.ser$all_data3[grep('Ctrl', sub.ser$all_data1)],#
+		t24 = sub.ser$all_data3[grep('24hrs', sub.ser$all_data1)],#
+		t48 = sub.ser$all_data3[grep('48hrs', sub.ser$all_data1)],#
+		t1wk = sub.ser$all_data3[grep('1week', sub.ser$all_data1)])#
+	n.ser = unlist(lapply(data.ser,length))#
+	plot(1:4, unlist(lapply(data.2i,mean)),#
+		type = 'l', lwd = 2,#
+		ylim=c(1,max(unlist(data.2i))*1.05),#
+		las=1, ylab='Fold change',#
+		xlim = c(0.5,4.5),#
+		xaxt='n', xlab='')#
+	points(rep(1:4,n.2i), unlist(data.2i), pch=19, cex=0.5)#
+	lines(1:4, unlist(lapply(data.ser,mean)), lwd=2, col='grey')#
+	points(rep(1:4,n.ser), unlist(data.ser), pch=19, cex=0.5)#
+}#
+#
+plot.te('ORF2')
+plot.te = function(te) {#
+	sub.2i = x2i[x2i$all_data2==te,]#
+	sub.ser = ser[ser$all_data2==te,]#
+	data.2i = list(#
+		t0 = sub.2i$all_data3[grep('Ctrl', sub.2i$all_data1)],#
+		t24 = sub.2i$all_data3[grep('24hrs', sub.2i$all_data1)],#
+		t48 = sub.2i$all_data3[grep('48hrs', sub.2i$all_data1)],#
+		t1wk = sub.2i$all_data3[grep('1week', sub.2i$all_data1)])#
+	n.2i = unlist(lapply(data.2i,length))#
+	data.ser = list(#
+		t0 = sub.ser$all_data3[grep('Ctrl', sub.ser$all_data1)],#
+		t24 = sub.ser$all_data3[grep('24hrs', sub.ser$all_data1)],#
+		t48 = sub.ser$all_data3[grep('48hrs', sub.ser$all_data1)],#
+		t1wk = sub.ser$all_data3[grep('1week', sub.ser$all_data1)])#
+	n.ser = unlist(lapply(data.ser,length))#
+	plot(1:4, unlist(lapply(data.2i,mean)),#
+		type = 'l', lwd = 2,#
+		ylim=c(1,max(unlist(data.2i))*1.05),#
+		las=1, ylab='Fold change',#
+		xlim = c(0.5,4.5),#
+		xaxt='n', xlab='')#
+	points(rep(1:4,n.2i), unlist(data.2i), pch=19, cex=0.5)#
+	lines(1:4, unlist(lapply(data.ser,mean)), lwd=2, col='grey')#
+	points(rep(1:4,n.ser), unlist(data.ser), pch=19, cex=0.5, col='grey')#
+}#
+#
+plot.te('ORF2')
+plot.te('ORF1')
+plot.te('ORF1a')
+head(ser)
+ser[ser$all_data2=='ORF1a',]
+plot.te('L1 TF')
+plot.te('L1 GF')
+plot.te('L1 A')
+plot.te('ORF1b')
+te='ORF1b'
+sub.2i = x2i[x2i$all_data2==te,]#
+	sub.ser = ser[ser$all_data2==te,]#
+	data.2i = list(#
+		t0 = sub.2i$all_data3[grep('Ctrl', sub.2i$all_data1)],#
+		t24 = sub.2i$all_data3[grep('24hrs', sub.2i$all_data1)],#
+		t48 = sub.2i$all_data3[grep('48hrs', sub.2i$all_data1)],#
+		t1wk = sub.2i$all_data3[grep('1week', sub.2i$all_data1)])#
+	n.2i = unlist(lapply(data.2i,length))#
+	data.ser = list(#
+		t0 = sub.ser$all_data3[grep('Ctrl', sub.ser$all_data1)],#
+		t24 = sub.ser$all_data3[grep('24hrs', sub.ser$all_data1)],#
+		t48 = sub.ser$all_data3[grep('48hrs', sub.ser$all_data1)],#
+		t1wk = sub.ser$all_data3[grep('1week', sub.ser$all_data1)])#
+	n.ser = unlist(lapply(data.ser,length))
+data.2i
+mat=unlist(data.2i,ncol=4)
+mat=matrix(unlist(mat),ncol=4)
+mat=matrix(unlist(data.2i),ncol=4)
+head(ser)
+t24.2i = x2i[grep('24hrs', x2i$all_data1),]
+t24.2i
+tapply(t24.2i$all_data3, t24.2i$all_data2, median)
+levels(ser$all_data2)
+data = x2i
+te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b')
+sub = data[data$all_data2 %in% te,]
+head(sub)
+group = factor(as.character(sub$all_data2), levels=te)
+levels(group)
+t24 = sub[grep('24hrs', sub$all_data1),]
+t24
+sub$group = factor(as.character(sub$all_data2), levels=te)
+t24 = sub[grep('24hrs', sub$all_data1),]
+tapply(t24$all_data3, t24$group, median)
+t0 = sub[grep('Ctrl', sub$all_data1),]#
+t24 = sub[grep('24hrs', sub$all_data1),]#
+t48 = sub[grep('48hrs', sub$all_data1),]#
+t1wk = sub[grep('1week', sub$all_data1),]
+mat = cbind(#
+	tapply(t0$all_data3, t0$group, median),#
+	tapply(t24$all_data3, t24$group, median),#
+	tapply(t48$all_data3, t48$group, median),#
+	tapply(t1wk$all_data3, t1wk$group, median))
+mta
+mat
+colnames(mat) = c('Ctrl', '24h','4h','1wk')
+mat
+heatmap(mat)
+heatmap(mat, scale='none')
+heatmap(mat, scale='none', Colv=FALSE, Rowv=FALSE, dendrogram='none')
+?matrix
+?heatmap
+heatmap(mat, scale='none', Colv=NA, Rowv=NA)
+colnames(mat) = c('Ctrl', '24h','48h','1wk')#
+#
+heatmap(mat, scale='none', Colv=NA, Rowv=NA)
+heatmap(mat, scale='none', Colv=NA, Rowv=NA, col=hcl.colors(100))
+plot.te = function(data, te) {#
+	sub = data[data$all_data2 %in% te,]#
+	sub$group = factor(as.character(sub$all_data2), levels=te)#
+	t0 = sub[grep('Ctrl', sub$all_data1),]#
+	t24 = sub[grep('24hrs', sub$all_data1),]#
+	t48 = sub[grep('48hrs', sub$all_data1),]#
+	t1wk = sub[grep('1week', sub$all_data1),]#
+	mat = cbind(#
+		tapply(t0$all_data3, t0$group, median),#
+		tapply(t24$all_data3, t24$group, median),#
+		tapply(t48$all_data3, t48$group, median),#
+		tapply(t1wk$all_data3, t1wk$group, median))#
+	colnames(mat) = c('Ctrl', '24h','48h','1wk')#
+	heatmap(mat, scale='none', Colv=NA, Rowv=NA, col=hcl.colors(100))#
+}#
+#
+plot.te(x2i, te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b'))
+plot.te(ser, te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b'))
+plot.te(x2i, te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b'))
+plot.te(ser, te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b'))
+?heatmap
+get.val = function(data, te) {#
+	sub = data[data$all_data2 %in% te,]#
+	sub$group = factor(as.character(sub$all_data2), levels=te)#
+	t0 = sub[grep('Ctrl', sub$all_data1),]#
+	t24 = sub[grep('24hrs', sub$all_data1),]#
+	t48 = sub[grep('48hrs', sub$all_data1),]#
+	t1wk = sub[grep('1week', sub$all_data1),]#
+	mat = cbind(#
+		tapply(t0$all_data3, t0$group, median),#
+		tapply(t24$all_data3, t24$group, median),#
+		tapply(t48$all_data3, t48$group, median),#
+		tapply(t1wk$all_data3, t1wk$group, median))#
+	colnames(mat) = c('Ctrl', '24h','48h','1wk')#
+	return(mat)#
+}#
+mat.2i = get.val(x2i, te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b'))#
+mat.ser = get.val(ser, te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b'))
+head(mat.2i)
+heatmap(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, col=hcl.colors(100))
+?heatmap
+library(gplots)
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, col=hcl.colors(100))
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace=NA)
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace=FALSE)
+?heatmap.2
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none')
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none', density.info='none')
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none', density.info='none',#
+	colsep=4)
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none', density.info='none',#
+	colsep=4, sepwidt=c(0.1,0.1))
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none', density.info='none',#
+	colsep=4, sepwidt=c(0.2,0.2))
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none', density.info='none',#
+	colsep=4)
+unique(x2i$all_data2[x2i$all_data2 %in% ser$all_data2])
+te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2a', 'ORF2b',#
+	'IAP LTR1', 'IAP LTR2', 'IAP LTR3', 'IAP GAG',#
+	'Etn/EtnII', 'MuSD GAG', 'MuLV', 'MuLV GAG', 'MERV', 'MERV GAG')#
+mat.2i = get.val(x2i, te)#
+mat.ser = get.val(ser, te)#
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none', density.info='none',#
+	colsep=4)
+te = c('L1 A', 'L1 TF', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b',#
+	'IAP LTR1', 'IAP LTR2', 'IAP LTR3', 'IAP GAG',#
+	'Etn/EtnII', 'MuSD GAG', 'MuLV', 'MuLV GAG', 'MERV', 'MERV GAG')#
+mat.2i = get.val(x2i, te)#
+mat.ser = get.val(ser, te)#
+heatmap.2(cbind(mat.2i, mat.ser),#
+	scale='none', Colv=NA, Rowv=NA, dendrogram='none',#
+	col=hcl.colors(100),#
+	trace='none', density.info='none',#
+	colsep=4)

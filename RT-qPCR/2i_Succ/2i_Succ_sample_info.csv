@@ -1,0 +1,14 @@
+Var1,Var2,Var3,Var4,Var5,Var6,Var7
+sampleID,sampleName,cellType,cellID,medium,treatment,expID
+qp413,2i-Ctrl23,E14,2i-9,2i,Ctrl,VC50
+qp414,2i-24hrs-VC23,E14,2i-9,2i,24hrs-VC,VC50
+qp415,2i-Ctrl-Succ12,E14,2i-9,2i,24hrs-Succ,VC50
+qp416,2i-VC-Succ12,E14,2i-9,2i,24hrs-VC-Succ,VC50
+qp397,2i-Ctrl21,E14,2i-5,2i,Ctrl,VC46A
+qp398,2i-24hrs-VC21,E14,2i-5,2i,24hrs-VC,VC46A
+qp399,2i-Ctrl-Succ10,E14,2i-5,2i,24hrs-Succ,VC46A
+qp400,2i-VC-Succ10,E14,2i-5,2i,24hrs-VC-Succ,VC46A
+qp401,2i-Ctrl22,E14,2i-5,2i,Ctrl,VC46B
+qp402,2i-24hrs-VC22,E14,2i-5,2i,24hrs-VC,VC46B
+qp403,2i-Ctrl-Succ11,E14,2i-5,2i,24hrs-Succ,VC46B
+qp404,2i-VC-Succ11,E14,2i-5,2i,24hrs-VC-Succ,VC46B

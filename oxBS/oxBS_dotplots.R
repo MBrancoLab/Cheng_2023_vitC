@@ -1,0 +1,143 @@
+
+oxbs.data = read.delim('ox_data.txt',as.is=T)
+
+
+##define functions
+
+get.data = function(data, amp, exp, sample) {
+	sub = data[data$amp==amp,]
+	if (!missing(exp)) {
+		sub = sub[sub$exp %in% exp,]
+	}
+	if (!missing(sample)) {
+		sub = sub[sub$sample %in% sample,]
+	}
+	return(sub)
+}
+
+get.means = function(data) {
+	mc.mean = hmc.mean = numeric()
+	for (s in unique(data$sample)) {
+		id = data$sample==s
+		mc = matrix(data$met[id],nrow=length(unique(data$pos)))
+		hmc = matrix(data$hmet[id],nrow=length(unique(data$pos)))
+		mc.mean = cbind(mc.mean,rowMeans(mc,na.rm=T))
+		hmc.mean = cbind(hmc.mean,rowMeans(hmc,na.rm=T))
+	}
+	colnames(mc.mean) = colnames(hmc.mean) = unique(data$sample)
+	rownames(mc.mean) = rownames(hmc.mean) = unique(data$pos)
+	out = list(mc.mean[order(unique(data$pos)),],hmc.mean[order(unique(data$pos)),])
+	names(out) = c('mc','hmc')
+	return(out)
+}
+
+dot.plot = function(values, groups, order = levels(groups), y.lab = '', width = 3, height = 4, point.size = 1, xlab.ori = 1, bottom.mar = 1, line.col='blue',y.lim=c(0,100)) {
+
+	##Get plot area
+	plot.area.x = width - 1.2
+	plot.area.ratio = plot.area.x / (height - bottom.mar - 0.2)
+	
+	##Define plot axis limits
+	x.lim = c(0.5, nlevels(groups) + 0.5)
+	
+	##Define spacing between points
+	threshold = point.size * (x.lim[2] - x.lim[1]) / (plot.area.x * 12)
+	
+	##Initialize plot
+	
+	quartz(w=width,h=height)
+	par(mai = c(bottom.mar, 0.8, 0.2, 0.4))
+	plot(NA, NA, xlim = x.lim, ylim = y.lim, xlab = '', ylab = y.lab, las = 1, xaxt = 'n')
+	axis(1, at = 1:nlevels(groups), labels = order, las = xlab.ori, cex.axis=1)
+	
+	for (i in 1:length(order)) {
+	
+		##Get group data
+		x = rep(i, length(groups == order[i]))
+		y = sort(values[groups == order[i]])
+		av = mean(y)
+		ci = sd(y)
+		
+		##Normalise y values to x dimensions
+		y.norm = y * (x.lim[2] - x.lim[1]) / ((y.lim[2] - y.lim[1]) * plot.area.ratio)
+	
+		##Plot first point
+		points(x[1], y[1], cex = point.size, pch=19, col='grey')
+		plot.x = x[1]
+		plot.y = y.norm[1]
+		
+		##Find space for remaining points
+		for (i in 2:length(y.norm)) {
+			dist = sqrt((y.norm[i] - plot.y)^2 + (x[i] - plot.x)^2)
+			inc = 0  ##current x distance from centre
+			dir = 1  ##current left-right position from centre
+			while (min(dist) < threshold) {
+				if (dir == 1) inc = inc + threshold / 10
+				x[i] = x[1] + dir * inc
+				dist = sqrt((y.norm[i] - plot.y)^2 + (x[i] - plot.x)^2)
+				dir = -dir
+			}
+			points(x[i], y[i], cex = point.size, pch=19, col='grey')
+			plot.x = c(plot.x, x[i])
+			plot.y = c(plot.y, y.norm[i])
+		}
+	
+		##Draw mean line
+		lines(c(x[1]-0.3, x[1]+0.3), c(av, av), lwd = 2, col = line.col)
+		
+		##Draw error bars
+		##lines(c(x[1]-0.2, x[1]+0.2), c(av-ci, av-ci), col = 'red',lwd=2)
+		##lines(c(x[1]-0.2, x[1]+0.2), c(av+ci, av+ci), col = 'red',lwd=2)
+		##lines(c(x[1], x[1]), c(av-ci, av+ci), col = 'red',lwd=2)
+	
+	}
+	##dev.off()
+}
+
+test = function(data) {
+	pos = as.factor(data$pos)
+	sample = as.factor(data$sample)
+	mc.aov = aov(data$met~sample+pos)
+	hmc.aov = aov(data$hmet~sample+pos)
+	out = list(mc.aov,hmc.aov)
+	names(out) = c('mc','hmc')
+	return(out)
+}
+
+
+##E14 (Figure 2A)
+
+e14.plot = function (te) {
+	te.data = get.data(oxbs.data,amp=te,exp='E14')
+	dot.plot(te.data$met, groups=factor(te.data$sample),height=3, point.size=0.5)
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,line.col='red',height=3,y.lim=c(0,20))
+	lapply(test(te.data), summary)
+}
+
+e14.plot('L1Tf')
+e14.plot('L1A')
+e14.plot('L1Gf')
+e14.plot('RLTR4_MM')
+e14.plot('IAP1a_2')
+
+
+
+##Kdm4 KO (Figure 4C)
+
+kdm.plot = function (te) {
+	te.data = get.data(oxbs.data,amp=te,exp='Kdm4_KO')
+	dot.plot(te.data$met, groups=factor(te.data$sample),point.size=0.5,
+	 order=c('WT_Ctrl','WT_VC','KO_Ctrl','KO_VC'),width=4)
+	dot.plot(te.data$hmet, groups=factor(te.data$sample),point.size=0.5,
+	 order=c('WT_Ctrl','WT_VC','KO_Ctrl','KO_VC'),width=4,line.col='red',y.lim=c(-3,20))
+	lapply(test(te.data), TukeyHSD)
+}
+
+kdm.plot('L1Tf')
+kdm.plot('L1A')
+kdm.plot('L1Gf')
+kdm.plot('RLTR4_MM')
+kdm.plot('IAP1a_2')
+
+
+

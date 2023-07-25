@@ -1,0 +1,174 @@
+setwd('~/Dropbox/Vitamin_C_JENNYMAC/Kevin_new_exp_data2019/2i_DMOG')
+x = read.csv('2i_DMOG_export_all.csv')
+head(x)
+levels(x$all_data2)
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b')
+levels(x$all_data1)
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*4-3]] = x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMSO',x$all_data1)]#
+	data[[i*4-2]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMSO',x$all_data1)]#
+	data[[i*4-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMOG',x$all_data1)]#
+	data[[i*4]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMOG',x$all_data1)]#
+}#
+names(data) = te.list
+data[[1]]
+data[[2]]
+te.list
+matrix(unlist(lapply(data,mean)), nrow=4
+)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,7),#
+	las=1, ylab='Fold change',#
+	col=c('grey','orange','grey','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*4-3]] = x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMSO',x$all_data1)]#
+	data[[i*4-2]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMSO',x$all_data1)]#
+	data[[i*4-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMOG',x$all_data1)]#
+	data[[i*4]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMOG',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+quartz(w=5, h=4.5)#
+par(mar=c(7,4,2,2))#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,7),#
+	las=1, ylab='Fold change',#
+	col=c('grey','orange','grey','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,4),#
+	las=1, ylab='Fold change',#
+	col=c('grey','orange','grey','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*4-3]] = x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMSO',x$all_data1)]#
+	data[[i*4-2]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMSO',x$all_data1)]#
+	data[[i*4-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMOG',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMOG',x$all_data1)]#
+	data[[i*4]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMOG',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMOG',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+quartz(w=5, h=4.5)#
+par(mar=c(7,4,2,2))#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,4),#
+	las=1, ylab='Fold change',#
+	col=c('grey','orange','grey','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*2-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMSO',x$all_data1)]#
+	data[[i*2]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMOG',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMOG',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+quartz(w=5, h=4.5)#
+par(mar=c(7,4,2,2))#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=4),#
+	beside=TRUE,#
+	ylim=c(0,4),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,4),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+te.list = c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF1b', 'ORF2', 'ORF2b')#
+##make list#
+#
+data = list()#
+for (i in 1:length(te.list)) {#
+	data[[i*2-1]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMSO',x$all_data1)]#
+	data[[i*2]] = x$all_data3[x$all_data2==te.list[i] & grepl('VC-DMOG',x$all_data1)]/x$all_data3[x$all_data2==te.list[i] & grepl('Ctrl-DMOG',x$all_data1)]#
+}#
+names(data) = te.list#
+##plot#
+#
+quartz(w=5, h=4.5)#
+par(mar=c(7,4,2,2))#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,4),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+quartz(w=5, h=4.5)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,3),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,3),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
+p = unlist(lapply(data, function(x) t.test(x, mu=1)$p.value))#
+p.adj = p.adjust(p, method='BH')
+p.adj
+p
+head(x)
+unlist(data)
+length(unlist(data))
+length(unlist(data))/3
+val = unlist(data)
+l1 = rep(te.list, each=6)
+l1 = factor(rep(te.list, each=6))
+l1
+length(l1)
+tr = factor(rep(rep(c('DMSO','DMOG'),each=3)),length(te.list))
+tr
+rep(c('DMSO','DMOG'),each=3)
+tr = factor(rep(rep(c('DMSO','DMOG'),each=3),length(te.list)))
+tr
+cbind(l1,tr,val)
+m = aov(val~l1*tr)
+summary(m)
+TukeyHSD(m)
+summary(m)
+quartz(w=5, h=4)#
+h = barplot(matrix(unlist(lapply(data,mean)), nrow=2),#
+	beside=TRUE,#
+	ylim=c(0,3),#
+	las=1, ylab='Fold change',#
+	col=c('orange','darkred'))#
+points(rep(h,unlist(lapply(data,length))) + rnorm(length(unlist(data)), sd=0.05),#
+	unlist(data), pch=19,cex=0.4)#
+abline(h=1, lty=2)
