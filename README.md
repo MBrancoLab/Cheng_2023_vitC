@@ -10,7 +10,7 @@ This folder contains H3K9me2 and H3K9me3 ChIP-qPCR data and associated script to
 
 *H3K9me2 ChIP-seq*
 
-Data from Ebata et al (PMID: 28706564) were processed in Seqmonk to extract raw read counts from full-length (>5kb) young L1s, as well as random 5kb-long regions. The associated script normalises the data as described in Ebata et al. and generates boxplots.
+Data from Ebata et al (PMID: 28706564) were processed in Seqmonk to extract read counts (RPM) from full-length (>5kb) young L1s, as well 5kb-long regions downstream of the same elements. The associated script calculates the enrichment ratio between L1 and downstream regions and produces a boxplot.
 
 *KDM4 ChIP-seq*
 
