@@ -1,25 +1,3 @@
-dnmt.df = paper.plot(data=dnmt,	#
-		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
-		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
-		width=3,#
-		ylab='Expression relative to TKO Ctrl',#
-		col=c('grey','darkred'))
-dnmt
-dnmt = read.csv('Dnmt_TKO/Dnmt_TKO_export_all.csv', as.is=T)#
-for (i in 1:nrow(dnmt)) {#
-	e14 = median(x24$all_data5[grepl('Ctrl',x24$all_data1) & x24$all_data2==dnmt$all_data2[i]], na.rm=T)#
-	dnmt$all_data3[i] = dnmt$all_data5[i]/e14#
-}#
-#
-dnmt.df = paper.plot(data=dnmt,	#
-		te.list=c('L1 TF', 'L1 A', 'L1 GF', 'ORF1a', 'ORF2a','ETnERV3'),#
-		g.list=c('2i-DTKO-Ctrl','2i-DTKO-VC'),#
-		width=3,#
-		ylab='Expression relative to TKO Ctrl',#
-		col=c('grey','darkred'))
-dnmt
-x24
-dnmt$all_data2[dnmt$all_data2=='ORF2a'] = 'ORF2'
 succ
 succ[grepl('2i-Ctrl',succ$all_data1) & succ$all_data2=='ETnERV3-int-B2']
 succ[grepl('2i-Ctrl',succ$all_data1) & succ$all_data2=='ETnERV3-int-B2',]
@@ -1245,3 +1223,60 @@ lines(c(0.8,1.2),c(mean(p),mean(p)), lwd=2)#
 lines(c(1.8,2.2),c(mean(n),mean(n)), lwd=2)#
 lines(c(2.8,3.2),c(mean(h),mean(h)), lwd=2)#
 abline(h=1, lty=2)
+paper.plot = function(data, te.list, g.list, ylab='Expression relative to Ctrl',#
+				col=c('orange','grey','darkred')[1:length(g.list)], y.lim=NULL,#
+				width=5, height=4) {#
+#
+	group = gsub('[[:digit:]]+$','',data$all_data1)#
+	sel = data$all_data2 %in% te.list & group %in% g.list#
+	val = data$all_data3[sel]#
+	te = factor(data$all_data2[sel], levels=te.list)#
+	gr = factor(group[sel], levels=g.list)#
+	vlist = list()#
+	for (i in 1:nlevels(te)) {#
+		for (j in 1:nlevels(gr)) {#
+			vlist[[i*nlevels(gr)-nlevels(gr)+j]] = val[te==levels(te)[i] & gr==levels(gr)[j]]#
+		}#
+	}#
+	if (nlevels(gr)>1) {#
+		avg = matrix(unlist(lapply(vlist,mean)), nrow=nlevels(gr))#
+	} else {#
+		avg = unlist(lapply(vlist,mean))#
+	}#
+	sd = unlist(lapply(vlist,sd))#
+	if (length(y.lim)==0) y.lim = c(0,max(val)*1.05)#
+	quartz(w=width, h=height)#
+	par(mar=c(7,4,2,2))#
+	h = barplot(avg,#
+		beside=TRUE,#
+		ylim=y.lim,#
+		las=2, ylab=ylab,#
+		col=col,#
+		names.arg=te.list)#
+	points(rep(h,unlist(lapply(vlist,length))) + rnorm(length(val), sd=0.05),#
+		unlist(vlist), pch=19,cex=0.4)#
+	for (i in 1:length(h)) {#
+		lines(c(h[i],h[i]), c(avg[i]-sd[i],avg[i]+sd[i]))#
+	}#
+	abline(h=1, lty=2)#
+	return(data.frame(gr,te,val))#
+}
+tet.iap = paper.plot(data=tet,	#
+		te.list=c('IAP LTR1', 'IAP LTR2', 'IAP LTR3', 'IAP GAG'),#
+		g.list=c('2iTTWT-VC','2iTTKO-Ctrl','2iTTKO-VC'),#
+		y.lim=c(0,4),#
+		width=4,#
+		ylab='Expression relative to WT')#
+#
+summary(aov(tet.iap$val ~ tet.iap$te * tet.iap$gr))
+tet = read.csv('Tet_TKO/Tet_TKO_export_all.csv', as.is=T)
+tet.iap = paper.plot(data=tet,	#
+		te.list=c('IAP LTR1', 'IAP LTR2', 'IAP LTR3', 'IAP GAG'),#
+		g.list=c('2iTTWT-VC','2iTTKO-Ctrl','2iTTKO-VC'),#
+		y.lim=c(0,4),#
+		width=4,#
+		ylab='Expression relative to WT')#
+#
+summary(aov(tet.iap$val ~ tet.iap$te * tet.iap$gr))
+model=aov(tet.iap$val ~ tet.iap$te * tet.iap$gr)
+TukeyHSD(model)
